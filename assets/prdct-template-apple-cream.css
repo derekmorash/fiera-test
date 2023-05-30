@@ -2088,6 +2088,9 @@ ul.s3list li{
 	}
 ul.s3list li img{margin:0 auto;display:block;max-width:100%;}
 
-
+.bnrCont .prd-det-rgt-list {
+  margin-top: 20px;
+  text-align: left;
+}
 
 
