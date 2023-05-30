@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Organica';
+    src: url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Regular.woff2') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Light.woff2') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-SemiBold.woff2') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Medium.woff2') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Italic.woff2') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/Organica-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Trajan Pro';
+    src: url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/TrajanPro-Bold.woff2') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/TrajanPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Trajan Pro';
+    src: url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/TrajanPro-Regular.woff2') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/TrajanPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

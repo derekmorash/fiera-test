@@ -1,0 +1,67 @@
+<div class="prd-det-bar3">
+  <div class="container">
+    <div class="prd-det-bar3-inr">
+      
+      {% if section.settings.image != blank %}
+      <img src="{{ section.settings.image | img_url: '300X' }}" alt="" class="prd-det-mny-bck" loading="lazy">
+      {% endif %}
+      
+      <div class="prd-det-bar3-inr-rgt">
+        
+        {% if section.settings.title != blank %}
+        <p class="comn-hdg">{{ section.settings.title }}</p>
+        {% endif %}
+        
+        {% if section.settings.content != blank %}
+        <div class="comn-txt prd-det-bar3-txt">{{ section.settings.content }}</div>
+        {% endif %}
+        
+        {% if section.settings.button_title != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="comn-btn comn-btn-fill hide-mob">{{ section.settings.button_title }}</a>
+        {% endif %}
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Guarantee",
+  "class": "product-guarantee-section--full-width",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },	
+	{
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Title"
+    }	,
+	{
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Guarantee"      
+    }
+  ]
+}
+{% endschema %}

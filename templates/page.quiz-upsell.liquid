@@ -1,0 +1,166 @@
+{% layout 'theme.quiz' %}
+{{ 'quiz-style.css' | asset_url | stylesheet_tag }}
+{{ 'quiz-fonts.css' | asset_url | stylesheet_tag }}
+{{ 'quiz-slick.css' | asset_url | stylesheet_tag }}
+<div class="quiz_cover quiz-upsell">
+  <div class="quiz_result_main">
+    <div class="products-sec" id="productaddcartsec">
+      {% comment %}
+      <div class="container">
+        <div class="prodDtls1-left">
+          <p class="prod-nameHdng forMob">FIÈRA APPLE STEM CELL CREAM</p>
+          <p class="prod-namesubHdng forMob">Full-coverage anti-aging concealer</p>
+          <div class="review-txt forMob"><p class="prod-Price">$34.97</p> <span><div class="yotpo bottomLine" data-product-id="7798772957414"></div></span></div>
+          <div class="prodBox-mob forMob"><img src="{{'prod1-slide1.png' | file_url }}" class="prd-nav" alt="img"></div>
+
+          <div class="prod-dtls1-slide"> 
+            <div class="slider-nav-custom">
+              <div><img src="{{'prod1-slide1.png' | file_url }}" class="prd-nav" alt="img"></div>
+              <div><img src="{{'prod1-slide2.png' | file_url }}" class="prd-nav" alt="img"></div>
+              <div><img src="{{'prod1-slide3.png' | file_url }}" class="prd-nav" alt="img"></div>
+              <div><img src="{{'prod1-slide4.png' | file_url }}" class="prd-nav" alt="img"></div>
+              <div><img src="{{'prod1-slide5.png' | file_url }}" class="prd-nav" alt="img"></div>
+            </div>
+
+            <div class="slide-div-custom">
+              <div>
+                <img src="{{'prod1-slide1.png' | file_url }}" class="prd-slide" alt="img">
+              </div>
+              <div>
+                <img src="{{'prod1-slide2.png' | file_url }}" class="prd-slide" alt="img">
+              </div>
+              <div>
+                <img src="{{'prod1-slide3.png' | file_url }}" class="prd-slide" alt="img">
+              </div>
+              <div>
+                <img src="{{'prod1-slide4.png' | file_url }}" class="prd-slide" alt="img">
+              </div>
+              <div>
+                <img src="{{'prod1-slide5.png' | file_url }}" class="prd-slide" alt="img">
+              </div>                 
+            </div>
+          </div>
+        </div>
+
+        <div class="prodDtls1-rght">
+          <p class="prod-nameHdng hide-mob">Fièra Luxury Concealer</p>
+          <p class="prod-namesubHdng hide-mob">Full-coverage anti-aging concealer</p>
+          <div class="review-txt hide-mob"><p class="prod-Price">$34.97</p> <span><div class="yotpo bottomLine" data-product-id="7798772957414"></div></span></div>
+          <div class="clearall"></div>
+          <div class="cart-btn-box">
+            <a href="#productaddcartsec" class="add-to-cart-btn sec-btn" style="width: 100%;">TRY BEFORE YOU BUY</a>
+            <span class="already_added" style="display: none;">Already added in the cart!</span>
+            {% comment %}
+            <a href="#" class="buy-btn">TRY BEFORE YOU BUY</a>
+            {% endcomment %}
+            <p class="btn-txt">Full-sized product</p>
+          </div>
+          <p class="describe-para">Fièra Luxury Concealer is the only concealer of its kind, specifically formulated for 40+ skin. Creamy full-coverage offers all-day wear that never settles into fine lines, while anti-aging properties improve the skin with prolonged use. <a href="javascript:void(0)" class="more-txt  get-popup">Learn more.</a></p>
+        </div>
+      </div>
+      {% endcomment %}
+      <div class="quiz-upsell-head">
+        <h3>Get Maximum Results</h3>
+        <p>Add our top-rated vitamin C serum to your<br> 14-day Try Before You Buy Order now!</p>
+      </div>
+      <div class="container">
+        <div class="upsell-img-block">
+          <div class="upsell-img"><img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/quiz-upsell_a.png" alt="img"></div>
+          <div class="upsell-details">
+            <h3>Fièra Citrus Stem Cell Serum</h3>
+            <ul>
+              <li>improves and evens out skin tone</li>
+              <li>Reduces the appearance of fine lines and wrinkles</li>
+              <li>improves skin elasticity and firmness</li>
+            </ul>
+            <a href="#" data-variant="42949487788262" data-selling-plan="3074425062" class="comn-btn add-to-cart-btn">Add to order</a>
+            <a href="#" class="thanx_text">No thanks</a>        
+            <span class="already_added" style="display: none;">Already added in the cart!</span>
+          </div>
+        </div>
+        <div class="upsell-benefits">
+          <h3>Benefits</h3>
+          <p>Loaded with vitamin C and powered by plant ster cells and caribbean orange oil, Fièra Citrus Stem Cell Serum reduces the appearance of fine lines and wrinkles, fodes the appearance of dark spots and protects the skin against future damage.</p>
+        </div>
+        
+        <div class="upsell-bottom">
+          <a href="#" class="thanx_text">No thanks</a>
+          <a href="#" data-variant="42949487788262" data-selling-plan="3074425062" class="comn-btn add-to-cart-btn">Add to order</a>
+        </div>
+        <span class="already_added" style="display: none;">Already added in the cart!</span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quiz-upsell.quiz_cover .products-sec {padding-top:0;}
+  .quiz-upsell {}
+  .quiz-upsell .quiz-upsell-head {background:#272727;padding:20px;text-align:center;}
+  .quiz-upsell-head h3 {
+    margin:0;padding:0 0 15px 0;line-height:1.4;letter-spacing:0.5px;
+    font-size: 55px;
+    color: #fff;
+    font-family: Trajan Pro;
+    font-weight: 700;
+    text-transform: uppercase;
+  
+  }
+  .quiz-upsell-head p {
+    color:#fff;
+    margin:0;
+    padding:0;
+    line-height:1.5;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    text-transform: none;
+  }
+  
+  .quiz-upsell .upsell-img-block {display:flex;align-items:center;max-width:500px;width:100%;margin:20px auto;}
+  .upsell-img-block .upsell-img {max-width: 110px; width: 100%;}
+  .upsell-img-block .upsell-img img {display:block;width:100%;padding:10px;}
+  .upsell-img-block .upsell-details {padding:0 0 0 20px;text-align:left;}
+  .upsell-img-block .upsell-details h3 {font-size:22px;text-transform:uppercase;color:#000;margin:0;padding:0 0 15px 0;line-height:1.4;letter-spacing:0.5px;}
+  .upsell-img-block .upsell-details ul {margin:0;padding:0 0 0 16px;}
+  .upsell-img-block .upsell-details ul li {display:list-item;list-style-type: disc;font-size:15px;text-transform:none;color:#000;margin:0;padding:0;line-height:1.5;}
+  .quiz_cover.quiz-upsell a.comn-btn {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 20px 0 10px 0;
+    font-size: 16px;
+    line-height: 1;
+    padding: 16px;
+    min-height: inherit;
+    height: auto;
+  }
+  .quiz_cover.quiz-upsell a.thanx_text { display: block; width: 100%; text-align: center;font-weight:500;text-decoration:underline;}
+  
+  .quiz-upsell .upsell-benefits {border:solid 2px #dcc290;border-radius:5px;padding:20px;text-align:left;max-width:500px;width:100%;margin:10px auto;
+    background:url('https://cdn.shopify.com/s/files/1/0549/5082/2118/files/sep_icon_af16d04e-088d-4ca2-8f5e-98efd395936c.png') no-repeat 98% 10px;
+  }
+  .quiz-upsell .upsell-benefits h3 {font-size:22px;text-transform:uppercase;color:#000;margin:0;padding:0 0 10px 0;line-height:1.4;letter-spacing:0.5px;}
+  .quiz-upsell .upsell-benefits p {font-size:15px;text-transform:none;color:#000;margin:0;padding:0;line-height:1.5;}
+  
+  .quiz-upsell .upsell-bottom {display:flex;align-items:center;max-width:500px;width:100%;margin:20px auto;justify-content:center;}
+  .quiz_cover.quiz-upsell .upsell-bottom a.thanx_text {max-width:150px;}
+  .quiz_cover.quiz-upsell .upsell-bottom a.comn-btn {margin:0;}
+  
+  
+  @media (max-width:650px) {
+    
+    .quiz-upsell-head h3 {font-size:32px;}
+    .quiz-upsell-head p {font-size:18px;}
+    .quiz-upsell-head p br {display:none;}
+    .quiz-upsell .upsell-img-block {flex-wrap: wrap;justify-content: center;}
+    .upsell-img-block .upsell-img {padding: 10px;}
+    .upsell-img-block .upsell-details { padding: 10px;}
+    .quiz_cover.quiz-upsell .upsell-bottom a.thanx_text { max-width: 120px;}
+    
+  }
+  
+</style>

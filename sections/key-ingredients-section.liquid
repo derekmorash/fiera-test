@@ -1,0 +1,141 @@
+{{ 'key-ingredients.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tabs.js' | asset_url }}" defer="defer"></script>
+
+{%- if section.settings.title != blank -%}
+	<h2>{{ section.settings.title | escape }}</h2>
+{%- endif -%}
+<div class="container">
+<div class="tab-container">
+  <ul class="tabs">
+    {% for block in section.blocks %}
+      {% if block.settings.cta_label != blank %}
+          <li {% if block.settings.active_tab %}class="active" {% endif %} rel="{{ block.settings.tab_id | escape }}">
+            {% if block.settings.image != blank %}
+            	<span class="tab_img"><img src="{{ block.settings.image | img_url: '500x' }}" alt="" loading="lazy"></span>
+            {% endif %}
+            <span class="tab_name">{{ block.settings.cta_label | escape }}</span>
+    	  </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  <div class="tab_container">
+    {% for block in section.blocks %}
+      {% if block.settings.cta_label != blank %}
+          <h3 class="{% if block.settings.active_tab %}d_active{% endif %} tab_drawer_heading" rel="{{ block.settings.tab_id | escape }}">
+            {% if block.settings.image != blank %}
+            	<span class="tab_img"><img src="{{ block.settings.image | img_url: '500x' }}" alt="" loading="lazy"></span>
+            {% endif %}
+            <span class="tab_name">{{ block.settings.cta_label | escape }}</span>
+    	  </h3>
+      {% endif %}
+      <div id="{{ block.settings.tab_id | escape }}" class="tab_content">
+        {% if block.settings.tab_info != blank %}
+          {{ block.settings.tab_info }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <!-- .tab_container -->
+</div>
+{% comment %}
+  <div class="single-faq-container">
+    <div class="up-slide-dwn">
+      <div class="accordion acdn-heading accordion-close">Full Ingredient List</div>
+      <div class="acdn-content" style="display: none;">
+        <p class="acdn-para">Water (Aqua), Caprylic/Capric Triglyceride, Bis-Diglyceryl Polyacyladipate-2, VP/Hexadecene Copolymer, Cetyl Alcohol, Ozokerite, Phytosteryl Macadamiate, Silica Dimethyl Silylate, Tocopheryl Acetate, Retinyl Palmitate, Ascorbyl Palmitate, Hydrolyzed Collagen, Sodium Hyaluronate, Lecithin, Magnesium Ascorbyl Phosphate, Tocopherol, Glycerin, Steareth-20, Chrysin, N-Hydroxysuccinimide, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7, Phenoxyethanol, Ethylhexylglycerin, [+/- (May Contain): Titanium Dioxide (CI 77891), Iron Oxides (CI 77491, CI 77492, CI 77499), Blue 1 Lake (CI 42090), Yellow 5 Lake (CI 19140), Ultramarines (CI 77007)].</p>
+      </div>
+    </div>
+  </div>
+{% endcomment %}
+  
+  <div class="single-faq-container">
+    <div class="up-slide-dwn">
+        {%- if section.settings.ingredient_list_title != blank -%}
+            <div class="accordion acdn-heading accordion-close">{{ section.settings.ingredient_list_title | escape }}</div>
+        {%- endif -%}
+      
+      
+      <div class="acdn-content" style="display: none;">
+      	{% if section.settings.ingredient_list_content != blank %}
+          {{ section.settings.ingredient_list_content }}
+        {% endif %}
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+  
+
+
+{% schema %}
+  {
+    "name": "Key Ingredients Section",
+    "class": "key-ingredients-section",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+	  {
+        "type": "text",
+        "id": "ingredient_list_title",
+        "label": "Ingredient List Title"
+      },
+      {
+        "type": "html",
+        "id": "ingredient_list_content",
+        "label": "Ingredient List Content"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+		  {
+            "type": "checkbox",
+            "id": "active_tab",
+            "default": false,
+            "label": "Active Tab"
+          },
+          {
+            "type": "text",
+            "id": "tab_id",
+            "label": "Tab ID"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "cta_label",
+            "label": "Main Title"
+          },
+		  {
+            "type": "html",
+            "id": "tab_info",
+            "label": "Tab Info"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Key Ingredients Section",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="{{ 'tutorial-style.css' | asset_url }}" media="print" onload="this.media='all'">
+<div class="container">
+  {%- if section.settings.show-main-page -%}
+    <div class="page-width page-width--narrow">
+      <h1 class="main-page-title page-title h0">
+        {{ page.title | escape }}
+      </h1>
+      <div class="rte">
+        {{ page.content }}
+      </div>
+    </div>
+  {%- endif -%}
+
+
+</div>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+		{
+			"type": "checkbox",
+			"id": "show-main-page",
+			"label": "Show Title and Content from page",
+			"default": true
+		}
+	]
+}
+{% endschema %}

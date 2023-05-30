@@ -1,0 +1,70 @@
+img{ max-width:auto;}
+.product-concealer-benefits {
+  width: 100%;
+  background: #e8ecf4;
+  padding: 150px 0 70px 0;
+  margin-top: -50px;
+}
+.product-concealer-benefits .container {max-width:1200px;}
+.product-concealer-benefits h2 { font-size: 45px; line-height: 1.5;  font-weight: 600;  width: 100%;  margin:0 0 20px 0;  color:#000;}
+
+.product-concealer-benefits .concealer-benefits-info {display:flex;align-items:center;}
+.product-concealer-benefits .concealer-benefits-info .fl.concealer-box {width:35%;text-align:left;}
+.product-concealer-benefits .concealer-benefits-info .fr.concealer-box {width:35%;text-align:right;}
+.product-concealer-benefits .concealer-benefits-info .concealer-image {width:30%;text-align:center;}
+.concealer-benefits-info .concealer-image img {display:inline-block;/*width:100%;*/}
+.concealer-benefits-info .concealer-image img.mobile_img {display:none;}
+
+.concealer-benefits-info .concealer-box li {margin-top:40px;}
+.concealer-benefits-info .concealer-box h3 {
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 600;
+  color: #313b54;
+  margin-bottom: 10px;
+  position: relative;
+}
+.concealer-benefits-info .concealer-box p {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+@media only screen and (max-width:767px) {
+  
+  .product-concealer-benefits h2 {font-size:30px;}
+  .concealer-benefits-info .concealer-box li { margin-top: 20px;}
+  .concealer-benefits-info .concealer-box h3 {font-size:20px;line-height:1.5;}
+  .concealer-benefits-info .concealer-box p {font-size:14px;}
+  
+  .concealer-benefits-info .concealer-image img.mobile_img { display: block; max-width: 500px; margin: 0 auto; width: 100%;}
+  .concealer-benefits-info .concealer-image img.mobile_img + img.desktop_img { display: none;}
+  
+  .product-concealer-benefits .concealer-benefits-info {flex-wrap: wrap;}
+  .product-concealer-benefits .concealer-benefits-info .fl.concealer-box { width: 100%;order: 2;text-align: center;}
+  .product-concealer-benefits .concealer-benefits-info .concealer-image {width: 100%;order: 1;text-align: center;}
+  .product-concealer-benefits .concealer-benefits-info .fr.concealer-box { width: 100%;text-align: center;order: 3;}
+  
+  .product-concealer-benefits {padding: 100px 0 40px 0;}
+  
+  
+  body ul.concealer-box{ margin:0; padding:0;}
+  .concealer-image { margin-bottom: 20px;}
+  .concealer-benefits-info .concealer-box li{ margin-top:0;}
+  body ul.concealer-box li {  text-align:left;}
+  body ul.concealer-box li  h3{ /*float: left;*/ width: 100%; text-align: left;
+    background: url(https://cdn.shopify.com/s/files/1/0549/5082/2118/files/cart-plus.png?v=1632477662) no-repeat 100% 50%;
+    padding: 15px 40px 15px 0 !important;    font-size: 18px !important; line-height: 22px !important; color: #000 !important; font-weight: 600 !important; cursor: pointer; position: relative; border: none;
+    margin: 0 !important; border-bottom: 1px solid #d4d4d4;}
+  
+  body ul.concealer-box li h3.active{background: url(https://cdn.shopify.com/s/files/1/0549/5082/2118/files/cart-minus.png) no-repeat 100% 50%;
+  border: none!important;}
+  
+  
+  body ul.concealer-box li h3.active{border-bottom: 1px solid transparent; margin: 0 !important;}
+  
+  body ul.concealer-box:last-child li:last-child  h3{border-bottom: 1px solid transparent; margin: 0 !important;}
+  
+}
+
+

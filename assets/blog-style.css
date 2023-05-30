@@ -1,0 +1,37 @@
+.top-sec .container {max-width: 1340px;width:100%;}
+ul.menu-list.fr li.menu-currency-box {display:none;}
+ul.menu-list.fr li { border-right: 0; padding-right: 0;}
+
+.container {max-width: 1340px;width:100%;}
+
+.btm-strp .container {max-width: 1500px;}
+.mail-strip .container {max-width: 1420px;}
+.ftr-links-sec .container {max-width: 1400px;}
+
+.contact-hdng { margin-top: 30px;}
+.contact-hdng h1 {
+  font-size: 42px;
+  line-height: 1.4;
+  color: #000000;
+  font-weight: 500;
+  margin-top: 5px;
+  font-family: 'SofiaPro-Medium';
+}
+.contact-hdng p {
+  font-size: 24px;
+  line-height: 1.4;
+  color: #000000;
+  text-transform: none;
+  font-weight: 400;
+  font-family: 'SofiaPro-Regular';
+  margin: 8px 0 10px 0;
+  padding: 0;
+  opacity: .8;
+}
+
+ul.btm-strp-list li {/* margin: 0 65px;*/}
+
+
+
+
+

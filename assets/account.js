@@ -1,0 +1,337 @@
+function generate_recharge_dashboard(){
+  console.log(window.customerToken);
+  $.ajax({
+    url: '/portal//request_objects' + '?token=' + window.customerToken,
+    type: 'get',
+    dataType: 'json',
+    data: { schema: '{ "customer": {} }' }
+  }).done(function(response) {
+    // Successful request made
+    console.log(response);
+  }).fail(function(response) {
+    // Request failed
+    console.log(response);
+  });
+  
+  $.ajax({
+    url: "https://upsell.secureddatasystem.com/recharge/index.php",
+    beforeSend: function() {
+      $('body').addClass('recharge_loading');
+    },
+    type:'POST',
+    data: {'data': {'customer_id' : window.customer_id }},
+    dataType:'json',
+    cache: false,
+    success: function(response){
+      console.log(response);
+      
+      let address = response.address;
+      let full_details = response.address_with_details;
+      let payment = response.payments;
+      let orders = response.orders;
+      let subscription = response.subscription;
+      let charges = response.charges;
+      //$('.dashboard-container')
+      
+      if(charges.length > 0){
+        $(charges).each(function(k,v){
+          console.log(v.customer_id);
+          console.log(v.scheduled_at);
+          console.log(v.created_at);
+          console.log(v.status);
+          console.log(v.line_items[0].title);
+        });
+      }
+      
+      //$('.upcoming-orders-container')
+      
+      if(subscription.length > 0){
+        let subscription_html = `<div class="rct_content-header"><div class="rct_content-header__title"><h3>Active subscriptions</h3></div>
+    		<div class="rct_content-header__actions"></div></div><div class="rct_subscriptions__container">`;
+        
+        $(subscription).each(function(k,v){
+          var t = '';
+          if(v.charge_interval_frequency == 1){
+            t = v.order_interval_unit;
+          }else{
+            t = v.charge_interval_frequency + ' ' + v.order_interval_unit+'s';
+          }
+          
+          subscription_html += `<div class="rct_card rct_card--action rct_card--media rct_card--subscription" data-subscription-item="">
+              <div class="rct_card__media__container">
+                <img src="${v.product.image}" alt="${v.product.title}" loading="lazy">
+              </div>
+              <div class="rct_card__content">
+                <strong>${v.product_title}</strong>
+                <p class="rct_text--small">${v.product.variant_title}</p>
+                <p class="rct_text--small">$${v.price} x ${v.quantity}</p>
+                <p class="rct_text--small">Every ${t}</p>
+              </div>
+            </div>
+		  `;
+        });
+        
+        $('.subscription-container').html(subscription_html+'</div>');
+      }
+      
+      if(orders.length > 0){
+        let upcomming_order_html = '';
+        let orders_html = '';
+        
+        $(orders).each(function(k,v){
+          var order = JSON.stringify(v);
+          var mydate = new Date(v.created_at);
+          var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          var date_str = month[mydate.getMonth()] + ' '+ mydate.getDate() +', ' + mydate.getFullYear();
+          
+          if( k == 0 ){            
+            upcomming_order_html += `<section class="rct_home__section rct_home__section--previous-order">
+              <h3>Your most recent order</h3>
+				<div class="rct_card rct_card--action rct_card--order" data-order-item="${v.id}">
+                <div class="rct_order__details">
+                  <strong class="rct_order__date">${date_str} </strong>
+					<p class="rct_order__number">Order #${v.shopify_order_number}</p>
+                </div>
+				<p class="rct_order__total">$${v.total_price}</p>
+              </div>
+              <a href="https://fiera-cosmetics.myshopify.com/tools/recurring/portal/e86988b1f30511460852a8d6e4edfd/orders?token=d15bdd492e6646bdbfa1e0e1bcee451c" class="rct_button rct_button--secondary">
+                  See all order history
+              </a>        
+            </section>`;    
+          }
+          
+          orders_html += `<div class="rct_card rct_card--action rct_card--order" data-order="${order}" data-order-item="${v.id}">
+              <div class="rct_order__details">
+                <strong class="rct_order__date">${date_str}</strong>
+                <p class="rct_order__number">Order #${v.shopify_order_number}</p> 
+              </div>
+              <p class="rct_order__total">$${v.total_price}</p>
+        	</div>`;
+        });
+        
+        $('.dashboard-container').html(upcomming_order_html);
+        $('.purchase-history-container').html('<h3>Purchase history</h3>'+orders_html);
+      }
+      
+      if(full_details.length > 0){
+        let shipping_html = '';        
+        let payment_html = '';
+        
+        $(full_details).each(function(k,v){
+          //console.log(v);
+          
+          let payments = v.payments;          
+          let subscription = v.subscriptions;
+          
+          //console.log(subscription);
+          
+          if(payments.length > 0){
+            payments = v.payments[0]
+          }
+          var day = '';
+          if(subscription.length > 0 && subscription[0] != undefined){
+            subscription = subscription[0];
+          }
+          
+          payment_html += `<div class="payment-method rc-expandable-card rc-card cursor-pointer" data-payment-method-id="${payments.id}" tabindex="0" aria-expanded="true">
+			<div class="rc-expandable-card--summary">
+            <span class="mr-2 d-flex align-items-center">
+              <span class="payment-method-logo"><div class="card-logo mr-2">
+                  <svg class="visa-icon" width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 3C0 1.34315 1.34315 0 3 0H33C34.6569 0 36 1.34315 36 3V21C36 22.6569 34.6569 24 33 24H3C1.34315 24 0 22.6569 0 21V3Z" fill="#D8E3F3"></path>
+                  <path d="M30.9827 7.52625H29.0967C28.5265 7.52625 28.0879 7.70168 27.8248 8.27186L24.2283 16.4736H26.7721C26.7721 16.4736 27.2107 15.3771 27.2984 15.114C27.5616 15.114 30.0616 15.114 30.4125 15.114C30.5002 15.421 30.7195 16.4298 30.7195 16.4298H33.0002L30.9827 7.52625ZM28.0002 13.2719C28.2195 12.7455 28.9651 10.7719 28.9651 10.7719C28.9651 10.8157 29.1844 10.2455 29.2721 9.93853L29.4476 10.728C29.4476 10.728 29.93 12.8771 30.0177 13.3157H28.0002V13.2719Z" fill="#3362AB"></path>
+                  <path d="M24.4036 13.535C24.4036 15.3771 22.7369 16.6052 20.1492 16.6052C19.0527 16.6052 18.0001 16.3859 17.4299 16.1227L17.7808 14.1052L18.0878 14.2368C18.8773 14.5876 19.4036 14.7192 20.3685 14.7192C21.0703 14.7192 21.8159 14.4561 21.8159 13.842C21.8159 13.4473 21.5089 13.1841 20.544 12.7455C19.6229 12.3069 18.3948 11.6052 18.3948 10.3332C18.3948 8.57886 20.1054 7.39465 22.5176 7.39465C23.4387 7.39465 24.2282 7.57009 24.7106 7.78939L24.3598 9.71921L24.1843 9.54378C23.7457 9.36834 23.1755 9.1929 22.3422 9.1929C21.4212 9.23676 20.9826 9.6315 20.9826 9.98237C20.9826 10.3771 21.5089 10.6841 22.3422 11.0789C23.7457 11.7368 24.4036 12.4824 24.4036 13.535Z" fill="#3362AB"></path>
+                  <path d="M3 7.61404L3.04386 7.4386H6.81579C7.3421 7.4386 7.73684 7.61404 7.86842 8.18421L8.70175 12.1316C7.86842 10.0263 5.9386 8.31579 3 7.61404Z" fill="#F9B50B"></path>
+                  <path d="M14.0088 7.52628L10.1931 16.4298H7.60534L5.41235 8.97365C6.9913 9.98242 8.30709 11.5614 8.78955 12.6579L9.0527 13.5789L11.4211 7.48242H14.0088V7.52628Z" fill="#3362AB"></path>
+                  <path d="M15.0175 7.48242H17.4298L15.8947 16.4298H13.4824L15.0175 7.48242Z" fill="#3362AB"></path>
+                  </svg>
+			  </div></span>
+              <span class="description flex-1">
+                <div class="payment-type">
+                  ${payments.payment_details.brand} ••••${payments.payment_details.last4}
+                </div>
+              </span>
+            </span>
+          <span class="ml-2 rc-expandable-card--arrow"><svg class="svg-inline--fa fa-chevron-down fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg><!-- <i class="fas fa-chevron-down"></i> --></span></div>
+          <div class="rc-expandable-card--details" style="height: auto;">
+            <div class="grid-250 mt-5 mb-2">
+              <div class="payment-method-details">
+                <h4 class="rc-subheading mt-4">Payment Method</h4>
+                <div class="card-summary">
+        		  <span class="mr-2 d-flex">         
+      			    <div class="flex-1 text-body-2" data-id="${payments.id}">        
+					  <div class="payment-type">
+          				${payments.payment_details.brand} ••••${payments.payment_details.last4}
+          			  </div>        
+          			  <div class="expires">Expires ${payments.payment_details.exp_month}/${payments.payment_details.exp_year}</div>
+      				</div>
+        		  </span>
+                </div>
+              </div>
+              <div class="billing-address-container">
+                <h4 class="rc-subheading mt-4">Billing Address</h4>
+                <div class="billing-address">
+                  <div class="address text-body-2" data-id="undefined">
+                    <div class="name">
+					  ${payments.billing_address.first_name} ${payments.billing_address.last_name}
+                    </div>
+                    <div class="address-line">
+					  ${payments.billing_address.address1}
+                    </div>
+                    <div class="city-state-zip">
+					  ${payments.billing_address.city}, ${payments.billing_address.province} ${payments.billing_address.zip}
+                    </div>
+                  </div></div>
+              </div>
+            </div>
+        	<div class="associated-subscriptions text-body-2">
+              <h4 class="rc-subheading mt-4">Associated Subscriptions</h4>
+              <div class="subscription">
+                <div class="subscription-item">${subscription.product_title} - ${subscription.order_interval_frequency} ${subscription.order_interval_unit}</div>
+              </div>
+        	</div>
+            <div class="actions d-flex justify-end">
+			  <button type="button" class="edit-payment-method rc-btn rc-btn--outlined mt-5 ml-2">Edit payment method</button>
+            </div>
+          </div>
+        </div>`;
+          
+          shipping_html += `<div class="shipping-info rc-expandable-card rc-card cursor-pointer" data-address-id="${v.id}">
+			<div class="address-info rc-expandable-card--summary position-relative">
+              <div class="grid-250">
+                <div class="shipping-address-container">
+                  <h4 class="rc-subheading">Shipping Address</h4>
+                  <div class="shipping-address">
+                    <div class="address text-body-2" data-id="${v.id}">
+                      <div class="name">${v.first_name} ${v.last_name}</div>
+                      <div class="address-line">${v.address1}</div>
+                      <div class="city-state-zip">${v.city}, ${v.province} ${v.zip}</div>
+                    </div>
+                  </div>
+                  <a class="edit-address rc-btn rc-btn--primary-text rc-btn--link" type="button" data-address-id="${v.id}">
+                    <span class="rc-btn--icon"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 10.5H3.375L8.905 4.96997L7.03 3.09497L1.5 8.62497V10.5ZM2.5 9.03997L7.03 4.50997L7.49 4.96997L2.96 9.49997H2.5V9.03997Z" fill="#002D31"></path>
+                    <path d="M9.18494 1.64503C8.98994 1.45003 8.67494 1.45003 8.47994 1.64503L7.56494 2.56003L9.43994 4.43503L10.3549 3.52003C10.5499 3.32503 10.5499 3.01003 10.3549 2.81503L9.18494 1.64503Z" fill="#002D31"></path>
+                    </svg></span>
+                    Edit address
+                  </a>
+                </div>
+
+				<div class="payment-method-details">
+                  <h4 class="rc-subheading">Payment Method</h4>
+                  <div class="card-summary">
+                    <span class="mr-2 d-flex">
+                      <div class="card-logo mr-2">
+                        <svg class="visa-icon" width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 3C0 1.34315 1.34315 0 3 0H33C34.6569 0 36 1.34315 36 3V21C36 22.6569 34.6569 24 33 24H3C1.34315 24 0 22.6569 0 21V3Z" fill="#D8E3F3"></path>
+                        <path d="M30.9827 7.52625H29.0967C28.5265 7.52625 28.0879 7.70168 27.8248 8.27186L24.2283 16.4736H26.7721C26.7721 16.4736 27.2107 15.3771 27.2984 15.114C27.5616 15.114 30.0616 15.114 30.4125 15.114C30.5002 15.421 30.7195 16.4298 30.7195 16.4298H33.0002L30.9827 7.52625ZM28.0002 13.2719C28.2195 12.7455 28.9651 10.7719 28.9651 10.7719C28.9651 10.8157 29.1844 10.2455 29.2721 9.93853L29.4476 10.728C29.4476 10.728 29.93 12.8771 30.0177 13.3157H28.0002V13.2719Z" fill="#3362AB"></path>
+                        <path d="M24.4036 13.535C24.4036 15.3771 22.7369 16.6052 20.1492 16.6052C19.0527 16.6052 18.0001 16.3859 17.4299 16.1227L17.7808 14.1052L18.0878 14.2368C18.8773 14.5876 19.4036 14.7192 20.3685 14.7192C21.0703 14.7192 21.8159 14.4561 21.8159 13.842C21.8159 13.4473 21.5089 13.1841 20.544 12.7455C19.6229 12.3069 18.3948 11.6052 18.3948 10.3332C18.3948 8.57886 20.1054 7.39465 22.5176 7.39465C23.4387 7.39465 24.2282 7.57009 24.7106 7.78939L24.3598 9.71921L24.1843 9.54378C23.7457 9.36834 23.1755 9.1929 22.3422 9.1929C21.4212 9.23676 20.9826 9.6315 20.9826 9.98237C20.9826 10.3771 21.5089 10.6841 22.3422 11.0789C23.7457 11.7368 24.4036 12.4824 24.4036 13.535Z" fill="#3362AB"></path>
+                        <path d="M3 7.61404L3.04386 7.4386H6.81579C7.3421 7.4386 7.73684 7.61404 7.86842 8.18421L8.70175 12.1316C7.86842 10.0263 5.9386 8.31579 3 7.61404Z" fill="#F9B50B"></path>
+                        <path d="M14.0088 7.52628L10.1931 16.4298H7.60534L5.41235 8.97365C6.9913 9.98242 8.30709 11.5614 8.78955 12.6579L9.0527 13.5789L11.4211 7.48242H14.0088V7.52628Z" fill="#3362AB"></path>
+                        <path d="M15.0175 7.48242H17.4298L15.8947 16.4298H13.4824L15.0175 7.48242Z" fill="#3362AB"></path>
+                        </svg>
+                      </div>
+
+						<div class="flex-1 text-body-2" data-id="${payments.id}">
+                        <div class="payment-type">
+                          ${payments.payment_details.brand} ••••${payments.payment_details.last4}
+                        </div>
+                        <div class="expires">Expires ${payments.payment_details.exp_month}/${payments.payment_details.exp_year}</div>
+                      </div>
+                    </span>
+                  </div>                  
+                </div>				
+			  </div>
+			<span class="ml-2 rc-expandable-card--arrow"><svg class="svg-inline--fa fa-chevron-down fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg><!-- <i class="fas fa-chevron-down"></i> --></span>
+		  </div>
+		  <div class="rc-expandable-card--details" style="height: auto;">
+          	<div class="details-container">
+                
+        	  <div class="associated-subscriptions text-body-2">
+            	<h4 class="rc-subheading mt-4">Associated Subscriptions</h4>           
+            	<div class="subscription">            
+                	<div class="subscription-item">${subscription.product_title} - ${subscription.order_interval_frequency} ${subscription.order_interval_unit}</div>                    
+            	</div>        
+        	  </div>                    
+            </div>
+          </div>
+	  	</div>`;
+        });
+        $('.shipping-addresses-container').html('<h3 class="rc-heading d-flex justify-space-between align-items-center">Shipping</h3><div class="shipping-addresses-list shipping-info-cards">'+shipping_html+'</div>');
+        
+        $('.payment-methods-container').html('<h3 class="rc-heading d-flex justify-space-between align-items-center">Payment Methods<button class="add-payment-method rc-btn rc-btn--outlined d-none">Add new payment method</button></h3><div class="payment-method-cards">'+payment_html+'</div>');
+      }
+      
+      $('body').removeClass('recharge_loading');
+    },
+    error: function(error){
+      console.log(error);
+    }
+  });
+}
+
+$(document).ready(function(){
+  $('.subscription-links .tab-link').on('click', function(){
+    var tab = $(this).data('tab');
+    $('.subscription-links .tab-link').removeClass('active');
+    $(this).addClass('active');
+    
+    $('.subscription-tab-container .tab-content').removeClass('active');
+    $('.subscription-tab-container .tab-content#'+tab).addClass('active');
+    //$("html").animate({ scrollTop: 0 }, "slow");
+  });
+  
+  var hash = window.location.hash;
+  console.log(hash);
+  if(hash != ''){
+    $('.account-sidebar li').removeClass('active');
+    $('[data-tab="'+hash+'"]').parent('li').addClass('active');
+    
+    $('.account-tabs .account-tab').removeClass('active');
+    $(hash).addClass('active');
+
+    if(hash == '#manage-subsciption'){
+      generate_recharge_dashboard();
+    }    
+  }
+  
+  $('.account-sidebar a.account-links').on('click', function(e){
+    e.preventDefault();
+    var hash = $(this).data('tab');
+   	
+    console.log(hash);    
+    
+    if(hash != undefined){
+      var url = window.location.href;
+      console.log(url);
+      console.log(url.indexOf('#'));
+      if(url.indexOf('#') != -1){
+        var arr = url.split('#');
+        window.location.href = arr[0]+hash;
+      }else{
+        window.location.href = url+hash;
+      }
+      
+      if(hash == '#manage-subsciption'){
+        generate_recharge_dashboard();
+      }
+      
+      $('.account-sidebar li').removeClass('active');
+      $('[data-tab="'+hash+'"]').parent('li').addClass('active');
+
+      $('.account-tabs .account-tab').removeClass('active');
+      $(hash).addClass('active');
+      $("html").animate({ scrollTop: 0 }, "slow");
+    }else{
+      var url = window.location.href;
+      window.location.href = url.replace(window.location.hash, '');
+      
+      $('.account-sidebar li').removeClass('active');
+      $('.account-sidebar-nav li:first').addClass('active');
+
+      $('.account-tabs .account-tab').removeClass('active');
+      $('.account-tabs .account-tab:first').addClass('active');
+      $("html").animate({ scrollTop: 0 }, "slow");
+    }
+  });
+});

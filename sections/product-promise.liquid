@@ -1,0 +1,71 @@
+<div class="prd-det-bar2">
+  <div class="container">
+    <div class="prd-det-bar2-inr">
+      
+      {% if section.settings.image != blank %}
+      <img data-src="{{ section.settings.image | img_url: '600X' }}" alt="" loading="lazy" class="lazy prd-det-vid-img hide-mob">
+      {% endif %}
+      
+      <div class="prd-det-bar2-inr-rgt">
+        
+        {% if section.settings.title != blank %}
+        <p class="comn-hdg">{{ section.settings.title }}</p>
+        {% endif %}
+        
+        {% if section.settings.image != blank %}
+        <img data-src="{{ section.settings.image | img_url: '600X' }}" alt="" loading="lazy" class="lazy prd-det-vid-img forMob">
+        {% endif %}
+        
+        {% if section.settings.content != blank %}
+        <p class="comn-txt prd-det-bar2-txt">{{ section.settings.content }}</p>
+        {% endif %}
+        
+        {% if section.settings.button_title != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="comn-btn comn-btn-fill hide-mo">{{ section.settings.button_title }}</a>
+        {% endif %}
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Promise",
+  "class": "product-promise-section--full-width",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+	{
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Title"
+    }	,
+	{
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Promise"      
+    }
+  ]
+}
+{% endschema %}

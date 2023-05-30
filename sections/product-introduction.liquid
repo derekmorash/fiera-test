@@ -1,0 +1,79 @@
+<div class="prd-det-s3">
+  <div class="container">
+    <div class="prd-det-s3-inr">
+      <div class="prd-det-s3-lft">
+        
+        {% if section.settings.title != blank %}
+        <p class="comn-hdg">{{ section.settings.title }}</p>
+        {% endif %}
+        
+        {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | img_url: '600X' }}" alt="" loading="lazy" class="prd-det-s3-img forMob">
+        {% endif %}
+        
+        {% if section.settings.sub_title != blank %}
+        <p class="prd-det-s3-tx1">{{ section.settings.sub_title }}</p>
+        {% endif %}
+        
+        {% if section.settings.content != blank %}
+        <p class="prd-det-s3-tx2">{{ section.settings.content }}</p>
+        {% endif %}
+        
+        {% if section.settings.button_title != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="comn-btn comn-btn-fill hide-mob">{{ section.settings.button_title }}</a>
+        {% endif %}
+        
+      </div>
+      
+      {% if section.settings.image != blank %}
+      <img src="{{ section.settings.image | img_url: '800X' }}" alt="" loading="lazy" class="prd-det-s3-img hide-mob">
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Introduction",
+  "class": "product-introduction-section--full-width",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },	
+	{
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Title"
+    },
+	{
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Introduction"      
+    }
+  ]
+}
+{% endschema %}

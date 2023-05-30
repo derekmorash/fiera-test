@@ -1,0 +1,160 @@
+<script>
+  var scriptAppend = document.createElement('script');
+  var version = new Date().getTime();
+  scriptAppend.src = 'https://apps.omegatheme.com/facebook-pixel/client/loading-custom-event.js?v=' + version;
+  document.querySelector('head').appendChild(scriptAppend)
+</script>
+
+<div class="ot-multi-pixel"></div>
+{% if template contains "product" %}
+  <meta property="omega:tags" content="{% for tag in product.tags %}{{ tag }}, {% endfor %}">
+  <meta property="omega:product" content="{{product.id}}">
+  <meta property="omega:product_type" content="{{product.type}}">
+  <meta property="omega:collections" content="{% for collection in product.collections %}{{ collection.id }}, {% endfor %}">
+{% endif %}
+{% if template contains "cart" %}
+  <meta property="omega:tags" content="{% for line_item in cart.items %} {% for tag in line_item.product.tags %}{{ tag}},{% endfor %}{% endfor %}">
+  <meta property="omega:product" content="{% for line_item in cart.items %} {{line_item.product.id}}, {% endfor %}">
+  <meta property="omega:product_type" content="{% for line_item in cart.items %} {{line_item.product.type}}, {% endfor %}">
+  <meta property="omega:collections" content="{% for line_item in cart.items %}  {% for collection in line_item.product.collections %}{{ collection.id }},{% endfor %}{% endfor %} ">
+{% endif %}
+{% if template contains "collection" %}
+  <meta property="omega:collections" content="{{ collection.id }}">
+{% endif %}
+
+{%if shop.metafields.OmegaFacebookPixel != blank %}
+
+  <script>
+    var arrayFBPixelTrack = [];
+  </script>
+
+  {%- for field in shop.metafields.OmegaFacebookPixel -%}
+    {%assign value = field | last %}
+    {%assign key = field | first %}
+    {%if key contains "collection_" %}
+      {%assign key = key | split:"_" %}
+      {%assign fbpixelID = key[1] %}
+      <script>
+        var otArrayCollection = '{{value}}'.trim().split(",");
+        if (document.querySelector("meta[property='omega:collections']") != null) {
+          var metaCollection = document.querySelector("meta[property='omega:collections']").getAttribute("content");
+          if (metaCollection != "") {
+            metaCollection = metaCollection.split(",");
+            for (let i = 0; i < metaCollection.length; i++) {
+              if (otArrayCollection.indexOf(metaCollection[i].trim()) > -1) {
+                if (! arrayFBPixelTrack.includes({{ fbpixelID }})) {
+                  arrayFBPixelTrack.push({{ fbpixelID }});
+
+                }
+              }
+            }
+
+          }
+        }
+      </script>
+    {%endif%}
+
+    {%assign value = field | last %}
+    {%assign key = field | first %}
+    {%if key contains "product_" %}
+      {%assign key = key | split:"_" %}
+      {%assign fbpixelID = key[1] %}
+      <script>
+        var otArrayProduct = '{{value}}'.split(",");
+        if (document.querySelector("meta[property='omega:product']") != null) {
+          var metaProduct = document.querySelector("meta[property='omega:product']").getAttribute("content");
+          if (metaProduct != "") {
+            metaProduct = metaProduct.split(",");
+            for (let i = 0; i < metaProduct.length; i++) {
+              if (otArrayProduct.indexOf(metaProduct[i].trim()) > -1) {
+                if (! arrayFBPixelTrack.includes({{ fbpixelID }})) {
+                  arrayFBPixelTrack.push({{ fbpixelID }});
+
+                }
+              }
+            }
+          }
+        }
+      </script>
+    {%endif%}
+
+
+    {%assign value = field | last %}
+    {%assign key = field | first %}
+    {%if key contains "tag_" %}
+      {%assign key = key | split:"_" %}
+      {%assign fbpixelID = key[1] %}
+      <script>
+        var otArrayTag = '{{value}}'.split(",");
+        if (document.querySelector("meta[property='omega:tags']") != null) {
+          var metaTag = document.querySelector("meta[property='omega:tags']").getAttribute("content");
+          if (metaTag != "") {
+            metaTag = metaTag.split(",");
+            for (let i = 0; i < metaTag.length; i++) {
+              if (otArrayTag.indexOf(metaTag[i].trim()) > -1) {
+                if (! arrayFBPixelTrack.includes({{ fbpixelID }})) {
+                  arrayFBPixelTrack.push({{ fbpixelID }});
+
+                }
+              }
+            }
+          }
+        }
+      </script>
+    {%endif%}
+
+
+    {%assign value = field | last %}
+    {%assign key = field | first %}
+    {%if key contains "type_" %}
+      {%assign key = key | split:"_" %}
+      {%assign fbpixelID = key[1] %}
+      <script>
+        var otArrayType = '{{value}}'.split(",");
+        if (document.querySelector("meta[property='omega:product_type']") != null) {
+          var metaType = document.querySelector("meta[property='omega:product_type']").getAttribute("content");
+          if (metaType != "") {
+            metaType = metaType.split(",");
+            for (let i = 0; i < metaType.length; i++) {
+              if (otArrayType.indexOf(metaType[i].trim()) > -1) {
+                if (! arrayFBPixelTrack.includes({{ fbpixelID }})) {
+                  arrayFBPixelTrack.push({{ fbpixelID }});
+
+                }
+              }
+            }
+          }
+        }
+      </script>
+    {%endif%}
+
+    {%assign value = field | last %}
+    {%assign key = field | first %}
+    {%if key contains "master" %}
+      {%assign fbpixelID = value %}
+      <script>
+        if (! arrayFBPixelTrack.includes({{ value }})) {
+          arrayFBPixelTrack.push({{ value }});
+
+        }
+      </script>
+    {%endif%}
+
+
+  {%- endfor -%}
+{%endif%}
+{%if shop.metafields.OmegaFacebookSettings != blank %}
+
+  {%- for field in shop.metafields.OmegaFacebookSettings -%}
+    {%assign value = field | last %}
+    {%assign key = field | first %}
+    {%if key contains "OmegaFacebookSettings" %}
+      <script>
+        var omegaFBSettings = [];
+        var omegaFBSettings = {{value}}
+        console.log({omegaFBSettings})
+      </script>
+
+    {%endif%}
+  {%- endfor -%}
+{%endif%}

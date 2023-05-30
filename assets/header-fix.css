@@ -1,0 +1,54 @@
+
+/* KL: Fix the Header issue */
+.top-fix-bar {
+    float: left;
+    width: 100%;
+    margin-bottom: 72px;
+}
+
+.top-sec .container {
+    max-width: 1500px;
+    padding: 0px;
+}
+
+ul.menu-list.fr li img {
+    margin: -8px 2px 0 0;
+}
+
+.ing-list {
+    margin-bottom: 70px;
+}
+
+h1.fc-seo {
+    float: left;
+    width: 100%;
+    font-size: 30px;
+    line-height: 40px;
+    color: #272727;
+    font-weight: 600;
+}
+
+h2.fc-seo {
+    float: left;
+    width: 100%;
+    font-size: 17px;
+    line-height: 25px;
+    color: #000;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+}
+
+@media only screen and (max-width: 767px) {
+    .logo {
+        margin-left: 66px;
+    }
+
+    ul.menu-list.fr li {
+        padding-right: 8px;
+    }
+    #cart-icon-bubble {
+        margin-top: 3px;
+    }
+}

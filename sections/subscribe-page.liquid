@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="{{ 'subscribe-save.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% comment %}
+<div class="page-header">
+  <div class="container">
+    <a href="/"><img src="//cdn.shopify.com/s/files/1/0549/5082/2118/files/logo_120x.png" loading="lazy" class="logo" width="112" height="41" alt="Fiera Cosmetics"></a>
+    <a href="mailto:support@fieracosmetics.com" class="mail-txt-page">support@fieracosmetics.com</a>
+  </div>
+</div>
+{% endcomment %}
+{%- if section.settings.show-main-page -%}
+<div class="page-width page-width--narrow">
+  <h1 class="main-page-title page-title h0">
+    {{ page.title | escape }}
+  </h1>
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Subscribe Page",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+		{
+			"type": "checkbox",
+			"id": "show-main-page",
+			"label": "Show Title and Content from page",
+			"default": true
+		}
+	]
+}
+{% endschema %}

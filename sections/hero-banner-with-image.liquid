@@ -1,0 +1,49 @@
+<div class="hero_banner_main" style="background-image:url({{ section.settings.hero_img_page | img_url: '5000x' }});">
+  <div class="hero_overlay">
+    <div class="container_1170">
+      {% if section.settings.hero_heading != blank %}
+      <h2>{{ section.settings.hero_heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.hero_heading_two != blank %}
+      <h3>{{ section.settings.hero_heading_two | escape }}</h2>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+	{
+		"name": "Hero Banner With Text",
+
+	"settings": [
+		{
+	      "type": "image_picker",
+    	  "id": "hero_img_page",
+          "label": "Choose Image",
+          "info": "Choose image to Show in Section"
+        },
+        {
+          "type": "text",
+          "id": "hero_heading",
+          "label": "Hero Heading:",
+		  "default": "Hero Heading"
+		},
+        {
+          "type": "text",
+          "id": "hero_heading_two",
+          "label": "Hero Small Heading:",
+		  "default": "Hero Small Heading"
+		}
+
+			],
+
+	"presets": [
+		{
+          "name": "Hero Banner With Text",
+          "category": "Page"
+		}
+	]
+
+	}
+
+{% endschema %}

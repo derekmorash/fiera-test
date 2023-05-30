@@ -1,0 +1,127 @@
+<div class="prd-det-s5">
+  <div class="container">
+    
+    {% if section.settings.title != blank %}
+    <p class="comn-hdg">{{ section.settings.title }}</p>
+    {% endif %}
+    
+    {% if section.settings.sub_title != blank %}
+    <p class="comn-txt pdng-para">{{ section.settings.sub_title }}</p>
+    {% endif %}
+    
+    {% if section.blocks.size > 0 %}
+    <div class="prd-det-s5-inr">
+      
+      {% for block in section.blocks %}
+      <div class="prd-det-s5-inr-bx">
+        
+        {% if block.settings.image != blank %}
+        <img src="{{ block.settings.image | img_url: '100X' }}" loading="lazy" alt="" class="prd-s5-ing">
+        {% endif %}
+        
+        {% if block.settings.title != blank %}
+        <h3>{{  block.settings.title}}</h3>
+        {% endif %}
+        
+        {% if block.settings.content != blank %}
+        <p>{{ block.settings.content }}</p>
+        {% endif %}
+        
+      </div>
+      {% endfor %}
+      
+    </div>
+    {% endif %}
+    
+    {% if section.settings.button_label != blank %}
+    <a href="javascript:void(0);" class="comn-btn ing-btn">{{ section.settings.button_label }} <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/btn-arw.png?v=1632742077" loading="lazy" alt="" class="btn-arw"></a>
+    {% endif %}
+    
+  </div>
+</div>
+
+{% if section.settings.popup_title != blank and section.settings.popup_content != blank %}
+<div class="ingredient-pop">
+  <div class="ing-popBox">
+    <h2 class="ing-pop-hdng">{{ section.settings.popup_title }} <span class="ing-pop-close">X</span></h2>
+    <div class="ing-pop-mdl">
+      <p>{{ section.settings.popup_content }}</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Product Ingredients",
+	"class": "product-ingredients-section--full-width",
+	"tag": "section",
+	"max_blocks": 10,
+    "settings": [
+		{
+		  "type": "text",
+	      "id": "title",
+		  "label": "Title" 
+		},
+		{
+		  "type": "textarea",
+		  "id": "sub_title",
+		  "label": "Sub Title"
+		},
+		{
+		  "type": "text",
+	      "id": "popup_title",
+		  "label": "Popup Title"
+		},
+		{
+		  "type": "html",
+	      "id": "popup_content",
+		  "label": "Popup Content"
+		},
+		{
+		  "type": "text",
+	      "id": "button_label",
+		  "label": "Button Label"
+		}
+	],
+	"blocks": [
+	 	{
+		  "type": "image",
+		  "name": "Ingredient",
+		  "settings": [
+			{
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            },
+			{
+			  "type": "text",
+			  "id": "title",
+			  "label": "Title"
+			},
+			{
+			  "type": "textarea",
+			  "id": "content",
+			  "label": "Content"
+			}
+		  ]
+		}
+	],
+	"presets":[
+		{
+          "name": "Product Ingredients",
+          "blocks": [
+            {
+              "type": "image"
+            },
+            {
+              "type": "image"
+            },
+            {
+              "type": "image"
+            }
+          ]
+		}
+	]
+  }
+{% endschema %}

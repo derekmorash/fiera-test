@@ -1,0 +1,139 @@
+<div class="sec5">
+  <div class="container">
+    
+    {%- if section.settings.title != blank -%}
+    	<p class="comn-hd">{{ section.settings.title | escape }}</p>
+    {%- endif -%}
+    
+
+    <div class="s5-mdl">
+      {%- if section.settings.title01 != blank -%}
+      <div class="s5-col" data-active="20">
+        <h4><img src="{{ 'clndr-ic.png' | asset_url }}" loading="lazy">{{ section.settings.title01 | escape }}</h4>
+        {% if section.settings.info01 != blank %}
+            <p>{{ section.settings.info01 | escape }}</p>
+        {% endif %}
+      </div>
+      {%- endif -%}
+      
+      {%- if section.settings.title02 != blank -%}
+      <div class="s5-col" data-active="50">
+        <h4><img src="{{ 'clndr-ic.png' | asset_url }}" loading="lazy">{{ section.settings.title02 | escape }}</h4>
+        {% if section.settings.info02 != blank %}
+            <p>{{ section.settings.info02 | escape }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      
+      {%- if section.settings.title03 != blank -%}
+      <div class="s5-col" data-active="80">
+        <h4><img src="{{ 'clndr-ic.png' | asset_url }}" loading="lazy">{{ section.settings.title03 | escape }}</h4>
+        {% if section.settings.info03 != blank %}
+            <p>{{ section.settings.info03 | escape }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="progress-outer">
+      <div class="progress-bar" id="progress" style="width: 22%;"></div>
+    </div>
+
+    <ul class="progress-dot">
+      {%- if section.settings.title01 != blank -%}<li><span></span></li>{% endif %}
+      {%- if section.settings.title02 != blank -%}<li><span></span></li>{% endif %}
+      {%- if section.settings.title03 != blank -%}<li><span></span></li>{% endif %}
+    </ul>
+
+    <ul class="s5-btm-lst">
+      {% if section.settings.html01 != blank %}
+      	<li>{{ section.settings.html01 }}</li>
+      {% endif %}
+      {% if section.settings.html02 != blank %}
+      	<li>{{ section.settings.html02 }}</li>
+      {% endif %}
+      {% if section.settings.html03 != blank %}
+      	<li>{{ section.settings.html03 }}</li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Subscription Benefits Sec",
+    "class": "subscription-benefits-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+	  },
+	  {
+        "type": "header",
+        "content": "Month 1"
+      },
+	  {
+        "type": "text",
+        "id": "title01",
+        "label": "Heading 1"
+	  },
+	  {
+        "type": "text",
+        "id": "info01",
+        "label": "Info 1"
+	  },
+      {
+        "type": "html",
+        "id": "html01",
+        "label": "HTML"
+      },
+	  {
+        "type": "header",
+        "content": "Month 2"
+      },
+	  {
+        "type": "text",
+        "id": "title02",
+        "label": "Heading 2"
+	  },
+	  {
+        "type": "text",
+        "id": "info02",
+        "label": "Info 2"
+	  },
+      {
+        "type": "html",
+        "id": "html02",
+        "label": "HTML"
+      },
+	  {
+        "type": "header",
+        "content": "Month 3"
+      },
+	  {
+        "type": "text",
+        "id": "title03",
+        "label": "Heading 3"
+	  },
+	  {
+        "type": "text",
+        "id": "info03",
+        "label": "Info 3"
+	  },
+      {
+        "type": "html",
+        "id": "html03",
+        "label": "HTML"
+      }
+      
+    ],
+    "presets": [
+      {
+        "name": "Subscription Benefits Sec",
+        "category": "Product"
+      }
+    ]
+  }
+{% endschema %}

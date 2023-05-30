@@ -1,0 +1,600 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+<link rel='preconnect dns-prefetch' href='https://triplewhale-pixel.web.app/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
+<script>
+/* >> TriplePixel :: start*/
+~function(W,H,A,L,E,_,B,N){function O(U,T,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,H.open("GET",U,!0),H.send(null),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):N[B]=R):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1;try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push(location.href),A.setItem(H+"U",JSON.stringify(E))}catch(e){}A.getItem('"!nC`')||(A=N,A[H]||(L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)},E=A[H]=function(t,e){return W=L(),(E._q=E._q||[]).push([W,t,e]),W},E.ch=W,B="configSecurityConfModel",N[B]=1,O("//conf.config-security.com/model",0),O("//triplewhale-pixel.web.app/triplefw.txt?",5)))}}("","TriplePixel",localStorage);
+/* << TriplePixel :: end*/
+</script>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+  {%- if settings.favicon != blank -%}
+  <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+  {%- endif -%}
+
+  {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  {%- endunless -%}
+  {% if template == '404' %}
+  <script>window.location.href = '/';</script>
+  {% endif %}
+  {%- comment -%}Few prefech to increase performance on commonly used third-parties{%- endcomment -%}
+  <link rel="preload" as="style" href="{{ 'bbc.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'ajax-cart.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'component-predictive-search.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'style.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'fonts.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'media.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'slick.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'jquery.fancybox.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'styles.min.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'popup.css' | asset_url }}">
+  <link rel="preload" as="script" href="{{ 'global.js' | asset_url }}">
+  <link rel="preload" as="script" href="{{ 'shopify-money.js' | asset_url }}">
+  <link rel="preload" as="script" href="{{ 'predictive-search.js' | asset_url }}">
+  <link rel="preload" as="script" href="{{ 'details-disclosure.js' | asset_url }}">
+  <link rel="preload" as="script" href="{{ 'details-modal.js' | asset_url }}">
+  <link rel="preload" as="script" href="{{ 'cart-notification.js' | asset_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fast.wistia.com/assets/external/E-v1.js" crossorigin>
+  <link rel="preconnect" href="https://cdn-widget-assets.yotpo.com/widget-referred-friend/app.v0.1.8-2822.js" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn-widgetsrepository.yotpo.com/v1/loader/lwMVs6FwFKa0ItmWL8HOlw" crossorigin>
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com" crossorigin>
+  <link rel="dns-prefetch" href="https://maps.googleapis.com" crossorigin>
+  <link rel="dns-prefetch" href="https://maps.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn-widget-assets.yotpo.com/widget-referred-friend/app.v0.1.8-2822.js" crossorigin>
+  <title>
+    {{ page_title}}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page | capitalize }}{% endif -%}
+    {%- unless page_title contains shop.name %} | {{ shop.name | capitalize }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% render 'meta-tags' %}
+
+  <script src="{{ 'global.js' | asset_url }}" defer></script>
+  {{ content_for_header }}
+
+  {%- liquid
+    assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+    assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+    assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
+
+    {% style %}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+    {{ body_font_bold | font_face: font_display: 'swap' }}
+    {{ body_font_italic | font_face: font_display: 'swap' }}
+    {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+    {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+    :root {
+    --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-body-style: {{ settings.type_body_font.style }};
+    --font-body-weight: {{ settings.type_body_font.weight }};
+
+    --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    --font-heading-style: {{ settings.type_header_font.style }};
+    --font-heading-weight: {{ settings.type_header_font.weight }};
+
+    --color-base-text: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
+    --color-base-background-1: {{ settings.colors_background_1.red }}, {{ settings.colors_background_1.green }}, {{ settings.colors_background_1.blue }};
+    --color-base-background-2: {{ settings.colors_background_2.red }}, {{ settings.colors_background_2.green }}, {{ settings.colors_background_2.blue }};
+    --color-base-solid-button-labels: {{ settings.colors_solid_button_labels.red }}, {{ settings.colors_solid_button_labels.green }}, {{ settings.colors_solid_button_labels.blue }};
+    --color-base-outline-button-labels: {{ settings.colors_outline_button_labels.red }}, {{ settings.colors_outline_button_labels.green }}, {{ settings.colors_outline_button_labels.blue }};
+    --color-base-accent-1: {{ settings.colors_accent_1.red }}, {{ settings.colors_accent_1.green }}, {{ settings.colors_accent_1.blue }};
+    --color-base-accent-2: {{ settings.colors_accent_2.red }}, {{ settings.colors_accent_2.green }}, {{ settings.colors_accent_2.blue }};
+    --payment-terms-background-color: {{ settings.colors_background_1 }};
+
+    --gradient-base-background-1: {% if settings.gradient_background_1 != blank %}{{ settings.gradient_background_1 }}{% else %}{{ settings.colors_background_1 }}{% endif %};
+    --gradient-base-background-2: {% if settings.gradient_background_2 != blank %}{{ settings.gradient_background_2 }}{% else %}{{ settings.colors_background_2 }}{% endif %};
+    --gradient-base-accent-1: {% if settings.gradient_accent_1 != blank %}{{ settings.gradient_accent_1 }}{% else %}{{ settings.colors_accent_1 }}{% endif %};
+    --gradient-base-accent-2: {% if settings.gradient_accent_2 != blank %}{{ settings.gradient_accent_2 }}{% else %}{{ settings.colors_accent_2 }}{% endif %};
+
+    --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+  }
+
+  *,
+  *::before,
+  *::after {
+  box-sizing: inherit;
+}
+
+html {
+box-sizing: border-box;
+/* font-size: 62.5%; */
+height: 100%;
+}
+
+body {
+display: grid;
+grid-template-rows: auto auto 1fr auto;
+grid-template-columns: 100%;
+min-height: 100%;
+margin: 0;
+/* font-size: 1.5rem; */
+letter-spacing: 0.06rem;
+/* line-height: 1.8; */
+font-family: var(--font-body-family);
+font-style: var(--font-body-style);
+font-weight: var(--font-body-weight);
+}
+
+@media screen and (min-width: 750px) {
+body {
+/* font-size: 1.6rem; */
+}
+}
+{% endstyle %}
+  <link rel="stylesheet" href="{{ 'bbc.css' | asset_url }}" type="text/css" defer>
+  
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+<!-- Add New Css Link -->
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Sharp" rel="stylesheet">
+
+{{ 'style.css' | asset_url | stylesheet_tag }}
+{{ 'fonts.css' | asset_url | stylesheet_tag }}
+{{ 'media.css' | asset_url | stylesheet_tag }}
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
+{{ 'styles.min.css' | asset_url | stylesheet_tag }}
+{{ 'popup.css' | asset_url | stylesheet_tag }}
+
+
+<!-- End Add New Css Link -->
+
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
+
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+<script>
+  var cart_use_page = -1;
+  var cart_url = 'cart';
+</script>
+
+<style>
+  #lblCartCount {
+    font-size: 12px;
+    background: #d2aa1b;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    display: inline;
+    border: none;
+    letter-spacing: 0;
+    line-height: 14px;
+    position: relative;
+    top: 4px;
+    left: 4px;
+  }
+  .badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+  .label-warning[href],
+  .badge-warning[href] {
+    background-color: #d2aa1b;
+  }
+  .menu-list a:hover {
+    text-decoration:underline;
+  }
+  .slider_subscription .slide-div { display: none; }
+  .slider_subscription .slide-div.slick-initialized { display: block; }
+</style>
+  {% comment %}
+  Below css are merged on bbc.css
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'custom-checkout.css' | asset_url | stylesheet_tag }}  
+  {{ 'checkout.css' | asset_url | stylesheet_tag }}
+  {% endcomment %}
+<link rel="stylesheet" href="{{ 'ajax-cart.css' | asset_url }}" type="text/css" defer>
+
+{%- unless settings.type_body_font.system? -%}
+<link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+{%- endunless -%}
+{%- unless settings.type_header_font.system? -%}
+<link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+{%- endunless -%}
+
+{%- if settings.predictive_search_enabled -%}
+<link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+  
+  <script type="text/javascript">
+    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/A1g0ak8AfUt4amT9bGjLpRLNOtyJXLCMEwdhx337/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+  </script>
+  
+  
+<!--   <script type="text/javascript">
+    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/TlZqJ8RVDYXMeVUg1WNN5VTVqRVL5dIjTowtkX1C/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script> -->
+  <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/lwMVs6FwFKa0ItmWL8HOlw" async></script>
+   <script src="{{ 'shopify-money.js' | asset_url }}" defer></script>
+{% include 'ufe-offer' %}
+{% render 'gsf-conversion-pixels' %}
+  
+<!-- Start VWO Async SmartCode -->
+<script type='text/javascript'>
+window._vwo_code = window._vwo_code || (function(){
+var account_id=616463,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+is_spa=1,
+hide_element='body',
+
+/* DO NOT EDIT BELOW THIS LINE */
+f=false,d=document,code={use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){
+window.settings_timer=setTimeout(function () {_vwo_code.finish() },settings_tolerance);var a=d.createElement('style'),b=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+(+is_spa)+'&r='+Math.random());return settings_timer; }};window._vwo_settings_timer = code.init(); return code; }());
+</script>
+<!-- End VWO Async SmartCode -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DP7M5YX0MB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+  gtag('js', new Date());
+  gtag('config', 'G-DP7M5YX0MB');
+  }
+</script>
+</head>
+
+<body class="gradient cart-is page-{{ page.handle }}">
+  <div class="shifter_page">
+
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ "accessibility.skip_to_text" | t }}
+    </a>
+
+    <style type="text/css">
+      .gradient {
+        background: transparent;
+      }
+      .top-strp p {
+        padding: 0;
+      }
+    </style>
+   {% comment %}
+    <div class="top-strp">
+      <div class="container">
+        {% section 'announcement-bar' %}
+      </div>
+    </div>
+    {% section 'header' %}
+	{% endcomment %}
+    
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+    {% comment %}
+ 	{% include 'ajax-cart' %}
+    {% endcomment %}
+    {% section 'footer' %}
+    
+    {% comment %}
+    {% if settings.cart_type == 'drawer' %}
+    <script src="{{ 'ajax-cart.js' | asset_url }}" defer></script>
+    {% endif %}
+	{% endcomment %}
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+    </ul>
+
+    <script>
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}'
+      };
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t }}`
+      }
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+      }
+
+      window.accessibilityStrings = {
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+      }
+    </script>
+
+    {%- if settings.predictive_search_enabled -%}
+    	<script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
+    {%- endif -%}
+    {% include 'subscription-theme-footer' %}
+    <script>
+    $(document).ready(function(){
+      setTimeout(function() {
+        $('.select__select').find("option:selected").each(function(){
+          var optionValue = $(this).attr("value");
+          console.log(optionValue);
+          if(optionValue == "Trial"){
+            $(".rc-container-wrapper").hide();
+          } else{
+            $(".rc-container-wrapper").show();
+          }
+        });
+      }, 2500);
+      
+      $("select").change(function(){
+        $(this).find("option:selected").each(function(){
+          var optionValue = $(this).attr("value");
+          if(optionValue == "Trial"){
+            $(".rc-container-wrapper").hide();
+          } else{
+            $(".rc-container-wrapper").show();
+          }
+        });
+      });
+    });
+      window.rechargeCustomTheme = {
+        selectors: {
+          variants: ['.con-set-var', '.con-shade-var', '.pro_var'],
+          variantTriggers: ['.con-pkg', '.con-shade'],
+        },
+      };
+    </script>
+ 
+    <style>
+      
+     #coupon-pop-wrapper { width: 100%;
+    height: 100vh;
+    background: #0008;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;}
+
+  .full_length_box{
+    width:100%;
+    display:block;
+  }
+  .center_aligned{
+    margin:0 auto 0 auto;
+  }
+  .form_preview_container{
+    padding:10px;
+    margin-top:10px;
+  }
+  table.form_preview_table{
+    padding:20px 30px 20px 30px;
+    width:500px;
+    margin:0 auto 0 auto;
+  }
+  table.form_preview_table i{
+    display:block;
+    font-size:9px;
+  }
+  table.form_preview_table td{
+    padding:5px 0 5px 0;
+  }
+  table.form_preview_table tr.submit_button td{
+    padding-top:15px;
+  }
+  table.form_preview_table tr.submit_button td input{
+    border-radius: 200px;
+    text-shadow: none;
+    box-shadow: none;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    margin-right: 3px;
+    padding: 7px 16px 6px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  table.form_preview_table label{
+    text-transform: none;
+    font-weight:normal;
+    text-transform:capitalize;
+  }
+  input[type="text"], input[type="password"], input[type="email"], textarea{
+    padding:5px;
+    border-radius:3px;
+    width:200px;
+    resize: none;
+    outline: none;
+  }
+  input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus{
+    box-shadow:none;
+  }
+  table.form_preview_table textarea{
+    height:70px;
+    width:210px;
+    max-width: 210px;
+    max-height: 70px;
+  }
+  .clearfloat{
+    clear:both;
+  }
+  .form_preview{
+    background:#F0F0F0;
+    border:2px solid #AAAAAA;
+    border-radius:10px;
+  }
+  table.form_preview_table label{
+    font-size:14px;
+    font-family:Arial;
+    color:#666666;
+  }
+  table.form_preview_table .submit_button input{
+    background:#666666;
+    border:1px solid #444444;
+    color:#FFFFFF;
+    font-family:Arial;
+  }
+  .form_preview_table input[type="text"], .form_preview_table input[type="password"], .form_preview_table input[type="email"], .form_preview_table textarea{
+    border:1px solid #AAAAAA;
+  }
+  
+</style>
+
+    
+    
+  {% comment %} 
+<div id="coupon-pop-wrapper">
+  <div class="coupon-pop" style="">
+    <div class="pop-content">
+      <div class="popUp-box"> <span class="material-icons-outlined close-pop">close</span>
+        <div class="popthankyou" style="display: none;">
+          <h2>Thank You For Signing Up!</h2>
+          <p>Helping you look and feel beautiful is our goal!</p>
+          <p>&nbsp;</p>
+          <p>Since we don’t want you missing out on our deals, please make sure it didn’t land on your promo or spam folder!</p>
+        </div>
+        <div class="pop-lft">
+          <div class="pop-heading">Today Only:</div>
+          <p class="pop-txt1">A Secret Discount<br>
+            For You</p>
+          <p class="pop-label">Simply enter your email below to<br>
+            get your special <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/t/1/assets/pop-log.png" alt="" loading="lazy" class="pop-log"> saving!</p>
+           
+          <form action="https://api.maropost.com/accounts/1560/forms/8/subscribe/92fbcf30aa7df0c1124bff7f06cb692b39ba046e" class="full_length_box" method="post">
+            <div class="two_col_feild_row">
+              <input class="pop-inp" include_blank="true" start_year="1950" type="text" name="contact_fields[first_name]" id="contact_fields_first_name" placeholder="First Name" />
+
+              <input class="pop-inp" include_blank="true" start_year="1950" type="text" name="contact_fields[last_name]" id="contact_fields_last_name" placeholder="Last Name" />
+            </div>
+
+            <input class="pop-inp" include_blank="true" start_year="1950" type="text" name="contact_fields[email]" id="contact_fields_email" placeholder="Enter Email Address" />
+
+            <input class="pop-btn" type="submit" name="commit" value="Claim My Discount Now!" data-disable-with="Claim My Discount Now!" />
+          </form>
+
+
+          
+          <p class="pop-btn-txt">By signing up, I agree to the <a href="#privacy-policy" target="_blank">Privacy Policy</a></p>
+        </div>
+        <div class="pop-rgt"> <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/t/1/assets/pop-rgt-img.jpg" alt="" loading="lazy" class="pop-rgt-img">  </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endcomment %} 
+
+ 
+    <script>
+    
+//     $(document).ready(function(){
+
+//       var stopAutohide;
+
+//       function showWindow(){
+        
+//         var hours = 1; // to clear the localStorage after 1 hour(if someone want to clear after 8hrs simply change hours=8)
+//         var now = new Date().getTime();
+//         var setupTime = localStorage.getItem('setupTime');
+//         if (setupTime == null) {
+//           $("#coupon-pop-wrapper").show();
+//           $(".coupon-pop").show();
+//           //localStorage.setItem('eucookie','123');
+//           localStorage.setItem('setupTime', now)
+//         } else {
+//           if(now-setupTime > hours*60*60*1000) {
+//             localStorage.clear()
+//             localStorage.setItem('setupTime', now);
+//           }
+//         }   
+//        // if(localStorage.getItem('eucookie') != '123'){
+//          // console.log('show');
+//          // $("#coupon-pop-wrapper").show();
+//          // $(".coupon-pop").show();
+//          // localStorage.setItem('eucookie','123');
+//         //}
+//         //$('').show();
+//         // stop scroll
+//         //$('html body').css('overflow','hidden');
+//         // auto hide fter 5s
+//         //stopAutohide = setTimeout(hideWindow,5000);
+//       }
+//       //showWindow()
+
+//       function hideWindow(){
+//         $('#coupon-pop-wrapper').hide();
+//         //localStorage.setItem('eucookie','123');
+        
+//         // on scroll
+//         $('html body').css('overflow','scroll');
+//       }
+//       //hideWindow()
+
+//       // now call function automatically after some time 
+
+
+//       // auto open after 40s
+//       setTimeout(showWindow,40000);
+
+//       // close after click 
+
+//       $(".close-pop").click(function(){
+
+//         hideWindow();
+//         //celarTimeout(stopAutohide);
+
+//       });
+
+//     });
+      $(document).ready(function(){
+        $(".forgot").click(function() {
+          $('.forgot_pass').show();
+          $('.login_form').hide();
+        });
+        
+        $(".back_login").click(function() {
+          $('.forgot_pass').hide();
+          $('.login_form').show();
+        });
+        setTimeout(function() {
+			$( ".rc-selling-plans" ).after( '<ul class="subs-det"><li><img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/subs-icn1.png?v=1644991064" alt="" loading="lazy"> Flexible subscription plan</li><li><img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/subs-icn2.png?v=1644991064" alt="" loading="lazy"> Easy Pause</li></ul>' );
+        }, 5500);
+      });
+	
+    </script>
+
+  <!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=13522" defer></script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
+<script src="{{ 'aispeed.js' | asset_url }}"></script>
+    <!-- CRITEO START -->
+{% include 'criteo-tracking' %}
+<!-- CRITEO END -->
+{% render 'banana-stand-footer' %}
+</body>
+  </html>

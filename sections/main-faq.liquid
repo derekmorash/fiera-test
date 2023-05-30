@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="contact-hdng">
+    {% if section.settings.title != blank %}
+    	<h1>{{ section.settings.title }}</h1>
+    {% else %}
+    	<h1>Frequently Asked Questions</h1>
+    {% endif %}
+    
+    {% if section.settings.sub_title != blank %}
+    	<p>{{ section.settings.sub_title }}</p>
+    {% else %}
+    	<p>Find answers to the most common questions about Fiera's product range</p>
+    {% endif %}
+    
+  </div>
+  
+  {{ page.content}}
+ 
+</div>
+
+
+{% schema %}
+  {
+    "name": "Main Faq Page Section",
+	"tag": "div",
+  	"class": "shop-sec1",
+    "settings": [
+		{
+			"type":"text",
+			"id":"title",
+			"label":"Title"
+		},
+		{
+			"type":"text",
+			"id":"sub_title",
+			"label":"Sub Title Text"
+		}
+	]
+  }
+{% endschema %}

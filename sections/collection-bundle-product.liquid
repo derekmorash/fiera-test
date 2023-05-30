@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="bundle-Box">
+    <div class="bndle-rght">
+      
+      {% if section.settings.title != blank %}
+      <p class="comn-hdg">{{ section.settings.title }}</p>
+      {% endif %}
+      
+      
+      {% assign prohandle = section.settings.button_link | split: "products/" %}
+      {% assign custom_product = all_products[prohandle[1]] %}
+      
+      <div class="s3-btm-tx3 bundle-price price-item--regular">
+        <span class="price">{{ custom_product.price | money }}</span>
+        {% if custom_product.compare_at_price_min > custom_product.price %}
+        	<span class="price"><s>{{ custom_product.compare_at_price_min | money }}</s></span>
+        {% endif %}
+      </div>
+      
+      {% if section.settings.sub_title != blank %}
+      <p class="bndle-txt1">{{ section.settings.sub_title }}</p>
+      {% endif %}
+      
+      {% if section.settings.image != blank %}
+      <img data-src="{{ section.settings.image | img_url: '500X' }}" loading="lazy" class="lazy bndle-prod">
+      {% endif %}
+      
+      {{ section.settings.content }}
+      
+      
+      
+      {% if section.settings.button_title != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="comn-btn">{{ section.settings.button_title }}</a>
+      {% endif %}
+       
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Collection Bundle Product",
+  "class": "collection-bundle-product-section--full-width",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },	
+	{
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Title"
+    }	,
+	{
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Bundle Product"      
+    }
+  ]
+}
+{% endschema %}

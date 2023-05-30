@@ -1,0 +1,236 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*----------------
+RESET CSS
+-----------------*/
+#coupon-pop-wrapper {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 0;
+  background: #ffffff;
+  color: #000000;
+  text-align: center;
+  font-family: 'Organica';
+  font-weight: normal;
+}
+#coupon-pop-wrapper div, ul, h1, h2, h3, h4, h5, li, p, img, form, input, textarea {margin: 0;padding: 0;}
+#coupon-pop-wrapper header, section, footer, aside, nav, main, article, figure {display: block;}
+#coupon-pop-wrapper table, tr, td {border: 0;}
+#coupon-pop-wrapper a {outline: none;color: inherit;text-decoration: none;}
+#coupon-pop-wrapper  img {border: none;}
+#coupon-pop-wrapper li {list-style: none;}
+#coupon-pop-wrapper * {box-sizing: border-box;}
+#coupon-pop-wrapper .img-full {max-width: 100%;}
+#coupon-pop-wrapper .clearall {
+  clear: both;
+  font-size: 1px;
+  line-height: 1px;
+  height: 1px;
+}
+#coupon-pop-wrapper .for-mob{display:none;}
+#coupon-pop-wrapper .for-desk{}
+#coupon-pop-wrapper .fl{ float:left;}
+#coupon-pop-wrapper .fr{ float:right;}
+
+
+#coupon-pop-wrapper ::-webkit-input-placeholder { /* Edge */
+  color: #d5d5d5;
+}
+
+#coupon-pop-wrapper :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #d5d5d5;
+}
+
+#coupon-pop-wrapper ::placeholder {
+  color: #d5d5d5;
+}
+
+
+
+/*-----------------------
+MAIN CSS START
+------------------------*/
+#coupon-pop-wrapper .container {
+  width: 1170px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+}
+
+#coupon-pop-wrapper  a.s2-btn {
+  display: inline-block;
+  vertical-align: middle;
+  width:100%;
+  margin-top:25px;
+}
+#coupon-pop-wrapper  a.s2-btn img {
+  display:block;
+  max-width:100%;
+}
+
+/*-----------------
+CSS FOR POPUP
+-----------------*/
+#coupon-pop-wrapper .coupon-pop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  transition:all ease 0.5s;
+  z-index: 999;
+}
+#coupon-pop-wrapper .pop-content {
+  float:left;
+  width:100%;
+  max-height:100%;
+  padding:40px 0;
+  text-align:center;	
+  overflow-y:auto;
+}
+#coupon-pop-wrapper .popUp-box {
+  display:inline-block;
+  vertical-align:top;
+  width:750px;
+  max-width:96%;
+  background:#fff;
+  border-radius:10px;
+  -webkit-box-shadow: 0 0 10px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px 1px rgba(0,0,0,0.1);
+  position:relative;
+  border:2px solid #dccdac;
+}
+#coupon-pop-wrapper .close-pop {
+  position:absolute;
+  color:#6d6d6d;
+  font-size:24px;
+  cursor:pointer;
+  right:10px;
+  top:10px;
+  z-index:1;
+}
+#coupon-pop-wrapper .pop-lft {
+  max-width:370px;
+  width:100%;
+  float:left;
+  text-align:left;
+  padding:10px 0px 10px 10px;
+}
+#coupon-pop-wrapper .pop-heading {
+  float:left;
+  width:100%;
+  color:#313b54;
+  font-size:45px;
+  line-height:50px;
+  font-weight:bold;
+  margin-top:0;
+  text-transform:uppercase;
+}
+#coupon-pop-wrapper .pop-txt1 {
+  font-size:35px;
+  line-height:40px;
+  color:#030303;
+  margin-bottom:10px;
+  width:100%;
+  text-transform:uppercase;
+}
+#coupon-pop-wrapper .pop-label {
+ 
+  width:calc(100% + 30px);
+  clear:both;
+  color:#010101;
+  font-size:20px;
+  line-height:24px;
+  font-weight:500;
+  margin:10px 0 5px -10px;
+  background:#f0eade;
+  padding:10px 12px 12px;
+}
+#coupon-pop-wrapper .pop-log {
+  display:inline-block;
+  vertical-align:top;
+  margin-top:2px;
+}
+#coupon-pop-wrapper .pop-inp {
+ 
+  width:100%;
+  border:1px solid #e1e1e1;
+  background:#f6f6f6;
+  padding:0 15px;
+  height:50px;
+  font-family: 'Organica';
+  font-size:15px;
+  color:#000;
+  outline:none;
+  margin-top:10px;
+}
+#coupon-pop-wrapper .pop-inp::placeholder {color:#8e8e8e;}
+#coupon-pop-wrapper .pop-btn {
+  float:left;
+  width:100%;
+  height:57px;
+  background:#313b54;
+  margin-top:15px;
+  color:#fff;
+  font-size:18px;
+  line-height:56px;
+  font-weight:600;
+  text-align:center;
+  cursor:pointer;
+  border: none;
+}
+#coupon-pop-wrapper .pop-btn:hover{background:#333;}
+#coupon-pop-wrapper .pop-btn-txt {
+  font-size:15px;
+  line-height:19px;
+  color:#000;
+  text-align:center;
+  margin-top:5px;
+  float:left;
+  width:100%;
+}
+#coupon-pop-wrapper .pop-rgt {
+  max-width:363px;
+  width:100%;
+  float:right;
+  padding:10px 10px 10px 0;
+}
+#coupon-pop-wrapper .pop-rgt-img {
+  max-width:100%;
+}
+
+#coupon-pop-wrapper .popthankyou {
+  display: none;
+  padding: 50px;
+}
+
+@media only screen and (max-width:500px) {
+  #coupon-pop-wrapper .popUp-box {padding:15px;}
+  #coupon-pop-wrapper .pop-lft {padding:0;}
+  #coupon-pop-wrapper .pop-heading {font-size:38px; line-height:45px;}
+  #coupon-pop-wrapper .pop-txt1 {font-size:26px; line-height:34px;}
+  #coupon-pop-wrapper .pop-label {width:calc(100% + 30px); margin-left:-15px;}
+  #coupon-pop-wrapper .pop-rgt {display:none;}
+}
+
+
+
+.two_col_feild_row { display: flex; justify-content: space-between;}
+
+.two_col_feild_row .pop-inp { width: (50% - 10px) !important; margin: 0 5px 0 0;}
+.two_col_feild_row .pop-inp:last-child { width: (50% - 10px) !important; margin: 0 0 0 5px;}
+
+
+p.shopify-challenge__message { margin: 20px 0;}
+body .shopify-challenge__container input.shopify-challenge__button.btn {
+  background:#313b54 !important; border-color:#313b54 !important; box-shadow:none;
+  margin: 20px auto !important; padding: 15px 30px !important; min-height: inherit !important; font-size: 18px !important; min-width: inherit !important;}
+body .shopify-challenge__container input.shopify-challenge__button.btn:hover,
+body .shopify-challenge__container input.shopify-challenge__button.btn:focus{background:#000 !important; border-color:#000 !important; box-shadow:none;}

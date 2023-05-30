@@ -1,0 +1,181 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- liquid
+  assign products_to_display = section.settings.collection.all_products_count
+
+  if section.settings.collection.all_products_count > section.settings.products_to_show
+    assign products_to_display = section.settings.products_to_show
+    assign more_in_collection = true
+  endif
+-%}
+<a id="shopify-section-template--15655878852838__1643784612a39e7f94">&nbsp;</a>
+<div class="sec3">
+  <div class="container">
+    <div class="section_page_container">
+      {% if section.settings.title != blank %}
+      <div  class="section_sec_title">
+        <h3>{{ section.settings.title }}</h3>
+      </div>
+      {% endif %}
+	</div>
+    
+   
+    {% if section.settings.sub_title != blank %}
+    <p class="comn-txt">{{ section.settings.sub_title }}</p>
+    {% endif %}
+    
+    
+
+    {% if section.settings.content != blank %}
+    {{ section.settings.content }}
+    {% endif %}
+    
+    {% comment %}
+    {%- if section.settings.show_view_all and more_in_collection -%}
+      <a href="{{ section.settings.collection.url }}" class="comn-btn">All Products</a>
+    {%- endif -%}
+    {% endcomment %}
+    
+    {% comment %}
+    <a href="{{ section.settings.collection.url }}" class="comn-btn">All Products</a>
+    {% endcomment %}
+    
+    <div class="s3-inr shop-prod-inr">
+      {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+        {% render 'product-card-subscription-home',
+            product_card_product: product,
+            media_size: section.settings.image_ratio,
+            show_secondary_image: section.settings.show_secondary_image,
+      		  home_page_title: product.metafields.my_fields.home_page_title,
+      	    collection_page_image: product.metafields.my_fields.collection_page_image,
+            collection_page_title: product.metafields.my_fields.collection_page_title,
+            collection_page_description: product.metafields.my_fields.collection_page_description,
+            add_image_padding: section.settings.add_image_padding,
+            show_vendor: section.settings.show_vendor,
+            show_image_outline: section.settings.show_image_outline,
+            show_rating: section.settings.show_rating
+        %}
+      {%- endfor -%}
+    </div>
+  
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Subscription Products",
+	"class":"subscription-products",
+	"settings":[
+	  {
+        "type": "text",
+        "id": "title",
+        "default": "Featured collection",
+        "label": "t:sections.featured-collection.settings.title.label"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title",
+        "label": "Sub Title"
+      },
+      {
+        "type": "html",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "t:sections.featured-collection.settings.collection.label"
+      },
+      {
+        "type": "range",
+        "id": "products_to_show",
+        "min": 2,
+        "max": 12,
+        "step": 2,
+        "default": 4,
+        "label": "t:sections.featured-collection.settings.products_to_show.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_view_all",
+        "default": true,
+        "label": "t:sections.featured-collection.settings.show_view_all.label"
+      },    
+      {
+        "type": "header",
+        "content": "t:sections.featured-collection.settings.header.content"
+      },
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "options": [
+          {
+            "value": "adapt",
+            "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+          },
+          {
+            "value": "portrait",
+            "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+          },
+          {
+            "value": "square",
+            "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+          }
+        ],
+        "default": "adapt",
+        "label": "t:sections.featured-collection.settings.image_ratio.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_secondary_image",
+        "default": false,
+        "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "add_image_padding",
+        "default": false,
+        "label": "t:sections.featured-collection.settings.add_image_padding.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_image_outline",
+        "default": true,
+        "label": "t:sections.featured-collection.settings.show_image_outline.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "default": false,
+        "label": "t:sections.featured-collection.settings.show_vendor.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_rating",
+        "default": false,
+        "label": "t:sections.featured-collection.settings.show_rating.label",
+        "info": "t:sections.featured-collection.settings.show_rating.info"
+      }
+	],
+	"presets": [
+      {
+        "name": "Subscription Feature Products"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

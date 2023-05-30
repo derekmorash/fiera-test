@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="subscribe_top">
+    {%- if section.settings.title != blank -%}
+        <h2>{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {% if section.settings.text != blank %}
+        <div class="rich-text">{{ section.settings.text }}</div>
+      {% endif %}
+  </div>
+  <div class="subscribe_block">
+  {% for block in section.blocks %}
+    <div class="subscribe-box">
+      	{% if block.settings.image != blank %}
+      		<div class="subscribe_img"><img src="{{ block.settings.image | img_url: '800x' }}" loading="lazy" alt=""></div>
+        {% endif %}
+		<div class="subscribe_details">
+          {% if block.settings.cta_label != blank %}
+              <h3>{{ block.settings.cta_label | escape }}</h3>
+          {% endif %}
+          {% if block.settings.text != blank %}
+              <div class="rich-text">{{ block.settings.text }}</div>
+          {% endif %}
+          {% if block.settings.code != blank %}
+              <div class="code-html">{{ block.settings.code }}</div>
+          {% endif %}
+          <div class="subscribe_price">
+            {% if block.settings.retail_price != blank %}
+            	<div class="retail_price">Retail Price: <span>{{ block.settings.retail_price | escape }}</span></div>
+            {% endif %}
+            {% if block.settings.subscription_price != blank %}
+            	<div class="subscription_price">Subscription Price: <span>{{ block.settings.subscription_price | escape }}</span></div>
+            {% endif %}
+          </div>
+          {% if block.settings.link != blank %}
+              <a class="btn comn-btn" href="{{ block.settings.link }}">{{ block.settings.link_btn | escape }}</a>
+          {% endif %}
+		</div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Subscribe Save Section",
+    "class": "subscribe-save-section claim-section",
+    "max_blocks": 10,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+    	  {	
+            "type": "header",
+            "content": "Content"
+          },
+          {
+            "type": "text",
+            "id": "cta_label",
+            "label": "Main Title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          },
+		  {
+            "type": "html",
+            "id": "code",
+            "label": "HTML"
+          },
+    	  {	
+            "type": "header",
+            "content": "Price"
+          },
+          {
+            "type": "text",
+            "id": "retail_price",
+            "label": "Retail Price"
+          },
+          {
+            "type": "text",
+            "id": "subscription_price",
+            "label": "Subscription Price"
+          },
+    	  {	
+            "type": "header",
+            "content": "Button"
+          },
+          {
+            "type": "text",
+            "id": "link_btn",
+            "label": "Shop"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Subscribe Save Section",
+        "category": "Subscribe",
+        "blocks": [
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

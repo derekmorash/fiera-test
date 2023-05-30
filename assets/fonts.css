@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'Organica';
+    src: url('Organica-Regular.woff2') format('woff2'),
+        url('Organica-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('Organica-Light.woff2') format('woff2'),
+        url('Organica-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('Organica-SemiBold.woff2') format('woff2'),
+        url('Organica-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('Organica-Medium.woff2') format('woff2'),
+        url('Organica-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Organica';
+    src: url('Organica-Italic.woff2') format('woff2'),
+        url('Organica-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Organica';
+    src: url('Organica-Bold.woff2') format('woff2'),
+        url('Organica-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'SofiaPro-SemiBold';
+    src: url('SofiaPro-SemiBold.eot');
+    src: url('SofiaPro-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('SofiaPro-SemiBold.woff2') format('woff2'),
+        url('SofiaPro-SemiBold.woff') format('woff'),
+        url('SofiaPro-SemiBold.ttf') format('truetype'),
+        url('SofiaPro-SemiBold.svg#SofiaPro-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SofiaPro-Regular';
+    src: url('SofiaPro-Regular.eot');
+    src: url('SofiaPro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('SofiaPro-Regular.woff2') format('woff2'),
+        url('SofiaPro-Regular.woff') format('woff'),
+        url('SofiaPro-Regular.ttf') format('truetype'),
+        url('SofiaPro-Regular.svg#SofiaPro-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SofiaPro-Medium';
+    src: url('SofiaPro-Medium.eot');
+    src: url('SofiaPro-Medium.eot?#iefix') format('embedded-opentype'),
+        url('SofiaPro-Medium.woff2') format('woff2'),
+        url('SofiaPro-Medium.woff') format('woff'),
+        url('SofiaPro-Medium.ttf') format('truetype'),
+        url('SofiaPro-Medium.svg#SofiaPro-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SofiaPro-Light';
+    src: url('SofiaPro-Light.eot');
+    src: url('SofiaPro-Light.eot?#iefix') format('embedded-opentype'),
+        url('SofiaPro-Light.woff2') format('woff2'),
+        url('SofiaPro-Light.woff') format('woff'),
+        url('SofiaPro-Light.ttf') format('truetype'),
+        url('SofiaPro-Light.svg#SofiaPro-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'SofiaPro-UltraLight';
+    src: url('SofiaPro-UltraLight.eot');
+    src: url('SofiaPro-UltraLight.eot?#iefix') format('embedded-opentype'),
+        url('SofiaPro-UltraLight.woff2') format('woff2'),
+        url('SofiaPro-UltraLight.woff') format('woff'),
+        url('SofiaPro-UltraLight.ttf') format('truetype'),
+        url('SofiaPro-UltraLight.svg#SofiaPro-UltraLight') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+

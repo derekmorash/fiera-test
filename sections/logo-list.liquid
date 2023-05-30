@@ -1,0 +1,61 @@
+{%- if section.blocks.size > 0 -%}
+<div class="brnd-sec">
+  <div class="container">
+    {% if section.settings.title != blank %}
+    <p class="brnd-hd"><span>{{ section.settings.title }}</span></p>
+    {% endif %}    
+    <div class="tabsld">
+      {%- for block in section.blocks -%}
+      	{%- if block.settings.image != blank -%}
+        <img data-src="{{ block.settings.image | img_url: '200X' }}" loading="lazy" alt="" class="lazy brnd-log">
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Logo List",
+  "class": "logo-list-section--full-width",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }    
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo List",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

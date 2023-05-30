@@ -1,0 +1,5 @@
+{% layout 'theme.quiz' %}
+{{ 'quiz-style.css' | asset_url | stylesheet_tag }}
+{{ 'quiz-fonts.css' | asset_url | stylesheet_tag }}
+
+{% include 'quiz-questions' %}

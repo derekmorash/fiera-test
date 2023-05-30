@@ -1,0 +1,288 @@
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+<!-- Add New Css Link -->
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Sharp" rel="stylesheet">
+
+{{ 'style.css' | asset_url | stylesheet_tag }}
+{{ 'fonts.css' | asset_url | stylesheet_tag }}
+{{ 'media.css' | asset_url | stylesheet_tag }}
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
+{{ 'styles.min.css' | asset_url | stylesheet_tag }}
+{{ 'popup.css' | asset_url | stylesheet_tag }}
+
+
+<!-- End Add New Css Link -->
+
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
+
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+<script>
+  var cart_use_page = -1;
+  var cart_url = 'cart';
+</script>
+
+<style>
+  #lblCartCount {
+    font-size: 12px;
+    background: #d2aa1b;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    display: inline;
+    border: none;
+    letter-spacing: 0;
+    line-height: 14px;
+    position: relative;
+    top: 4px;
+    left: 4px;
+  }
+  .badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+  .label-warning[href],
+  .badge-warning[href] {
+    background-color: #d2aa1b;
+  }
+  .menu-list a:hover {
+    text-decoration:underline;
+  }
+  .slider_subscription .slide-div { display: none; }
+  .slider_subscription .slide-div.slick-initialized { display: block; }
+</style>
+
+<div class="sec1 {% if template.name == 'index' %} sec-home {% endif %}">
+   
+  <div class="top-fix-bar">
+    <div class="top-sec">
+      <div class="hide-desk">
+        <div class="mob-mnu-ic">
+          <button class="dl-trigger" id="mobMenuBtn">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </button>
+        </div>        
+        {%- if section.settings.menu != blank -%}         
+          <ul class="mobilemenu" role="list">
+            {%- for link in section.settings.menu.links -%}
+            <li>
+              <a href="{{ link.url }}" {% if link.current %} aria-current="page" class="header__active-menu-item"{% endif %}>
+                {{ link.title | escape }}
+              </a>
+            </li>
+            {%- endfor -%}
+          </ul>          
+        {%- endif -%}
+      </div>
+      <div class="container">
+        <a href="{{ routes.root_url }}">
+          {%- if section.settings.logo != blank -%}
+            {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+            <img srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+              src="{{ section.settings.logo | img_url: image_size }}"
+              loading="lazy"
+              class="logo"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            >
+          {%- else -%}
+            <span class="h2 logo">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+        
+        {%- if section.settings.menu != blank -%}  
+        <ul class="menu-list fl hide-mob">
+          {%- for link in section.settings.menu.links -%}
+          <li>
+            <a href="{{ link.url }}" class="effect-3 {% if link.current %} mob_menu_active {% endif %}" {% if link.current %} aria-current="page" {% endif %}>
+              {{ link.title | escape }}
+            </a>
+          </li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+        
+        <ul class="menu-list fr">
+          
+          
+          <li class="menu-cart-box menu-account-box">
+            <a href="/account" class="account_icons" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+              </svg>
+              <span class="acc_txt">Account</span>
+            </a>
+          </li>
+          
+          <li class="menu-cart-box {% if settings.cart_type == 'drawer' %} js-ajax-cart-drawer-trigger {% endif %}">
+            <a href="{{ routes.cart_url }}" id="cart-icon-bubble">
+              <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/menu-cart-icn.png?v=1632478926" loading="lazy" alt="">
+              <span class="hide-mob">{{ 'templates.cart.cart' | t }}</span>
+              {%- if cart != empty -%}
+                <span class='badge badge-warning lblCartCount js-ajax-cart-counter' id='lblCartCount'>{{ cart.item_count }}</span>
+              {%- endif -%}
+            </a>
+          </li>
+          <li class="menu-currency-box">
+            <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/dots.png?v=1632479081" alt="" loading="lazy" class="dots hide-desk">
+            {% form 'currency' %}
+              <select name="currency">
+                {% for currency in shop.enabled_currencies %}
+                  {% if currency == cart.currency %}
+                    <option selected="true">{{currency.iso_code}}</option>
+                    {% else %}
+                    <option>{{currency.iso_code}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            {% endform %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  {% if template.name == 'index' %}
+  <div class="s1-inr">
+    <div class="container">
+      <div class="s1-inr-lft">
+        
+        {%- if section.settings.banner_title != blank -%}
+        <h1 class="s1-hd">{{ section.settings.banner_title }}</h1>
+        {%- endif -%}
+        
+        {%- if section.settings.banner_img != blank -%}
+        <img data-src="{{ section.settings.banner_img | img_url: 'master' }}" src="{{ section.settings.banner_img | img_url: 'master' }}" alt="" class="lazy s1-img">
+        {%- endif -%}
+        
+        {%- if section.settings.banner_subtitle != blank -%}
+        <p class="s1-txt">{{ section.settings.banner_subtitle }}</p>
+        {%- endif -%}
+        
+        {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+        <a href="{{ section.settings.button_url }}" class="comn-btn">{{ section.settings.button_text }}</a>
+        {%- endif -%}
+        
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+</div>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append: 'x' %}
+      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "settings": [    
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.header.settings.logo.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "t:sections.header.settings.logo_width.unit",
+      "label": "t:sections.header.settings.logo_width.label"
+    },    
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "header",
+      "content": "Homepage"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Banner Image"
+    },
+    {
+      "type": "textarea",
+      "id": "banner_title",
+      "label": "Banner Title"
+    },
+    {
+      "type": "textarea",
+      "id": "banner_subtitle",
+      "label": "Banner Sub Title"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type":"url",
+      "id":"button_url",
+      "label":" Button Url"
+    }
+  ]
+}
+{% endschema %}

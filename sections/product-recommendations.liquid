@@ -1,0 +1,301 @@
+<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-product-grid.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-product-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-price.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% if product.metafields.my_fields.bought_this_also_purchased != '' %}
+
+
+
+
+<div class="prd-det-s7">
+    <p class="comn-hdg">{{ section.settings.heading | escape }}</p>
+  	<p class="comn-txt">{{ section.settings.sub_heading | escape }}</p>
+  {% if section.settings.collection != blank %}
+  <div class="prd-det-s7-inr">
+    {% assign product_handle = section.settings.collection %}
+    {% for product in collections[product_handle].products %}
+    {% assign product_card_product = product %}
+    <div class="prd-det-s7-inr-bx">
+      {%- if product_card_product.featured_media -%}
+      {%- if product_card_product.media[1] != nil and show_secondary_image -%}
+      <div class="hover-bg" style="background:url({{ product_card_product.media[1] | img_url: '700x' }}) center top no-repeat; background-size:cover;"></div>
+      {%- endif -%}
+      {% if collection_page_image != blank %}
+      <img src="{{ collection_page_image | img_url: '235x' }}" loading="lazy" alt="" class="prd-dtls7-slide-img">
+      {% else %}
+      <img src="{{ product_card_product.featured_media | img_url: '235x' }}" alt="" loading="lazy" class="prd-dtls7-slide-img">
+      {% endif %}
+      {%- endif -%}
+
+      <p class="prd-det-s7-txt1">
+        {% if collection_page_title != blank %}
+        {{ product_card_product.metafields.my_fields.collection_page_title }}
+        {% else %}
+        {{ product_card_product.metafields.my_fields.collection_page_title }}
+        {% endif %}
+      </p>
+      {% comment %}
+      {% render 'price', product: product_card_product, price_class: '' %}
+      {% endcomment %}
+      <div class="prd-rat">
+        <div class="yotpo bottomLine" data-product-id="{{ product_card_product.id }}"></div>
+      </div>
+
+
+      {% if collection_page_description != blank %}
+      <p class="s3-btm-tx4">{{ collection_page_description }}</p>
+      {% endif %}
+      <a href="{{ product_card_product.url | default: '#' }}" class="comn-btn">See Details</a>
+
+    </div>
+    {% endfor %}
+  </div>
+  
+  {% else %}
+    <div class="prd-det-s7-inr">
+      {% assign product_handle = product.metafields.my_fields.bought_this_also_purchased | split: ',' %}
+      
+      {% for product in product_handle %}
+      {% assign product_card_product = all_products[product] %}
+      
+      <div class="prd-det-s7-inr-bx">
+
+        {%- if product_card_product.featured_media -%}
+        {%- if product_card_product.media[1] != nil and show_secondary_image -%}
+        <div class="hover-bg" style="background:url({{ product_card_product.media[1] | img_url: '700x' }}) center top no-repeat; background-size:cover;"></div>
+        {%- endif -%}
+        {% if collection_page_image != blank %}
+        <img src="{{ collection_page_image | img_url: '235x' }}" loading="lazy" alt="" class="prd-dtls7-slide-img">
+        {% else %}
+        <img src="{{ product_card_product.featured_media | img_url: '235x' }}" alt="" loading="lazy" class="prd-dtls7-slide-img">
+        {% endif %}
+        {%- endif -%}
+
+        <p class="prd-det-s7-txt1">
+          {% if collection_page_title != blank %}
+          	{{ product_card_product.metafields.my_fields.collection_page_title }}
+          {% else %}
+          	{{ product_card_product.metafields.my_fields.collection_page_title }}
+          {% endif %}
+        </p>
+         {% render 'price', product: product_card_product, price_class: '' %}
+         <div class="prd-rat">
+          <div class="yotpo bottomLine" data-product-id="{{ product_card_product.id }}"></div>
+        </div>
+
+
+        {% if collection_page_description != blank %}
+        <p class="s3-btm-tx4">{{ collection_page_description }}</p>
+        {% endif %}
+        <a href="{{ product_card_product.url | default: '#' }}" class="comn-btn">Buy Now</a>
+
+      </div>
+      {% endfor %}
+    </div>
+  {% endif%}
+</div>
+
+{% endif %}
+
+{% comment %}
+
+<product-recommendations class="prd-det-s7" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id=6635202019558&limit=5">
+  {% if recommendations.performed and recommendations.products_count > 0 %}
+    <p class="comn-hdg">{{ section.settings.heading | escape }}</p>
+  	<p class="comn-txt">{{ section.settings.sub_heading | escape }}</p>
+    <div class="prd-det-s7-inr">
+      {% comment %}
+      {% for recommendation in recommendations.products %}   
+          {% render 'product-card-rec',
+            product_card_product: recommendation,
+            collection_page_image: recommendation.metafields.my_fields.collection_page_image,
+            collection_page_title: recommendation.metafields.my_fields.collection_page_title,
+            media_size: section.settings.image_ratio,
+            show_secondary_image: section.settings.show_secondary_image,
+            add_image_padding: section.settings.add_image_padding,
+            show_vendor: section.settings.show_vendor,
+            show_image_outline: section.settings.show_image_outline,
+            show_rating: section.settings.show_rating
+          %}
+      {% endfor %}
+      {% endcomment %}
+       
+      
+     
+        {% for product_card_product in collections[section.settings.collection].products %} 
+        <div class="prd-det-s7-inr-bx">
+		
+          {%- if product_card_product.featured_media -%}
+          {%- if product_card_product.media[1] != nil and show_secondary_image -%}
+          <div class="hover-bg" style="background:url({{ product_card_product.media[1] | img_url: '700x' }}) center top no-repeat; background-size:cover;"></div>
+          {%- endif -%}
+          {% if collection_page_image != blank %}
+          <img src="{{ collection_page_image | img_url: '235x' }}" alt="" loading="lazy" class="prd-dtls7-slide-img">
+          {% else %}
+          <img src="{{ product_card_product.featured_media | img_url: '235x' }}" alt="" loading="lazy" class="prd-dtls7-slide-img">
+          {% endif %}
+          {%- endif -%}
+
+          <p class="prd-det-s7-txt1">
+            {% if collection_page_title != blank %}
+              {{ product_card_product.metafields.my_fields.collection_page_title }}
+            {% else %}
+              {{ product_card_product.metafields.my_fields.collection_page_title }}
+            {% endif %}
+          </p>
+          {% comment %}
+          {% render 'price', product: product_card_product, price_class: '' %}
+          {% endcomment %}
+          <div class="prd-rat">
+            <div class="yotpo bottomLine" data-product-id="{{ product_card_product.id }}"></div>
+            {% comment %}
+            <div class="yotpo bottomLine stars"
+                 data-appkey="A1g0ak8AfUt4amT9bGjLpRLNOtyJXLCMEwdhx337"
+                 data-product-id="{{ product_card_product.id }}"
+                 data-name="{{ product_card_product.title | escape }}"
+                 data-url="{{ shop.url }}{{ product_card_product.url }}"
+                 data-image-url="{{ product_card_product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                 data-price="{{ product_card_product.price | money_without_currency }}"
+                 data-currency="{{ shop.currency }}"
+                 loading="lazy">
+            </div>   
+            {% endcomment %}
+          </div>
+
+
+          {% if collection_page_description != blank %}
+          <p class="s3-btm-tx4">{{ collection_page_description }}</p>
+          {% endif %}
+          <a href="{{ product_card_product.url | default: '#' }}" class="comn-btn">Buy Now</a>
+
+        </div>
+        {% endfor %}
+    </div>
+  {% endif %}
+</product-recommendations>
+{% endcomment %}
+{% javascript %}
+  class ProductRecommendations extends HTMLElement {
+    constructor() {
+      super();
+	
+      const handleIntersection = (entries, observer) => {
+        if (!entries[0].isIntersecting) return;
+        observer.unobserve(this);
+
+        fetch(this.dataset.url)
+          .then(response => response.text())
+          .then(text => {
+            const html = document.createElement('div');
+            html.innerHTML = text;
+            const recommendations = html.querySelector('product-recommendations');
+            if (recommendations && recommendations.innerHTML.trim().length) {
+              this.innerHTML = recommendations.innerHTML;
+            }
+			setTimeout(function(){
+              var api = new Yotpo.API(yotpo);
+              api.refreshWidgets();
+			}, 1000);
+          })
+          .catch(e => {
+            console.error(e);
+          });
+      }
+
+      new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 200px 0px'}).observe(this);
+    }
+  }
+
+  customElements.define('product-recommendations', ProductRecommendations);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.product-recommendations.name",
+  "tag": "section",
+  "class": "spaced-section product-recommendations",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.product-recommendations.settings.paragraph__1.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "You may also like",
+      "label": "t:sections.product-recommendations.settings.heading.label"
+    },
+	{
+      "type": "textarea",
+      "id": "sub_heading",
+      "label": "Sub Heading"
+    },
+    {
+    "type": "collection",
+    "id": "collection",
+    "label": "t:sections.featured-collection.settings.collection.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.product-recommendations.settings.header__2.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.product-recommendations.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.product-recommendations.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.product-recommendations.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.product-recommendations.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_outline",
+      "default": true,
+      "label": "t:sections.product-recommendations.settings.show_image_outline.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.show_rating.label",
+      "info": "t:sections.product-recommendations.settings.show_rating.info"
+    }
+  ]
+}
+{% endschema %}

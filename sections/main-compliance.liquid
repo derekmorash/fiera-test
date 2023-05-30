@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="contact-hdng">
+    {% if section.settings.title != blank %}
+    	<h1>{{ section.settings.title }}</h1>
+    {% else %}
+    	<h1>Data Policy</h1>
+    {% endif %}
+    
+    {% if section.settings.sub_title != blank %}
+    	<p>{{ section.settings.sub_title }}</p>
+    {% else %}
+    	<p></p>
+    {% endif %}
+    
+  </div>
+  
+  {{ page.content}}
+ 
+</div>
+<style>
+  div#ccpa_page {
+    text-align: left;    
+}
+
+div#ccpa_page ul li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div#ccpa_page form {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div#ccpa_page h2 {
+    font-size: 18px;
+    margin-top: 20px
+}
+
+input.btn {
+    font-size: 14px;
+    line-height: 26px;
+    width: 100px;
+    border: 2px solid #313b54;
+    max-width: 100%;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 2px;
+    position: relative;
+}
+
+input {
+    border: 2px solid #313b54;
+}
+</style>
+
+{% schema %}
+  {
+    "name": "Main Compliance Section",
+	"tag": "div",
+  	"class": "shop-sec1",
+    "settings": [
+		{
+			"type":"text",
+			"id":"title",
+			"label":"Title"
+		},
+		{
+			"type":"text",
+			"id":"sub_title",
+			"label":"Sub Title Text"
+		}
+	]
+  }
+{% endschema %}

@@ -1,0 +1,108 @@
+
+{% if section.settings.section_enable %}
+  <div class="faq_section_custom">
+	<div class="section_page_container">
+      {% if section.settings.info_sec_heading != blank %}
+      <div  class="section_sec_title">
+        <h3>{{ section.settings.info_sec_heading }}</h3>
+      </div>
+      {% endif %}
+      {% if section.settings.section_richtext != blank %}
+      <div class="sec__rich__text">
+        {{ section.settings.section_richtext }}
+      </div>
+      {% endif %}
+	</div>
+
+
+<div class="faq-container" style="overflow: hidden;">
+ {% for block in section.blocks %}
+  <div class="up-slide-dwn" >
+    {% if block.settings.faq_heading != blank %}
+        <div class="accordion acdn-heading accordion-close" id="custom-faq-{{ forloop.index }}">{{ block.settings.faq_heading }}</div>
+    {% endif %}
+    
+    {% if block.settings.text_info != blank %}
+        <div class="acdn-content" style="display: none;">
+         <div class="acdn-para">{{ block.settings.text_info }}</div>
+        </div>
+    {% endif %}
+    
+    {% if block.settings.text_html_info != blank %}
+        <div class="acdn-content" style="display: none;">
+         <div class="acdn-para">{{ block.settings.text_html_info }}</div>
+        </div>
+    {% endif %}
+    
+  </div>
+ {% endfor %}
+  
+ </div>
+</div>
+<div class="clearall"></div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "FAQ Section",
+    "class": "faq_section_custom_main_cover",
+    "max_blocks": 20,
+    "settings": [
+        {
+          "type": "checkbox",
+          "id": "section_enable",
+          "label": "Show Section",
+          "info": "Show or Hide Section",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "info_sec_heading",
+          "label": "Section Heading",
+          "default": "Section Heading"
+          },
+          {
+          "type": "richtext",
+          "id": "faq_richtext",
+          "label": "Text"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "text",
+        "settings": [
+		  {
+            "type": "text",
+            "id": "faq_heading",
+            "label": "FAQ Heading"
+          },
+          {
+              "id": "text_info",
+              "type": "richtext",
+              "default": "<p>Text goes here</p>",
+              "label": "Text goes here"
+		  },
+          {
+              "id": "text_html_info",
+              "type": "html",
+              "default": "HTML Code",
+              "label": "HTML Code"
+		  }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "FAQ Section",
+        "category": "Page",
+        "blocks": [
+          {
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

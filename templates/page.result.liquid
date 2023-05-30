@@ -1,0 +1,100 @@
+{{ 'result-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tabs.js' | asset_url }}" defer="defer"></script>
+<div class="result__page__main">
+  <div class="container">
+
+    <div class="contact-hdng">
+      <h1>Fiera Cosmetics Reviews & Customer Testimonials</h1>
+      <p>Here is what our customers had to say about Fièra Products.</p>
+    </div>
+    <div class="clearall"></div>
+    <div class="container">
+      <div class="tab-container">
+        <ul class="tabs">
+          	<li rel="tab1" class="first_tab">Luxury Concealer</li>
+            <li rel="tab2" class="">Luxury Neck Cream</li>
+            <li rel="tab3" class="">Stem C Serum</li>
+            <li rel="tab4" class="">Apple Cream</li>
+            <li rel="tab5" class="">Finishing Powder</li>
+        </ul>
+        <div class="tab_container">
+          <h3 class="tab_drawer_heading" rel="tab1">Luxury Concealer</h3>
+          <div id="tab1" class="tab_content" style="display: block;">
+            {% comment %}
+            <div id="shopify-product-reviews" data-id="6634854056166">{{ product.metafields.spr.reviews }}</div>
+            {% endcomment %}
+            <div class="yotpo yotpo-main-widget"
+                 data-product-id="6634854056166"
+                 data-price="39.97"
+                 data-currency="USD"
+                 data-name="Fièra Luxury Concealer"
+                 data-url="/"
+                 data-image-url="images/luxury-concealer-slide1.png">
+            </div>
+          </div>
+          
+          <h3 class="tab_drawer_heading" rel="tab2">Luxury Neck Cream</h3>
+          <div id="tab2" class="tab_content" style="display: block;">
+            {% comment %}
+            <div id="shopify-product-reviews" data-id="6635202019558">{{ product.metafields.spr.reviews }}</div>
+            {% endcomment %}
+            <div class="yotpo yotpo-main-widget"
+                 data-product-id="6635202019558"
+                 data-price="39.97"
+                 data-currency="USD"
+                 data-name="Fiéra Luxury Neck Cream"
+                 data-url="/"
+                 data-image-url="images/neck-cream-slide1.png">
+            </div>
+          </div>
+          
+          <h3 class="tab_drawer_heading" rel="tab3">Stem C Serum</h3>
+          <div id="tab3" class="tab_content" style="display: block;">
+            {% comment %}
+            <div id="shopify-product-reviews" data-id="6635202117862">{{ product.metafields.spr.reviews }}</div>
+            {% endcomment %}
+            <div class="yotpo yotpo-main-widget"
+                 data-product-id="6635202117862"
+                 data-price="37.97"
+                 data-currency="USD"
+                 data-name="Fièra Citrus Serum"
+                 data-url="/"
+                 data-image-url="images/stem-serum-slide1.png">
+            </div>
+          </div>
+          
+          <h3 class="tab_drawer_heading" rel="tab4">Apple Cream</h3>
+          <div id="tab4" class="tab_content" style="display: block;">
+            {% comment %}
+            <div id="shopify-product-reviews" data-id="6635202248934">{{ product.metafields.spr.reviews }}</div>
+            {% endcomment %}
+            <div class="yotpo yotpo-main-widget"
+                 data-product-id="6635202248934"
+                 data-price="34.97"
+                 data-currency="USD"
+                 data-name="Fièra Apple Cream"
+                 data-url="/"
+                 data-image-url="images/apple-cream-slide1.png">
+            </div>
+          </div>
+          
+          <h3 class="tab_drawer_heading" rel="tab5">Finishing Powder</h3>
+          <div id="tab5" class="tab_content" style="display: block;">
+            {% comment %}
+            <div id="shopify-product-reviews" data-id="7192594841830">{{ product.metafields.spr.reviews }}</div>
+            {% endcomment %}
+            <div class="yotpo yotpo-main-widget"
+                 data-product-id="6635202281702"
+                 data-price="34.99"
+                 data-currency="USD"
+                 data-name="Fièra HD Finishing Powder"
+                 data-url="/"
+                 data-image-url="images/finshng-pwdr-slide1.png">
+            </div>
+          </div>
+        </div>
+        <!-- .tab_container -->
+      </div>
+    </div>
+    <div>
+<div>

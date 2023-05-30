@@ -1,0 +1,202 @@
+<div class="prd-det-s4">
+  <div class="container">
+    
+    {% if section.settings.title != blank %}
+    <p class="comn-hdg">{{ section.settings.title }}</p>
+    {% endif %}
+    
+    {% if section.settings.sub_title != blank %}
+    <p class="comn-txt pdng-para">{{ section.settings.sub_title }}</p>
+    {% endif %}
+    
+    <div class="prd-det-s4-inr">
+      
+      {% assign image_width = section.settings.image_width | append: 'X' %}
+      
+      {% if section.settings.image_mobile != blank %}
+      	<img src="{{ section.settings.image_mobile | img_url: image_width }}" alt="" loading="lazy" class="prd-det-s4-img-btl prd-det-s4-img1 mobile_img">
+      {% endif %}
+      
+      {% if section.settings.image != blank %}
+      	<img src="{{ section.settings.image | img_url: image_width }}" alt="" loading="lazy" class="prd-det-s4-img-btl prd-det-s4-img1">
+      {% endif %}
+      
+      <ul class="prd-det-s4-lst fl">
+        <li>
+          {% if section.settings.image_1 != blank %}
+          <img src="{{ section.settings.image_1 | img_url: '100X' }}" alt="" loading="lazy" class="prd-det-s4-lst-icn">
+          {% endif %}
+          
+          {% if section.settings.title_1 != blank %}
+          <h3>{{ section.settings.title_1 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_1 != blank %}
+          <p>{{ section.settings.content_1 }}</p>
+          {% endif %}
+        </li>
+        <li>
+          {% if section.settings.image_2 != blank %}
+          <img src="{{ section.settings.image_2 | img_url: '100X' }}" alt="" loading="lazy" class="prd-det-s4-lst-icn">
+          {% endif %}
+          
+          {% if section.settings.title_2 != blank %}
+          <h3>{{ section.settings.title_2 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_2 != blank %}
+          <p>{{ section.settings.content_2 }}</p>
+          {% endif %}
+        </li>
+      </ul>
+      <ul class="prd-det-s4-lst fr">
+        <li>
+          {% if section.settings.image_3 != blank %}
+          <img src="{{ section.settings.image_3 | img_url: '100X' }}" alt="" loading="lazy" class="prd-det-s4-lst-icn">
+          {% endif %}
+          
+          {% if section.settings.title_3 != blank %}
+          <h3>{{ section.settings.title_3 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_3 != blank %}
+          <p>{{ section.settings.content_3 }}</p>
+          {% endif %}
+        </li>
+        <li>
+          {% if section.settings.image_4 != blank %}
+          <img src="{{ section.settings.image_4 | img_url: '100X' }}" alt="" loading="lazy" class="prd-det-s4-lst-icn">
+          {% endif %}
+          
+          {% if section.settings.title_4 != blank %}
+          <h3>{{ section.settings.title_4 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_4 != blank %}
+          <p>{{ section.settings.content_4 }}</p>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product How Works",
+  "class": "product-how-works-section--full-width",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+	{
+      "type": "range",
+	  "min": 100,
+	  "max": 500,
+	  "step": 50,
+      "id": "image_width",
+      "label": "Image Width",
+	  "default": 400
+    },
+	{
+      "type": "header",
+      "content": "Section 1"
+    },
+	{
+      "type": "textarea",
+      "id": "title_1",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_1",
+      "label": "Content"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+	{
+      "type": "header",
+      "content": "Section 2"
+    },
+	{
+      "type": "textarea",
+      "id": "title_2",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_2",
+      "label": "Content"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+	{
+      "type": "header",
+      "content": "Section 3"
+    },
+	{
+      "type": "textarea",
+      "id": "title_3",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_3",
+      "label": "Content"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image"
+    },
+	{
+      "type": "header",
+      "content": "Section 4"
+    },
+	{
+      "type": "textarea",
+      "id": "title_4",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_4",
+      "label": "Content"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product How Works"      
+    }
+  ]
+}
+{% endschema %}

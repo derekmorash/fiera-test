@@ -1,0 +1,113 @@
+{% if section.settings.section_enable %}
+<div class="info_box_main">
+   <div class="section_page_container">
+      {% if section.settings.info_sec_heading != blank %}
+      <div  class="section_sec_title">
+        <h3>{{ section.settings.info_sec_heading }}</h3>
+      </div>
+      {% endif %}
+      {% if section.settings.section_richtext != blank %}
+      <div class="sec__rich__text">
+        {{ section.settings.section_richtext }}
+      </div>
+      {% endif %}
+    </div>
+
+  <div class="ctn_brand_container">
+    <div class="info_box_cover">
+      
+      {% for block in section.blocks %}
+      
+      <div class="info_box">
+        <div class="info_box_inner_sec">
+            {% if block.settings.info_img_box != blank %} 
+            <div class="info_box_img">
+              <img src="{{ block.settings.info_img_box | img_url: '5000x' }}" alt="" loading="lazy" />
+            </div>
+            {% endif %}
+           <div class="info_right">
+            {% if block.settings.box_heading != blank %}
+              <div class="brand_box_title">{{ block.settings.box_heading }}</div>
+            {% endif %}
+            
+            {% if block.settings.text_info != blank %}
+              <div class="info_box_content">{{ block.settings.text_info }}</div>
+            {% endif %}
+           </div>
+        </div>
+      </div>
+      
+      {% endfor %}
+      
+      
+      
+      
+    </div>
+    
+    
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Icon Info Section",
+    "class": "box_info_section",
+    "max_blocks": 20,
+    "settings": [
+        {
+          "type": "checkbox",
+          "id": "section_enable",
+          "label": "Show Section",
+          "info": "Show or Hide Section",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "info_sec_heading",
+          "label": "Section Heading",
+          "default": "Section Heading"
+          },
+          {
+          "type": "richtext",
+          "id": "section_richtext",
+          "label": "Text"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+		  {
+            "type": "image_picker",
+            "id": "info_img_box",
+            "label": "Info Icon"
+          },
+		  {
+            "type": "text",
+            "id": "box_heading",
+            "label": "Box Heading"
+          },
+          {
+              "id": "text_info",
+              "type": "richtext",
+              "default": "<p>Text goes here</p>",
+              "label": "Text goes here"
+		  }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Icon Info Section",
+        "category": "Page",
+        "blocks": [
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

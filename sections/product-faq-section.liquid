@@ -1,0 +1,38 @@
+<div class="custom_sec_main">
+  <div class="faq-sec" id="faq">
+    <div class="container">
+      {%- if section.settings.title != blank -%}
+	      <p class="comn-hd">{{ section.settings.title | escape }}</p>
+      {%- endif -%}
+      {% if section.settings.html != blank %}
+      	<div class="faq-container" style="overflow:hidden;">{{ section.settings.html }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product Faq Section",
+    "class": "product-faq-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+	  },
+      {
+        "type": "html",
+        "id": "html",
+        "label": "HTML"
+      }
+      
+    ],
+    "presets": [
+      {
+        "name": "Product Faq Section",
+        "category": "Product"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,2535 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-newsletter.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-payment.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-social.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'disclosure.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<noscript>{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-social.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'disclosure.css' | asset_url | stylesheet_tag }}</noscript>
+{% comment %}Production: 41473600061670, Sandbox: 43832092754144{% endcomment %}
+{% assign free_brush_sku = "41473600061670" %}
+
+
+{% comment %}
+
+<footer class="footer color-{{ section.settings.color_scheme }} gradient">
+  {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social -%}
+  <div class="footer__content-top page-width">
+    {%- if section.blocks.size > 0 -%}
+    {%- liquid
+      if section.blocks.size == 9
+      assign footer_grid_class = 'grid--3-col-tablet'
+      elsif section.blocks.size > 6
+      assign footer_grid_class = 'grid--4-col-desktop'
+      elsif section.blocks.size > 4
+      assign footer_grid_class = 'grid--3-col-tablet'
+      endif
+      -%}
+      <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}">
+        {%- for block in section.blocks -%}
+        <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+          <h2 class="footer-block__heading">{{- block.settings.heading | escape -}}</h2>
+          {%- endif -%}
+
+          {%- case block.type -%}
+          {%- when 'text' -%}
+          <div class="footer-block__details-content rte">
+            {{ block.settings.subtext }}
+          </div>
+          {%- when 'link_list' -%}
+          {%- if block.settings.menu != blank and block.settings.heading != blank -%}
+          <ul class="footer-block__details-content list-unstyled">
+            {%- for link in block.settings.menu.links -%}
+            <li>
+              <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                {{ link.title }}
+              </a>
+            </li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+          {%- when 'image' -%}
+          <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
+            {%- if block.settings.image != blank -%}
+            {%- assign image_size = block.settings.image_width | append: 'x' -%}
+            <img
+            srcset= "{{ block.settings.image | img_url: image_size }}, {{ block.settings.image | img_url: image_size, scale: 2 }} 2x"
+            src="{{ block.settings.image | img_url: '400x' }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            style="max-width: min(100%, {{ block.settings.image_width }}px);"
+            >
+            {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+            {%- endif -%}
+          </div>
+          {%- endcase -%}
+        </div>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <div class="footer-block--newsletter">
+        {%- if section.settings.newsletter_enable -%}
+        <div class="footer-block__newsletter">
+          {%- if section.settings.newsletter_heading != blank -%}
+          <h2 class="footer-block__heading">{{ section.settings.newsletter_heading | escape }}</h2>
+          {%- endif -%}
+          
+          <div class="mail-field">
+            <form action='https://api-us1.chd01.com/accounts/1560/forms/10/subscribe/ff2d640e4c3685c63c6bf55a83af2e4b782b443a' class="footer__newsletter newsletter-form" method='post'>
+              <div class="newsletter-form__field-wrapper">
+                <div class="field">
+                  <input class="field__input" include_blank="true" start_year="1950" type="text" name="contact_fields[email]" id="contact_fields_email" />
+                  <input class="signUp" type="submit" name="commit" value="Subscribe" data-disable-with="Subscribe" />
+                </div>
+              </div>
+            </form>
+          </div>
+          
+          
+          
+          {% comment %}
+          {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-form__field-wrapper">
+            <div class="field">
+              <input
+              id="NewsletterForm--{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}
+              autofocus
+              aria-invalid="true"
+              aria-describedby="ContactFooter-error"
+              {% elsif form.posted_successfully? %}
+              aria-describedby="ContactFooter-success"
+              {% endif %}
+              placeholder="{{ 'newsletter.label' | t }}"
+              required
+              >
+              <label class="field__label" for="NewsletterForm--{{ section.id }}">
+                {{ 'newsletter.label' | t }}
+              </label>
+              <button type="submit" class="newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                {% render 'icon-arrow' %}
+              </button>
+            </div>
+            {%- if form.errors -%}
+            <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+            {%- endif -%}
+          </div>
+          {%- if form.posted_successfully? -%}
+          <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+          {%- endif -%}
+          {%- endform -%}
+          {% endcomment %}
+        </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_social -%}
+        <ul class="footer__list-social list-unstyled list-social" role="list">
+          {%- if settings.social_twitter_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_twitter_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-twitter' -%}
+              <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_facebook_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_facebook_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-facebook' -%}
+              <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_pinterest_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_pinterest_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-pinterest' -%}
+              <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_instagram_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_instagram_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-instagram' -%}
+              <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_tiktok_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_tiktok_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-tiktok' -%}
+              <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_tumblr_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_tumblr_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-tumblr' -%}
+              <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_snapchat_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_snapchat_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-snapchat' -%}
+              <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_youtube_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_youtube_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-youtube' -%}
+              <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_vimeo_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_vimeo_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-vimeo' -%}
+              <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+        </ul>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- endif -%}
+
+    <div class="footer__content-bottom">
+      <div class="footer__content-bottom-wrapper page-width">
+        <div class="footer__column footer__localization">
+          {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <noscript>
+            {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
+            <div class="localization-form__select">
+              <h2 class="visually-hidden" id="FooterCountryLabelNoScript">{{ 'localization.country_label' | t }}</h2>
+              <select class="localization-selector link" name="country_code" aria-labelledby="FooterCountryLabelNoScript">
+                {%- for country in localization.available_countries -%}
+                <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                  {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                </option>
+                {%- endfor -%}
+              </select>
+              {% render 'icon-caret' %}
+            </div>
+            <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
+            {%- endform -%}
+          </noscript>
+          <localization-form>
+            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
+            <div class="no-js-hidden">
+              <h2 class="caption-large" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+              <div class="disclosure">
+                <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterCountryList" aria-describedby="FooterCountryLabel">
+                  {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+                  {% render 'icon-caret' %}
+                </button>
+                <ul id="FooterCountryList" role="list" class="disclosure__list list-unstyled" hidden>
+                  {%- for country in localization.available_countries -%}
+                  <li class="disclosure__item" tabindex="-1">
+                    <a class="link link--text disclosure__link caption-large{% if country.iso_code == localization.country.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
+                      {{ country.name }} <span class="localization-form__currency">({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
+                    </a>
+                  </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+              <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+            </div>
+            {%- endform -%}
+          </localization-form>
+          {%- endif -%}
+
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <noscript>
+            {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
+            <div class="localization-form__select">
+              <h2 class="visually-hidden" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+              <select class="localization-selector link" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
+                {%- for language in localization.available_languages -%}
+                <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                  {{ language.endonym_name | capitalize }}
+                </option>
+                {%- endfor -%}
+              </select>
+              {% render 'icon-caret' %}
+            </div>
+            <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
+            {%- endform -%}
+          </noscript>
+
+          <localization-form>
+            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
+            <div class="no-js-hidden">
+              <h2 class="caption-large" id="FooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+              <div class="disclosure">
+                <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterLanguageList" aria-describedby="FooterLanguageLabel">
+                  {{ localization.language.endonym_name | capitalize }}
+                  {% render 'icon-caret' %}
+                </button>
+                <ul id="FooterLanguageList" role="list" class="disclosure__list list-unstyled" hidden>
+                  {%- for language in localization.available_languages -%}
+                  <li class="disclosure__item" tabindex="-1">
+                    <a class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} data-value="{{ language.iso_code }}">
+                      {{ language.endonym_name | capitalize }}
+                    </a>
+                  </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+              <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+            </div>
+            {%- endform -%}
+          </localization-form>
+          {%- endif -%}
+        </div>
+        <div class="footer__column footer__column--info">
+          {%- if section.settings.payment_enable -%}
+          <div class="footer__payment">
+            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+            <ul class="list list-payment" role="list">
+              {%- for type in shop.enabled_payment_types -%}
+              <li class="list-payment__item">
+                {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+              </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+          {%- endif -%}
+          <div class="footer__copyright caption">
+            <small class="copyright__content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
+            <small class="copyright__content">{{ powered_by_link }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  {% endcomment %}
+
+
+{% unless template == 'cart' or page.handle == 'contact' or product.handle == 'fiera-luxury-concealer-1' or product.handle == 'fiera-luxury-neck-cream-1' or product.handle == 'fiera-citrus-stem-c-serum-1' or product.handle == 'fiera-apple-stem-cell-cream-1' %}
+  <div class="sec7">
+    <div id="insta-feed"></div>
+    {% comment %}
+    <p class="comn-hdg">@fieracosmetics</p>
+    <div class="s7-slide-div">
+      <div>
+        <div class="s7-box">
+          <a href="https://www.instagram.com/p/CUKcidqlflj/" target="_blank">
+            <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/CUKcidqlflj.jpg?v=1632543648" class="lazy slider-img1">
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="s7-box">
+          <a href="https://www.instagram.com/p/CUFmCUqlxDL/" target="_blank">
+            <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/CUFmCUqlxDL.jpg?v=1632543675" class="lazy slider-img1">
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="s7-box">
+          <a href="https://www.instagram.com/p/CUDlV1CDzad/" target="_blank">
+            <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/CUDlV1CDzad.jpg?v=1632543708" class="lazy slider-img1">
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="s7-box">
+          <a href="https://www.instagram.com/p/CT72tQcPzwF/" target="_blank">
+            <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/CT72tQcPzwF.jpg?v=1632543742" class="lazy slider-img1">
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="s7-box">
+          <a href="https://www.instagram.com/p/CT2eLNKlW1K/" target="_blank">
+            <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/CT2eLNKlW1K.jpg?v=1632543769" class="lazy slider-img1">
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="s7-box">
+          <a href="https://www.instagram.com/p/CT0LPqQPBIV/" target="_blank">
+            <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/CT0LPqQPBIV.jpg?v=1632543797" class="lazy slider-img1">
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endcomment %}
+  </div>
+{% endunless %}
+
+{% if template == 'product.product-page-v5' %}
+
+<div class="btm-strp">
+	<div class="container-lg">
+        <ul class="btm-strp-list">
+            <li>
+                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/btm-strp-icn1_2c6b28b6-110b-4e19-9b1a-cb871d447511.png?v=1650453338" loading="lazy" alt="" class="btm-strp-icn">
+                <p>Produced in<br>the USA</p>
+            </li>
+            <li>
+                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/btm-strp-icn2_7d08bb6c-727b-4ba6-bc87-64022dcdcecf.png?v=1650453366" loading="lazy" alt="" class="btm-strp-icn">
+                <p>Non<br>GMO</p>
+            </li>
+            <li>
+                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/btm-strp-icn3_862c856f-c9f0-49f4-9353-8a497b755fd9.png?v=1650453397" loading="lazy" alt="" class="btm-strp-icn">
+                <p>Cruelty<br>Free</p>
+            </li>
+            <li>
+                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/btm-strp-icn4_073090e6-b1e8-4dcd-b59c-d7cd414d5453.png?v=1650453418" loading="lazy" alt="" class="btm-strp-icn">
+                <p>Paraben<br>Free</p>
+            </li>
+            <li>
+                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/btm-strp-icn5_38f6f15a-5429-45db-972f-079afbb8cf93.png?v=1650453441" loading="lazy" alt="" class="btm-strp-icn">
+                <p>Money Back<br>Guarantee</p>
+            </li>
+            <li>
+                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/btm-strp-icn6_08bd5805-1df3-4ff9-b664-20cb6d585a64.png?v=1650453466" loading="lazy" alt="" class="btm-strp-icn">
+                <p>Charity<br>Giving Back</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% else %}   
+
+  {%- if section.blocks.size > 0 -%}
+  {%- for block in section.blocks -%}
+  {% if block.type == 'logo_list' %}
+  <div class="btm-strp">
+    <div class="container">
+      <ul class="btm-strp-list">
+        {%- if block.settings.logo_img_1 != blank -%}
+        <li>
+          <img data-src="{{ block.settings.logo_img_1 | img_url: '100X' }}" loading="lazy" alt="" class="lazy btm-strp-icn">
+        </li>
+        {%- endif -%}
+        {%- if block.settings.logo_img_2 != blank -%}
+        <li>
+          <img data-src="{{ block.settings.logo_img_2 | img_url: '100X' }}" loading="lazy" alt="" class="lazy btm-strp-icn">
+        </li>
+        {%- endif -%}
+        {%- if block.settings.logo_img_3 != blank -%}
+        <li>
+          <img data-src="{{ block.settings.logo_img_3 | img_url: '100X' }}" loading="lazy" alt="" class="lazy btm-strp-icn">
+        </li>
+        {%- endif -%}
+        {%- if block.settings.logo_img_4 != blank -%}
+        <li>
+          <img data-src="{{ block.settings.logo_img_4 | img_url: '100X' }}" loading="lazy" alt="" class="lazy btm-strp-icn">
+        </li>
+        {%- endif -%}
+        {%- if block.settings.logo_img_5 != blank -%}
+        <li>
+          <img data-src="{{ block.settings.logo_img_5 | img_url: '100X' }}" loading="lazy" alt="" class="lazy btm-strp-icn">
+        </li>
+        {%- endif -%}
+        {%- if block.settings.logo_img_6 != blank -%}
+        <li>
+          <img data-src="{{ block.settings.logo_img_6 | img_url: '100X' }}" loading="lazy" alt="" class="lazy btm-strp-icn">
+        </li>
+        {%- endif -%}            
+      </ul>
+    </div>
+  </div>
+  {% break %}
+  {% endif %}
+  {%- endfor -%}
+  {%- endif -%}
+
+{% endif %} 
+
+  {%- if section.settings.newsletter_enable -%}
+  <div class="mail-strip">
+    <div class="container">
+      <div class="mail-strp-lft">
+        {%- if section.settings.newsletter_heading != blank -%}
+        <span>{{ section.settings.newsletter_heading }}</span>
+        {%- endif -%}
+        {%- if section.settings.newsletter_sub_heading != blank -%}
+        <p>{{ section.settings.newsletter_sub_heading }}</p>
+        {%- endif -%}
+      </div>
+      <div class="mail-field">
+ 
+    {% form 'customer', class: 'newsletter-form footer__newsletter' %}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="newsletter-form__field-wrapper">
+                <div class="field">
+                  <input
+                    id="NewsletterForm--{{ section.id }}"
+                    type="email"
+                    name="contact[email]"
+                    class="field__input"
+                    value=""
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    {% if form.errors %}
+                      autofocus
+                      aria-invalid="true"
+                      aria-describedby="Newsletter-error--{{ section.id }}"
+                    {% elsif form.posted_successfully? %}
+                      aria-describedby="Newsletter-success--{{ section.id }}"
+                    {% endif %}
+                    placeholder="Please Enter Your Email"
+                    required
+                  >
+                  <button type="submit" class="newsletter-form__button field__button signUp" value="Submit" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">Submit</button>
+                </div>
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                {%- endif -%}
+              </div>
+              {%- if form.posted_successfully? -%}
+                <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+              {%- endif -%}
+            {% endform %}
+
+       {% comment %}
+        <form action='https://api-us1.chd01.com/accounts/1560/forms/10/subscribe/ff2d640e4c3685c63c6bf55a83af2e4b782b443a' class="footer__newsletter newsletter-form" method='post'>
+          <div class="newsletter-form__field-wrapper">
+            <div class="field">
+              <input class="field__input" placeholder="Please Enter Your Email" include_blank="true" start_year="1950" type="text" name="contact_fields[email]" id="contact_fields_email" />
+              <input class="signUp" type="submit" name="commit" value="Submit" data-disable-with="Submit" />
+            </div>
+          </div>
+        </form>
+       {% endcomment %} 
+    
+		{% comment %}
+        {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+        {%- if form.posted_successfully? -%}
+        <style>.footerthankyou { display:block; font-size: 0.75em; color: white }</style>
+        <div class="footerthankyou">
+          <h2>Thank You For Signing Up!</h2>
+          <p>Helping you look and feel beautiful is our goal!</p>
+          <p>Since we don’t want you missing out on our deals, please make sure it didn’t land on your promo or spam folder!</p>
+        </div>
+        {% else %} 
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form__field-wrapper">
+          <div class="field">
+            <input
+            id="NewsletterForm--{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="field__input"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            {% if form.errors %}
+            autofocus
+            aria-invalid="true"
+            aria-describedby="ContactFooter-error"
+            {% elsif form.posted_successfully? %}
+            aria-describedby="ContactFooter-success"
+            {% endif %}
+            placeholder="Please Enter Your {{ 'newsletter.label' | t }}"
+            required
+            >
+            <label class="field__label" for="NewsletterForm--{{ section.id }}">
+              Please Enter Your {{ 'newsletter.label' | t }}
+            </label>
+            <button type="submit" class="signUp" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+              Submit
+            </button>
+          </div>
+          {%- if form.errors -%}
+          <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+		{% endcomment %}
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <div class="ftr-links-sec">
+    <div class="container">
+      <div class="ftr-links-inr">
+        <div class="ftr-links-col ftr-links-col-1">
+          {% if section.settings.footer_logo != blank %}
+          <img data-src="{{ section.settings.footer_logo | img_url: 'master' }}" loading="lazy" alt="" class="lazy ftr-log">
+          {% endif %}
+          <ul class="ftr-col-1-list">
+            {% if section.settings.location_icon != blank or section.settings.footer_location != blank %}
+            <li>
+              {% if section.settings.location_icon != blank %}
+              <img data-src="{{ section.settings.location_icon | img_url: 'master' }}" loading="lazy" class="lazy" alt="">
+              {% endif %}
+              {% if section.settings.footer_location != blank %}
+              {{ section.settings.footer_location }}
+              {% endif %}
+            </li>
+            {% endif %}
+            {% if section.settings.email_icon != blank or section.settings.footer_email != blank %}
+            <li>
+              {% if section.settings.email_icon != blank %}
+              <img data-src="{{ section.settings.email_icon | img_url: 'master' }}" loading="lazy" class="lazy" alt="">
+              {% endif %}
+              {% if section.settings.footer_email != blank %}
+              <a href="mailto:{{ section.settings.footer_email }}">{{ section.settings.footer_email }}</a>
+              {% endif %}
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+        {%- if block.type == 'link_list' -%}
+        {%- if block.settings.menu != blank and block.settings.heading != blank -%}
+        <div class="ftr-links-col ftr-links-col-{{ forloop.index }}">
+          <p class="ftr-links-hd">{{ block.settings.heading }} <span class="tot-img hide-desk"></span></p>
+          <ul class="ftr-links-list">
+            {%- for link in block.settings.menu.links -%}
+            <li>
+              <a href="{{ link.url }}">
+                {{ link.title }}
+              </a>
+            </li>
+            {%- endfor -%}
+            {% if forloop.last == true %}
+            <li>
+              <a href="/pages/terms-conditions" target="_blank" rel="noopener noreferrer">Terms And Conditions</a>
+            </li>
+            <li>
+              <a href="/pages/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        {%- endif -%}
+        {%- endif -%}
+        {%- endfor -%}      
+        {%- endif -%}
+
+        {%- if section.settings.show_social or section.settings.payment_enable -%}
+        <div class="ftr-links-col hide-mob" style="border-right:none;">
+          {%- if section.settings.show_social -%}
+          {% if section.settings.social_label != blank %}
+          <p class="ftr-links-hd">{{ section.settings.social_label }}</p>
+          {% endif %}
+          <ul class="scl-list" role="list">
+            {%- if settings.social_twitter_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_twitter_link }}" class="link link--text list-social__link" >
+                {%- render 'icon-twitter' -%}
+                <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_facebook_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_facebook_link }}" target="_blank">
+                <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/scl-icn1.png?v=1632484814" class="lazy" alt="Facebook">
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_pinterest_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_pinterest_link }}" class="link link--text list-social__link" >
+                {%- render 'icon-pinterest' -%}
+                <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_instagram_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_instagram_link }}" target="_blank">
+                <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/scl-icn3.png?v=1632484834" class="lazy" alt="Instagram">
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_tiktok_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_tiktok_link }}" class="link link--text list-social__link" >
+                {%- render 'icon-tiktok' -%}
+                <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_tumblr_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_tumblr_link }}" class="link link--text list-social__link" >
+                {%- render 'icon-tumblr' -%}
+                <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_snapchat_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_snapchat_link }}" class="link link--text list-social__link" >
+                {%- render 'icon-snapchat' -%}
+                <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_youtube_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_youtube_link }}" class="link link--text list-social__link" >
+                {%- render 'icon-youtube' -%}
+                <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if settings.social_vimeo_link != blank -%}
+            <li class="list-social__item">
+              <a href="{{ settings.social_vimeo_link }}" class="link link--text list-social__link" >
+                {%- render 'icon-vimeo' -%}
+                <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+              </a>
+            </li>
+            {%- endif -%}
+          </ul>
+          {%- endif -%}        
+          <div class="clearall"></div>
+
+          {%- if section.settings.payment_enable -%}
+          {% if section.settings.payment_label != blank %}
+          <p class="acpt-txt">{{ section.settings.payment_label }}</p>
+          {% endif %}
+
+          {% if section.settings.payment_logo != blank %}
+          <img data-src="{{ section.settings.payment_logo | img_url: 'master' }}" loading="lazy" alt="" class="lazy cards">
+          {% endif %}
+          {%- endif -%}
+
+        </div>
+        {%- endif -%} 
+
+        {%- if section.settings.show_social -%}        
+        <ul class="scl-list hide-desk" role="list">
+          {%- if settings.social_twitter_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_twitter_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-twitter' -%}
+              <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_facebook_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_facebook_link }}" target="_blank">
+              <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/scl-icn1.png?v=1632484814" loading="lazy" class="lazy" alt="Facebook">
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_pinterest_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_pinterest_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-pinterest' -%}
+              <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_instagram_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_instagram_link }}" target="_blank">
+              <img data-src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/scl-icn3.png?v=1632484834" loading="lazy" class="lazy" alt="Instagram">
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_tiktok_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_tiktok_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-tiktok' -%}
+              <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_tumblr_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_tumblr_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-tumblr' -%}
+              <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_snapchat_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_snapchat_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-snapchat' -%}
+              <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_youtube_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_youtube_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-youtube' -%}
+              <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if settings.social_vimeo_link != blank -%}
+          <li class="list-social__item">
+            <a href="{{ settings.social_vimeo_link }}" class="link link--text list-social__link" >
+              {%- render 'icon-vimeo' -%}
+              <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+        </ul>
+        {%- endif -%}      
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <p class="ftr-txt">
+        &copy; Copyright {{ 'now' | date: "%Y" }}, {{ shop.name }} Inc. All Rights Reserved.
+      </p>
+    </div>
+  </div>
+
+  <div id="terms-conditions" class="content-page">
+    <!-- Refer to: pages/terms-condition -->
+  </div>
+
+  <div id="privacy-policy" class="content-page">
+  	<!-- Refer to: pages/privacy-policy -->
+  </div>
+
+
+  <script src="{{ 'jquery-1.12.4.min.js' | asset_url }}"></script>
+  <script src="{{ 'slick.js' | asset_url }}"></script>
+  <script src="{{ 'easyResponsiveTabs.js' | asset_url }}"></script>
+  <script src="{{ 'jquery.fancybox.js' | asset_url }}"></script>
+  <!--   <script src="{{ 'cart.js' | asset_url }}"></script> -->
+  <script src="{{ 'lazyload.min.js' | asset_url }}"></script>
+  <script src="{{ 'bookmarkscroll.js' | asset_url }}"></script>
+  <script src="{{ 'jquery.accordion.js' | asset_url }}"></script>
+
+{% if template contains 'account' %}
+  <script type="text/javascript">
+  	window.customer_id = "{{ customer.id }}";
+  </script>
+  <script src="{{ 'account.js' | asset_url }}"></script>
+{% endif %}
+
+{% if template contains 'page' %}
+  {% if page.handle == 'quiz' %}
+    <script src="{{ 'quiz-js.js' | asset_url }}" type="text/javascript"></script>
+  {% endif %}
+
+  {% if page.handle == 'quiz-result' %}
+    {{ 'quiz-result.js' | asset_url | script_tag }}
+  {% endif %}
+
+  {% if page.handle == 'quiz-special-offer' %}
+  	{{ 'quiz-upsell.js' | asset_url | script_tag }}
+  {% endif %}
+{% endif %}
+<!-- <script>
+window._browsee = window._browsee || function () { (_browsee.q = _browsee.q || []).push(arguments) };
+_browsee('init', '85f7c65241dc9fdab085161c5316fdc005aa22336ccbe332');
+</script>
+<script async src='https://cdn.browsee.io/js/browsee.min.js'></script> -->
+  <script type="text/javascript">
+    function setCookie(key, value, expiry) {
+      var expires = new Date();
+      expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+    }
+
+    function getCookie(key) {
+      var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+      return keyValue ? keyValue[2] : null;
+    }
+
+    function eraseCookie(key) {
+      var keyValue = getCookie(key);
+      setCookie(key, keyValue, '-1');
+    }
+    
+    
+      function fetchCartData() {
+
+      $.ajax({
+          type: 'GET',
+          url: '/cart.js',
+          dataType: 'json',
+          success: function(cart) {
+              
+
+          },
+      });
+  	}
+    /* terms & conditions page */
+    // $(document).on('click', '.scrollToList a[href^="#"]', function(e) {
+    //   var id = $(this).attr('href');
+    //   var $id = $(id);
+    //   if ($id.length === 0) {
+    //     return;
+    //   }
+
+    //   e.preventDefault();
+    //   var pos = $id.offset().top - 100;
+    //   $('.content-page').animate({scrollTop: pos});
+    // });
+
+    jQuery(document).ready(function(){
+      {%  if template == 'customers/login' %}
+      if (jQuery('div.cst_login_frm.login_form').children().eq(2) != null) {
+        jQuery('div.cst_login_frm.login_form').children().eq(2).empty();
+      }
+      {% endif %}
+
+      {% if template == 'cart' %}
+      $('div.shopify-cleanslate').addClass('small-hide');
+      $('button.checkout-button-mobile').text('Checkout');
+      $('div.mobile-checkout-div').css("visibility", "visible");
+      $('div.mobile-checkout-div').show();
+      {% endif %}
+      
+      $('#currency_form select').on('change',function(){
+        $('#currency_form').submit();
+      });
+
+      $('.fancybox').fancybox();
+
+      $('.mob-mnu-ic, ul.mobilemenu li a').click(function(e) {
+        $('.mobilemenu').slideToggle();
+        $('.dl-trigger').toggleClass('dl-active');
+      });
+
+      $('.dots').click(function(e) {
+        if ( $(window).innerWidth() <= 767 ) {
+          $('.shopify-currency-form').toggle();
+        }
+      });
+      
+       $('#buy1').click(function(e) {
+         $("[name='offers1']").hide();
+         $("[name='offers2']").hide();
+      });
+      $('#buy3').click(function(e) {
+        $("[name='offers1']").show();
+        $("[name='offers2']").show();
+      });
+
+//       $('.accordion').accordion({
+//         defaultOpen: 'custom-faq-1',
+//         speed: 'slow'
+//       });
+      
+//       $('.accordion').accordion({
+//         defaultOpen: 'hd-one',
+//         speed: 'slow'
+//       });
+      
+      
+      $('#parentHorizontalTab').easyResponsiveTabs({
+        defaultOpen: 'hd-one',
+        type: 'default', //Types: default, vertical, accordion
+        width: 'auto', //auto or any width like 600px
+        fit: true, // 100% fit in a container
+        closed: 'accordion', // Start closed if in accordion view
+        tabidentify: 'hor_1', // The tab groups identifier
+        activate: function (event) { // Callback function if tab is switched
+          var $tab = $(this);
+          var $info = $('#nested-tabInfo');
+          var $name = $('span', $info);
+
+          $name.text($tab.text());
+
+          $info.show();
+        }
+      });
+
+      $('body').click(function(e) {
+        if ( $(window).innerWidth() <= 767 ) {
+          $('.shopify-currency-form').hide();
+        }
+      });
+
+      $('.shopify-currency-form, .dots').click(function(event){
+        if ( $(window).innerWidth() <= 767 ) {
+          event.stopPropagation();
+        }
+      });
+
+      $('.pkg-select-col').click(function(e) {
+        $('.pkg-select-col').removeClass('active');
+        $(this).addClass('active');
+      });
+
+       {% if settings.cart_type != 'drawer' %}
+      $('.pop-open').click(function(ee) {
+        ee.preventDefault();
+        
+        $(this).addClass('popopend');
+		
+        $('.shade-popup .shade-error').hide();
+        $("[name='offers']").removeClass();
+        $("[name='offers1']").removeClass();
+        $("[name='offers2']").removeClass();
+        
+        if ($("[name='selector']:checked").val() == 3){
+          $("[name='offers1']").show();
+          $("[name='offers2']").show();
+        } else {
+          $("[name='offers1']").val("");
+          $("[name='offers2']").val("");
+          $("[name='offers1']").hide();
+          $("[name='offers2']").hide();
+        }
+        $('.cart-is').removeClass('cart_open');
+        $('#Pop1').fadeIn();
+      });
+
+       $('.pop-open_v5').click(function(ee) {
+      ee.preventDefault();
+
+      $(this).addClass('popopend');
+
+      $('.shade-popup .shade-error').hide();
+      //"[name='offers']").removeClass();
+      $("[name='offers1']").removeClass();
+      $("[name='offers2']").removeClass();
+
+      
+        $("[name='offers1']").show();
+        $("[name='offers2']").show();
+     
+      $('.cart-is').removeClass('cart_open');
+      $('#Pop1').fadeIn();
+    });
+      
+      
+      $('.pop-close').click(function(e) {
+        $('.shade-popup').hide();
+      });
+      
+      $('.popup-close').click(function(e) {
+        $('.shade-popup').hide();
+      });
+      
+      $('.add_free_product').click(function(e) {
+        var cur_time = new Date().getTime();
+
+        var itemArray = [];
+        
+          var itemData1 = {
+            quantity: 1,
+            id: $("[name='offers'] option:selected").val(),
+            'properties': {
+              '_bundle_id': cur_time
+            }
+          };
+          console.log(itemData1);
+          itemArray.push(itemData1);
+        
+        /* free brush */
+        var itemData = {
+          quantity: 1,
+          id: {{ free_brush_sku }},
+          'properties': {
+            '_free_brush': 1,
+            '_bundle_id': cur_time
+          }
+        };
+        itemArray.push(itemData);
+        
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({'items': itemArray})
+        }) .then(response => {                    
+          if (response.ok) {
+            
+            	window.location.href='/cart';
+            
+          }   
+          });
+        
+      });
+
+      $('.pop-chkbtn').click(function(e) {
+        
+//          console.log('offer-1=>'+$("[name='offers'] option:selected").data('color'));
+//          console.log('offer-2=>'+$("[name='offers1'] option:selected").data('color'));
+//         console.log('offer-3=>'+$("[name='offers2'] option:selected").data('color'));
+// 		return false;
+        
+        var shade_combo_error = 0;
+        //if($("[name='offers'] option:selected").data('color') == undefined ){
+        //console.log(shade_combo_error);
+        //	shade_combo_error++;
+        //}
+        if ($("[name='offers']").is(":visible")) {
+          if($("[name='offers'] option:selected").val()=="" ){
+            shade_combo_error++;
+          }
+        }
+        if ($("[name='offers1']").is(":visible")) {
+          if($("[name='offers1'] option:selected").val()==""){
+            shade_combo_error++;
+          }
+        }
+        if ($("[name='offers2']").is(":visible")) {
+          if($("[name='offers2'] option:selected").val()==""){
+            shade_combo_error++;
+          }
+        }
+        console.log(shade_combo_error);
+        if(shade_combo_error==1){
+          $('.shade-popup .shade-error').show();
+          $('.shade-popup .shade-error').html('Please select shade');
+          return false;
+        } else if(shade_combo_error>1){
+          console.log(shade_combo_error);
+          $('.shade-popup .shade-error').show();
+          if(shade_combo_error == 4){
+            $('.shade-popup .shade-error').html('Please select all 3 shades');
+          }
+          else{
+          	$('.shade-popup .shade-error').html('Please select all '+shade_combo_error+' shades');
+          }
+          return false;
+        } else {
+          $('.shade-popup .shade-error').hide();
+          $('.pop-open').removeClass('popopend');
+        }
+        
+        var cur_time = new Date().getTime();
+        
+        var itemArray = [];
+        
+        if ($("[name='offers']").is(":visible")) {
+          var itemData1 = {
+            quantity: 1,
+            id: $("[name='offers'] option:selected").val(),
+            'properties': {
+              '_bundle_id': cur_time
+            }
+          };
+          console.log(itemData1);
+          itemArray.push(itemData1);
+        }
+        
+        if ($("[name='offers1']").is(":visible")) {
+          var itemData2 = {
+            quantity: 1,
+            id: $("[name='offers1'] option:selected").val(),
+            'properties': {
+              '_bundle_id': cur_time
+            }
+          };
+          console.log(itemData2);
+          itemArray.push(itemData2);
+        }
+        
+        if ($("[name='offers2']").is(":visible")) {
+          /* free product */
+          var itemData3 = {
+            quantity: 1,
+            id: $("[name='offers2'] option:selected").val(),
+            'properties': {
+              '_free_product': 1,
+              '_bundle_id': cur_time
+            }
+          };
+          itemArray.push(itemData3);
+          console.log(itemData3);
+        }
+        
+        if($(this).data('bundle-status')==0){
+          /* free brush */
+          var itemData4 = {
+            quantity: 1,
+            id: {{ free_brush_sku }},
+            'properties': {
+              '_free_brush': 1,
+              '_bundle_id': cur_time
+            }
+          };
+          itemArray.push(itemData4);
+        }
+             console.log(itemArray);   
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({'items': itemArray})
+        })
+        .then(response => {                    
+          if (response.ok) {
+            
+            	window.location.href='/cart';
+            
+            
+          } else {
+            $('.shade-popup').hide();
+            response.text().then( errorMessage => {
+              var er = $.parseJSON(errorMessage);
+              var e = document.createElement("span");
+              e.className = "ProductForm__Error";
+              e.innerHTML = er.description;
+              $(".combo-product-add-error").html(e);
+              setTimeout(function () {
+                e.remove();
+              }, 4000);
+            });
+          }
+        })
+        .catch((error) => {
+          $('.shade-popup').hide();
+          error.text().then( errorMessage => {
+            var er = $.parseJSON(errorMessage);
+            var e = document.createElement("span");
+            e.className = "ProductForm__Error";
+            e.innerHTML = er.description;
+            $(".combo-product-add-error").html(e);
+            setTimeout(function () {
+              e.remove();
+            }, 4000);
+          });
+        });
+        
+		return false;
+      });
+      
+      {% endif %}
+
+          $('.ing-btn').click(function(ee) {
+            ee.preventDefault();
+            $('.ingredient-pop').fadeIn();
+          });
+
+          $('.ing-pop-close').click(function(e) {
+            $('.ingredient-pop').hide();
+          });
+
+          $('.show_video').click(function(e){
+            $('.video-cell').last().trigger('click');
+          });
+
+          $('.addTocut-btn').click(function(){
+            colrclk_step = 0;
+            $('.pop-slct select').val('');
+          });
+      
+          $("[name='offers'], [name='offers1'], [name='offers2']").on('change', function() {
+            $('.shade-popup .shade-error').hide();
+            var selected_color = $(this).find(':selected').data('color');
+            $(this).removeClass();
+            $(this).addClass(selected_color);
+
+          });
+
+          // KL: Org.
+      $(document).on('click', '.add-to-cart-btn', function(){
+
+        var cur_time = new Date().getTime();
+
+        var itemArray = [];
+
+        if ($("[name='selector']:checked").val() == 3){
+
+          var itemData1 = {
+            quantity: 2,
+            id: $(this).data('variant-id'),
+            'properties': {
+              '_bundle_id': cur_time
+            }
+          };
+          itemArray.push(itemData1);
+
+          /* free product */
+          var itemData2 = {
+            quantity: 1,
+            id: $(this).data('variant-id'),
+            'properties': {
+              '_free_product': 1,
+              '_bundle_id': cur_time
+            }
+          };
+          itemArray.push(itemData2);
+
+        } else {
+
+          var itemData = {
+            quantity: 1,
+            id: $(this).data('variant-id')
+          };
+          itemArray.push(itemData);
+
+        }
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({'items': itemArray})
+        })
+            .then(response => {
+              if (response.ok) {
+                window.location.href='/cart';
+              } else {
+                $('.shade-popup').hide();
+                response.text().then( errorMessage => {
+                  var er = $.parseJSON(errorMessage);
+                  var e = document.createElement("span");
+                  e.className = "ProductForm__Error";
+                  e.innerHTML = er.description;
+                  $(".combo-product-add-error").html(e);
+                  setTimeout(function () {
+                    e.remove();
+                  }, 4000);
+                });
+              }
+            })
+            .catch((error) => {
+              $('.shade-popup').hide();
+              error.text().then( errorMessage => {
+                var er = $.parseJSON(errorMessage);
+                var e = document.createElement("span");
+                e.className = "ProductForm__Error";
+                e.innerHTML = er.description;
+                $(".combo-product-add-error").html(e);
+                setTimeout(function () {
+                  e.remove();
+                }, 4000);
+              });
+            });
+
+        return false;
+      });
+
+      $('.colrclk').click(function(e){
+        $('.shade-popup .shade-error').hide();
+        console.log('pop-slct', $('.pop-slct select:visible').length);
+
+        var clicked_value = $(this).data("value");
+        if ($('.pop-slct select:visible').length > 1) {
+          if ($("[name='offers']").is(":visible")) {
+            if (colrclk_step == 0) {
+              $("[name='offers']").val(clicked_value);
+              $("[name='offers']").removeClass();
+              var selected_color = $("[name='offers'] option:selected").data('color');
+              $("[name='offers']").addClass(selected_color);
+              colrclk_step++;
+              return;
+            }
+          }
+          if ($("[name='offers1']").is(":visible")) {
+            if (colrclk_step == 1) {
+              $("[name='offers1']").val(clicked_value);
+              $("[name='offers1']").removeClass();
+              var selected_color = $("[name='offers1'] option:selected").data('color');
+              $("[name='offers1']").addClass(selected_color);
+              colrclk_step++;
+              return;
+            }
+          }
+          if ($("[name='offers2']").is(":visible")) {
+            if (colrclk_step == 2) {
+              $("[name='offers2']").val(clicked_value);
+              $("[name='offers2']").removeClass();
+              var selected_color = $("[name='offers2'] option:selected").data('color');
+              $("[name='offers2']").addClass(selected_color);
+              colrclk_step = 0;
+              return;
+            }
+          }
+        }else{
+          colrclk_step = 0
+          $("[name='offers']").val(clicked_value);
+          $("[name='offers']").removeClass();
+          var selected_color = $("[name='offers'] option:selected").data('color');
+          $("[name='offers']").addClass(selected_color);
+        }
+      });
+
+      // KL: A/B Test Specific
+          $(document).on('click', '.add-to-cart-btn-ex', function(){
+			
+            var cur_time = new Date().getTime();
+            var itemArray = [];
+            var hasError = false;
+
+            //KL: Custom logic for fiera-luxury-concealer
+            {% comment %}For product.handle = fiera-luxury-concealer ONLY{% endcomment %}
+            {%  if product.handle == 'fiera-luxury-concealer' %}
+            if ($('#ProductSelect-option-variant-buy-3').is(":checked") ||
+                $('select.bundle-options-selector').val() === 'buy3'
+            ) {
+
+              // KL: Valid the selection
+              if ($("select#color-choice1").val().length == 0) {
+                $("select#color-choice1").addClass('error');
+                hasError = true;
+              } else {
+                $("select#color-choice1").removeClass('error');
+              }
+
+              if ($("select#color-choice2").val().length == 0) {
+                $("select#color-choice2").addClass('error');
+                hasError = true;
+              } else {
+                $("select#color-choice2").removeClass('error');
+              }
+
+              if ($("select#color-choice3").val().length == 0) {
+                $("select#color-choice3").addClass('error');
+                hasError = true;
+              } else {
+                $("select#color-choice3").removeClass('error');
+              }
+
+              // KL: Do we have error?
+              if (hasError) {
+                $('span.product-form__error-message').text('Oops! You need to select your 3 shades above to continue');
+                $('div.product-form__error-message-wrapper').removeAttr('hidden');
+                return;
+              } else {
+                $('div.product-form__error-message-wrapper').attr('hidden', 'hidden');
+              }
+
+              if ($("select#color-choice1").val()) {
+                var itemData1 = {
+                  quantity: 1,
+                  id: $("select#color-choice1").val(),
+                  'properties': {
+                    '_bundle_id': cur_time
+                  }
+                };
+                console.log(itemData1);
+                itemArray.push(itemData1);
+              }
+
+              if ($("select#color-choice2").val()) {
+                var itemData2 = {
+                  quantity: 1,
+                  id: $("select#color-choice2").val(),
+                  'properties': {
+                    '_bundle_id': cur_time
+                  }
+                };
+                console.log(itemData2);
+                itemArray.push(itemData2);
+              }
+
+              if ($("select#color-choice3").val()) {
+                /* free product */
+                var itemData3 = {
+                  quantity: 1,
+                  id: $("select#color-choice3").val(),
+                  'properties': {
+                    '_free_product': 1,
+                    '_bundle_id': cur_time
+                  }
+                };
+                itemArray.push(itemData3);
+                console.log(itemData3);
+              }
+
+            {%  else %}
+            if ($("[name='selector']:checked").val() == 3){
+              
+              var itemData1 = {
+                quantity: 2,
+                id: $(this).data('variant-id'),
+                'properties': {
+                  '_bundle_id': cur_time
+                }
+              };
+              itemArray.push(itemData1);
+              
+              /* free product */
+              var itemData2 = {
+                quantity: 1,
+                id: $(this).data('variant-id'),
+                'properties': {
+                  '_free_product': 1,
+                  '_bundle_id': cur_time
+                }
+              };
+              itemArray.push(itemData2);
+
+            {% endif %}
+
+            } else {
+              
+              var itemData = {
+                quantity: 1,
+                id: $(this).data('variant-id'),
+                'properties': {
+                  '_bundle_id': cur_time
+                }
+              };
+              itemArray.push(itemData);
+              
+            }
+
+            /* free brush */
+            var itemFreeBrushData = {
+              quantity: 1,
+              id: {{ free_brush_sku }},
+              'properties': {
+                '_free_brush': 1,
+                '_bundle_id': cur_time
+              }
+            };
+            itemArray.push(itemFreeBrushData);
+            
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({'items': itemArray})
+            })
+            .then(response => {                    
+              if (response.ok) {
+                window.location.href='/cart';
+              } else {
+                $('.shade-popup').hide();
+                response.text().then( errorMessage => {
+                  var er = $.parseJSON(errorMessage);
+                  var e = document.createElement("span");
+                  e.className = "ProductForm__Error";
+                  e.innerHTML = er.description;
+                  $(".combo-product-add-error").html(e);
+                  setTimeout(function () {
+                    e.remove();
+                  }, 4000);
+                });
+              }
+            })
+            .catch((error) => {
+              $('.shade-popup').hide();
+              error.text().then( errorMessage => {
+                var er = $.parseJSON(errorMessage);
+                var e = document.createElement("span");
+                e.className = "ProductForm__Error";
+                e.innerHTML = er.description;
+                $(".combo-product-add-error").html(e);
+                setTimeout(function () {
+                  e.remove();
+                }, 4000);
+              });
+            });
+            
+            return false;
+          });
+      	
+          $('.colrclk').click(function(e){
+            $('.shade-popup .shade-error').hide();
+            console.log('pop-slct', $('.pop-slct select:visible').length);
+            
+            var clicked_value = $(this).data("value");
+            if ($('.pop-slct select:visible').length > 1) {
+              if ($("[name='offers']").is(":visible")) {
+                if (colrclk_step == 0) {
+                  $("[name='offers']").val(clicked_value);
+                  $("[name='offers']").removeClass();
+                  var selected_color = $("[name='offers'] option:selected").data('color');
+                  $("[name='offers']").addClass(selected_color);
+                  colrclk_step++;
+                  return;
+                }
+              }
+              if ($("[name='offers1']").is(":visible")) {
+                if (colrclk_step == 1) {
+                  $("[name='offers1']").val(clicked_value);
+                  $("[name='offers1']").removeClass();
+                  var selected_color = $("[name='offers1'] option:selected").data('color');
+                  $("[name='offers1']").addClass(selected_color);
+                  colrclk_step++;
+                  return;
+                }
+              }    
+              if ($("[name='offers2']").is(":visible")) {
+                if (colrclk_step == 2) {
+                  $("[name='offers2']").val(clicked_value);
+                  $("[name='offers2']").removeClass();
+                  var selected_color = $("[name='offers2'] option:selected").data('color');
+                  $("[name='offers2']").addClass(selected_color);
+                  colrclk_step = 0;
+                  return;
+                }
+              }
+            }else{
+              colrclk_step = 0
+              $("[name='offers']").val(clicked_value);
+              $("[name='offers']").removeClass();
+              var selected_color = $("[name='offers'] option:selected").data('color');
+              $("[name='offers']").addClass(selected_color);
+            }
+          }); 
+      
+      $('.colrclk_new').click(function(e){
+        $('.shade-popup .shade-error').hide();
+        console.log('pop-slct', $('.pop-slct select:visible').length);
+
+        var clicked_value = $(this).data("value");
+        
+          colrclk_step = 0
+          $("[name='offers']").val(clicked_value);
+          $("[name='offers']").removeClass();
+          var selected_color = $("[name='offers'] option:selected").data('color');
+          $("[name='offers']").addClass(selected_color);
+       
+      }); 
+      		
+      
+      $('.s3-inr.product_list').slick({
+        dots: false,
+        speed: 300,
+        slidesToShow: 4,
+        centerMode: false,
+        centerPadding: '25px',
+        slidesToScroll: 2,
+        adaptiveHeight: false,
+        arrows:true,
+        infinite: true,
+        variableWidth: false,
+        responsive: [
+          {
+            breakpoint: 1010,
+            settings: {
+              slidesToShow: 2.3,
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 1,
+              infinite: true,
+              slidesToScroll: 1,
+            }
+          }
+        ]
+      });
+      
+      
+      
+         
+
+          $('.s4-inr').slick({
+            dots: true,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            arrows:false, 
+            autoplay: true,
+            autoplaySpeed: 5000,
+            responsive: [
+            {
+              breakpoint: 767,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              }
+            }
+            ]
+          });
+      
+      
+
+          $('.s6-inr').slick({
+            dots: false,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            variableWidth: false,
+            arrows:true,
+            responsive: [
+            {
+              breakpoint: 9999999,
+              settings: "unslick"
+            },
+            {
+              breakpoint: 767,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              }
+            }
+            ] 
+          });
+
+          $('.s7-slide-div').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            dots: false,
+            variableWidth: false,
+            centerMode: false,
+            autoplaySpeed: 11000,
+            responsive: [
+            {
+              breakpoint: 767,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              }
+            }
+            ]
+          });
+
+      	  setInterval(function(){
+            if ($(".prd-det-s7-inr").is(":visible")) {
+              if(!$('.prd-det-s7').hasClass('tmp-slick')){
+                $('.prd-det-s7').addClass('tmp-slick');
+                
+                $('.prd-det-s7-inr').slick({
+                  dots: false,
+                  speed: 300,
+                  slidesToShow: 3,
+                  slidesToScroll: 1,
+                  adaptiveHeight: false,
+                  arrows:false,
+                  responsive: [
+                    {
+                      breakpoint: 9999999,
+                      settings: {
+                        slidesToShow: 4,
+                      }
+                    },
+                    {
+                      breakpoint: 1610,
+                      settings: {
+                        slidesToShow: 4,
+                      }
+                    },
+                    {
+                      breakpoint: 1180,
+                      settings: {
+                        slidesToShow: 3,
+                      }
+                    },
+                    {
+                      breakpoint: 1010,
+                      settings: {
+                        slidesToShow: 2,
+                      }
+                    },
+                    {
+                      breakpoint: 767,
+                      settings: {
+                        slidesToShow: 1,
+                        arrows:true,
+                      }
+                    }
+                  ]
+                });                
+              }              
+            }    
+          }, 1000);
+      
+          if ( $(window).innerWidth() <= 767 ) {
+            $('.ftr-links-hd').click(function(e) {
+              $(this).next('.ftr-links-list').slideToggle();
+              $(this).toggleClass('active');
+            });
+          }
+      
+      
+          /*$('.custom_blog_slider').slick({
+            dots: false,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows:true
+          });*/
+
+        }); 
+
+    
+    
+      </script> 
+
+      <script type="text/javascript">
+        var colrclk_step = 0;
+        $(document).ready(function(){
+          if($('.slide-div').length > 0){
+            try{
+              $('.slide-div').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: true,
+                dots: true,
+              });
+            } catch(error){
+              // slider may already initized
+            }
+          }
+         /* $('.slider-nav').slick({
+            slidesToShow:5,
+            slidesToScroll: 1,
+            asNavFor: '.slide-div',
+            dots: false,
+            vertical:true,
+            verticalSwiping:true,
+            arrows: true,
+          });*/
+          $('.slider-nav > div').click(function() {
+            $('.slide-div').slick('slickGoTo',$(this).index());
+            $('.pro-thumb').removeClass('active');
+            $(this).addClass('active');
+          })
+          {% if template contains 'index' or 'story' %}
+          $.ajax({
+            url: "https://apps.fieracosmetics.com/webhook/getTotalOrders",
+            type: 'get', 
+            crossDomain: true,
+            dataType: 'json',
+            success: function(result){
+              
+              var count_number = '';
+              var number = result.total_orders;
+              number = number + '';
+              if(number.length > 2){
+              	var number_array = number.split('');
+                for(var i=0; i < number_array.length; i++){
+                  count_number += '<div class="timer-count">'+number_array[i]+'</div>';
+                }
+              }
+              else if(number.length == 2){
+                var number_array = number.split('');
+                console.log(number_array);
+              	count_number = '<div class="timer-count">0</div><div class="timer-count">'+number_array[0]+'</div><div class="timer-count">'+number_array[1]+'</div>';
+              }
+              else{ 
+               count_number = '<div class="timer-count">0</div><div class="timer-count">0</div><div class="timer-count">'+number+'</div>';
+              }
+              $('.timer-sec_main').append(count_number);
+          	}
+          });
+          {% endif %}
+        });
+      </script>
+
+      <script type="text/javascript">
+        
+        $(document).scroll(function() {
+
+          if ($(this).scrollTop() > 40){
+            $('.top-fix-bar').addClass('fixed-nav');
+            $('.logo').addClass('log-anim');
+          }else{
+            $('.top-fix-bar').removeClass('fixed-nav');
+            $('.logo').removeClass('log-anim');
+          }
+
+          if ($(this).scrollTop() > 10){
+            $('.mobilemenu').addClass('mobimenu-top');
+          }else{
+            $('.mobilemenu').removeClass('mobimenu-top');
+          }
+
+        });
+      </script>
+
+      <script>
+        $(function() {
+          $(".sel-curr").on("change", function (){
+            console.log(window.location.protocol + '//' + window.location.hostname + window.location.pathname+"?locale="+$(this).val());
+            window.location.href=window.location.protocol + '//' + window.location.hostname + window.location.pathname+"?locale="+$(this).val();
+          });
+        });
+      </script>
+      <script>
+        $('.close-pop').click(function(e) {
+         $('.coupon-pop').hide();
+       });
+
+        function validateEmail(email)
+        {
+          var regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return regEx.test(email)
+        }
+        $('.pop-btn').click(function(e) {
+         var _first_name =  $('#contact_fields_first_name').val();
+         var _email =  $('#contact_fields_email').val();
+         if (_first_name.length < 1) {
+           alert('First Name is required');
+           return;
+         }
+         if (_email.length < 1) {
+           alert('Email is required');
+           return;
+         } else {
+          if (!validateEmail(_email)) {
+            alert('Email is invalid');
+            return;
+          }
+        }
+        $('#frmMP').submit();
+      });
+        $("#frmMP").submit( function () {  
+         var action = $(this).attr('action');
+
+         $.post(
+          action,
+          $(this).serialize(),
+          function(data){
+            $('.pop-lft').hide();
+            $('.pop-rgt').hide();
+            $('.popthankyou').show();
+          }
+          );
+         return false;   
+       });
+
+        $('.signUp-newsletter').click(function(e) {
+         var _emailField =  $('#contact_fields_email2');
+         var _email = _emailField.val();
+         if (_email.length < 1) {
+           alert('Email is required');
+           _emailField.focus();
+           return;
+         } else {
+          if (!validateEmail(_email)) {
+            alert('Email is invalid');
+            _emailField.focus();
+            return;
+          }
+        }
+        $("#contact_fields_email_input").val(_email);
+        $('#frmMPfooter').submit();
+      });
+        $("#frmMPfooter").submit( function () {  
+         var action = $(this).attr('action');
+
+         $.post(
+          action,
+          $(this).serialize(),
+          function(data){
+            $('#contact_fields_email2').hide();
+            $('.signUp-newsletter').hide();
+            $('.footerthankyou').show();
+          }
+          );
+         return false;   
+       });
+
+     </script>
+
+     <script>
+      (function () {
+        function logElementEvent(eventName, element) {
+      //console.log(Date.now(), eventName, element.getAttribute("data-src"));
+    }
+
+    var callback_enter = function (element) {
+      logElementEvent("🔑 ENTERED", element);
+    };
+    var callback_exit = function (element) {
+      logElementEvent("🚪 EXITED", element);
+    };
+    var callback_loading = function (element) {
+      logElementEvent("⌚ LOADING", element);
+    };
+    var callback_loaded = function (element) {
+      logElementEvent("👍 LOADED", element);
+    };
+    var callback_error = function (element) {
+      logElementEvent("💀 ERROR", element);
+      element.src = "https://via.placeholder.com/440x560/?text=Error+Placeholder";
+    };
+    var callback_finish = function () {
+      logElementEvent("✔️ FINISHED", document.documentElement);
+    };
+    var callback_cancel = function (element) {
+      logElementEvent("🔥 CANCEL", element);
+    };
+
+    var ll = new LazyLoad({
+      class_applied: "lz-applied",
+      class_loading: "lz-loading",
+      class_loaded: "lz-loaded",
+      class_error: "lz-error",
+      class_entered: "lz-entered",
+      class_exited: "lz-exited",
+      // Assign the callbacks defined above
+      callback_enter: callback_enter,
+      callback_exit: callback_exit,
+      callback_cancel: callback_cancel,
+      callback_loading: callback_loading,
+      callback_loaded: callback_loaded,
+      callback_error: callback_error,
+      callback_finish: callback_finish
+    });
+  })();
+</script>  
+<script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      var onetime_price = $('.rc_widget__price--onetime').text();
+      var onetime_price_ori = onetime_price.replace('$', '');
+      
+      var onetime_price_sale = $('.rc_widget__price--subsave').text();
+      var onetime_price_sale_ori = onetime_price_sale.replace('$', '');
+      
+      var discount_price = onetime_price_ori - onetime_price_sale_ori;
+      var discount_price_digit = discount_price.toFixed(2);
+      
+    $('.subs-det').before('<div class="pur-tab-cont pur-tab-cont2 buy1" style="display: none;"><p class="swtc-subs-tx"><span>Switch to a subscription and save <span class="default-price-save" style="color: rgb(188, 46, 62);">$'+ discount_price_digit +'</span></span><br>You can have the same for only <strong class="default-price-sub">'+ onetime_price_sale +'</strong> if you subscribe and you can change or cancel your subscription any time!</p></div>');
+    
+    $( ".rc_widget__option--onetime" ).click(function() {
+      	$('.buy3').hide();
+		$('.buy1').show();
+      	$('.prc-lft-you-save').hide();
+      	$('#rprice').hide();
+    });
+      
+    $( ".rc_widget__option--subsave" ).click(function() {
+      setTimeout(function() {
+      $('.buy3').hide();
+      $('.buy1').hide();
+      $('.prc-lft-you-save').show();
+      $('#rprice').show();
+      var pro_price_main = $('#fprice').text();                 
+      var pro_price_1 =	pro_price_main.split('$');
+
+      console.log(pro_price_1[1]);
+        
+      if($( "#conBuy3" ).hasClass( "active" )){
+        
+        var pro_com_price = $("#conBuy3").find('.con_var').attr('pro-var-price');
+       
+     	
+      }
+      if($( "#conBuy1" ).hasClass( "active" )){
+         var pro_com_price = $("#conBuy1").find('.con_var').attr('pro-var-price');
+     
+      }
+        if($( "#buy1" ).hasClass( "active" )){
+          var pro_com_price = $("#buy1").find('.con_var').attr('pro-var-price');  
+          
+        }
+        if($( "#buy3" ).hasClass( "active" )){
+          var pro_com_price = $("#buy3").find('.con_var').attr('pro-var-price');  
+          
+        }
+        
+        var sale_save_price = pro_com_price.split('$');
+      
+      $('#rprice').text(pro_com_price);
+
+      console.log(sale_save_price);
+
+      var final_sale_price = Number(sale_save_price[1]) - Number(pro_price_1[1]);
+      // console.log(final_sale_price);
+      var final_save_price_1 = final_sale_price.toFixed(2);
+      //console.log(final_save_price_1);
+      $('.you-save').text('$'+final_save_price_1);
+       }, 500);
+    });
+      
+    }, 7000);
+    
+    $('#conBuy3').click(function(){
+	setTimeout(function(){
+      var onetime_price_buy2 = $('.rc_widget__price--onetime').text();
+      var onetime_price_ori_buy2 = onetime_price_buy2.replace('$', '');
+
+      var onetime_price_sale_buy2 = $('.rc_widget__price--subsave').text();
+      var onetime_price_sale_ori_buy2 = onetime_price_sale_buy2.replace('$', '');
+
+      var discount_price_buy2 = onetime_price_ori_buy2 - onetime_price_sale_ori_buy2;
+      var discount_price_digit_buy2 = discount_price_buy2.toFixed(2);
+      if ($(".buy3").length == 0) {
+        $('.subs-det').before('<div class="pur-tab-cont pur-tab-cont2 buy3" style="display: none;"><p class="swtc-subs-tx"><span>Switch to a subscription and save <span class="default-price-save" style="color: rgb(188, 46, 62);">$'+ discount_price_digit_buy2 +'</span></span><br>You can have the same for only <strong class="default-price-sub">'+ onetime_price_sale_buy2 +'</strong> if you subscribe and you can change or cancel your subscription any time!</p></div>');
+      }
+      $( ".rc_widget__option--onetime" ).click(function() {
+        $('.buy1').hide();
+        $('.buy3').show();
+      });
+
+      $( ".rc_widget__option--subsave" ).click(function() {
+        $('.buy1').hide();
+        $('.buy3').hide();
+      });
+     }, 500);
+
+    });
+    
+    $('#buy3').click(function(){
+      setTimeout(function(){
+        // KL: Only do this if we have pro_com_price
+        if ($('#buy3').find('.con_var').attr('pro-var-price').length == 0) {
+          return;
+        }
+        var pro_price_main = $('#fprice').text();                 
+        var pro_price_1 =	pro_price_main.split('$');
+
+        console.log(pro_price_1[1]);
+
+        var pro_com_price = $('#buy3').find('.con_var').attr('pro-var-price');
+        var sale_save_price = pro_com_price.split('$');
+        $('#rprice').text(pro_com_price);
+
+        console.log(sale_save_price[1]);
+
+        var final_sale_price = Number(sale_save_price[1]) - Number(pro_price_1[1]);
+        console.log(final_sale_price);
+        var final_save_price_1 = final_sale_price.toFixed(2);
+        console.log(final_save_price_1);
+        $('.you-save').text('$'+final_save_price_1);
+        
+        
+      var onetime_price = $('.rc_widget__price--onetime').text();
+      var onetime_price_ori = onetime_price.replace('$', '');
+       console.log(onetime_price);
+      var onetime_price_sale = $('.rc_widget__price--subsave').text();
+      var onetime_price_sale_ori = onetime_price_sale.replace('$', '');
+		console.log(onetime_price_sale);
+      var discount_price = onetime_price_ori - onetime_price_sale_ori;
+      var discount_price_digit = discount_price.toFixed(2);
+        if ($(".buy3").length == 0) {
+          $('.subs-det').before('<div class="pur-tab-cont pur-tab-cont2 buy3" style="display: none;"><p class="swtc-subs-tx"><span>Switch to a subscription and save <span class="default-price-save" style="color: rgb(188, 46, 62);">$'+ discount_price_digit +'</span></span><br>You can have the same for only <strong class="default-price-sub">'+ onetime_price_sale +'</strong> if you subscribe and you can change or cancel your subscription any time!</p></div>');
+        }
+        $( ".rc_widget__option--onetime" ).click(function() {
+          $('.buy1').hide();
+          $('.buy3').show();
+        });
+
+        $( ".rc_widget__option--subsave" ).click(function() {
+          $('.buy1').hide();
+          $('.buy3').hide();
+        });
+     }, 500);
+      
+    });
+    
+    $('#conBuy1').click(function(){
+	setTimeout(function(){
+      var onetime_price = $('.rc_widget__price--onetime').text();
+      var onetime_price_ori = onetime_price.replace('$', '');
+
+      var onetime_price_sale = $('.rc_widget__price--subsave').text();
+      var onetime_price_sale_ori = onetime_price_sale.replace('$', '');
+
+      var discount_price = onetime_price_ori - onetime_price_sale_ori;
+      var discount_price_digit = discount_price.toFixed(2);
+
+      $(this).find('.subs-det').before('<div class="pur-tab-cont pur-tab-cont2 buy1" style="display: none;"><p class="swtc-subs-tx"><span>Switch to a subscription and save <span class="default-price-save" style="color: rgb(188, 46, 62);">$'+ discount_price_digit +'</span></span><br>You can have the same for only <strong class="default-price-sub">'+ onetime_price_sale +'</strong> if you subscribe and you can change or cancel your subscription any time!</p></div>');
+
+      $( ".rc_widget__option--onetime" ).click(function() {
+        $('.buy3').hide();
+        $('.buy1').show();
+      });
+
+      $( ".rc_widget__option--subsave" ).click(function() {
+        $('.buy3').hide();
+        $('.buy1').hide();
+      });
+     }, 500);
+
+    });
+    
+    $('#buy1').click(function(){
+      setTimeout(function(){
+        
+        var pro_price_main = $('#fprice').text();                 
+        var pro_price_1 =	pro_price_main.split('$');
+
+        console.log(pro_price_1[1]);
+
+        var pro_com_price = $("#buy1").find('.con_var').attr('pro-var-price');
+        var sale_save_price = pro_com_price.split('$');
+        $('#rprice').text(pro_com_price);
+
+        console.log(sale_save_price[1]);
+
+        var final_sale_price = Number(sale_save_price[1]) - Number(pro_price_1[1]);
+        // console.log(final_sale_price);
+        var final_save_price_1 = final_sale_price.toFixed(2);
+        //console.log(final_save_price_1);
+        $('.you-save').text('$'+final_save_price_1);
+        
+        var onetime_price = $('.rc_widget__price--onetime').text();
+        var onetime_price_ori = onetime_price.replace('$', '');
+
+        var onetime_price_sale = $('.rc_widget__price--subsave').text();
+        var onetime_price_sale_ori = onetime_price_sale.replace('$', '');
+
+        var discount_price = onetime_price_ori - onetime_price_sale_ori;
+        var discount_price_digit = discount_price.toFixed(2);
+
+        $(this).find('.subs-det').before('<div class="pur-tab-cont pur-tab-cont2 buy1" style="display: none;"><p class="swtc-subs-tx"><span>Switch to a subscription and save <span class="default-price-save" style="color: rgb(188, 46, 62);">$'+ discount_price_digit +'</span></span><br>You can have the same for only <strong class="default-price-sub">'+ onetime_price_sale +'</strong> if you subscribe and you can change or cancel your subscription any time!</p></div>');
+
+        $( ".rc_widget__option--onetime" ).click(function() {
+          $('.buy3').hide();
+          $('.buy1').show();
+        });
+
+        $( ".rc_widget__option--subsave" ).click(function() {
+          $('.buy3').hide();
+          $('.buy1').hide();
+        });
+      }, 500);
+
+    });
+    
+    $('.shade-color').click(function(){
+      
+      if($('.shade-color').hasClass('active')){
+        
+      	$('.shade-color').removeClass('active');
+      }
+        $(this).addClass('active');           
+    });
+    $('.accordion').accordion({
+      defaultOpen: 'hd-one',
+      speed: 'slow'
+    });
+    
+    $("#authorized").click(function () {
+      $(".accordion:eq(3)").trigger('click');
+   
+    });
+    
+    $("#authorized_1").click(function () {
+      $(".accordion:eq(3)").trigger('click');
+   
+    });
+    
+    if ($(window).width() <= 767){
+      $('.prd-ben-tx').hide();
+      $('.prd-ben-hd').click(function(e) {
+		var thisDiv = $(this).next('.prd-ben-tx');
+		if ($(thisDiv).is(":visible")){
+			$(this).next('.prd-ben-tx').slideUp();
+			$(this).removeClass('active');
+		}else{
+			$('.prd-ben-tx').slideUp();
+			$(this).next('.prd-ben-tx').slideDown();
+			$('.prd-ben-hd').removeClass('active');
+			$(this).addClass('active');
+		}
+    });
+    }
+  });
+</script>
+{% if template == 'cart' %}
+<!-- Browsiee -->
+<!--<script>
+  window._browsee = window._browsee || function () { (_browsee.q = _browsee.q || []).push(arguments) };
+  _browsee('init', '85f7c65241dc9fdab085161c5316fdc005aa22336ccbe332');
+</script>-->
+<!--<script async src='https://cdn.browsee.io/js/browsee.min.js'></script>-->
+{% endif %}
+</div>
+
+{% javascript %}
+class LocalizationForm extends HTMLElement {
+constructor() {
+super();
+this.elements = {
+input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
+button: this.querySelector('button'),
+panel: this.querySelector('ul'),
+};
+this.elements.button.addEventListener('click', this.openSelector.bind(this));
+this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+
+this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+}
+
+hidePanel() {
+this.elements.button.setAttribute('aria-expanded', 'false');
+this.elements.panel.setAttribute('hidden', true);
+}
+
+onContainerKeyUp(event) {
+if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+this.hidePanel();
+this.elements.button.focus();
+}
+
+onItemClick(event) {
+event.preventDefault();
+const form = this.querySelector('form');
+this.elements.input.value = event.currentTarget.dataset.value;
+if (form) form.submit();
+}
+
+openSelector() {
+this.elements.button.focus();
+this.elements.panel.toggleAttribute('hidden');
+this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+}
+
+closeSelector(event) {
+const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+if (event.relatedTarget === null || shouldClose) {
+this.hidePanel();
+}
+}
+}
+
+customElements.define('localization-form', LocalizationForm);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+  {
+    "type": "link_list",
+    "name": "t:sections.footer.blocks.link_list.name",
+    "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Quick links",
+      "label": "t:sections.footer.blocks.link_list.settings.heading.label",
+      "info": "t:sections.footer.blocks.link_list.settings.heading.info"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "footer",
+      "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+      "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+    }
+    ]
+  },
+  {
+    "type": "logo_list",
+    "name": "Logo List",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_img_1",
+      "label": "Logo Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img_2",
+      "label": "Logo Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img_3",
+      "label": "Logo Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img_4",
+      "label": "Logo Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img_5",
+      "label": "Logo Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img_6",
+      "label": "Logo Image 6"
+    }
+    ]
+  },
+  {
+    "type": "text",
+    "name": "t:sections.footer.blocks.text.name",
+    "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Heading",
+      "label": "t:sections.footer.blocks.text.settings.heading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "default": "<p>Share store details, promotions, or brand content with your customers.</p>",
+      "label": "t:sections.footer.blocks.text.settings.subtext.label"
+    }
+    ]
+  },
+  {
+    "type": "image",
+    "name": "Image",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Image width",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Image alignment on large screen",
+      "options": [
+      {
+        "value": "",
+        "label": "Left"
+      },
+      {
+        "value": "center",
+        "label": "Center"
+      },
+      {
+        "value": "right",
+        "label": "Right"
+      }
+      ],
+      "default": "center"
+    }
+    ]
+  }
+  ],
+  "settings": [
+  {
+    "type": "image_picker",
+    "id": "footer_logo",
+    "label": "Footer Logo"
+  },
+  {
+    "type": "image_picker",
+    "id": "location_icon",
+    "label": "Location Icon"
+  },
+  {
+    "type": "text",
+    "id": "footer_location",
+    "label": "Location"
+  },
+  {
+    "type": "image_picker",
+    "id": "email_icon",
+    "label": "Email Icon"
+  },
+  {
+    "type": "text",
+    "id": "footer_email",
+    "label": "Email"
+  },
+  {
+    "type": "header",
+    "content": "t:sections.footer.settings.header__1.content",
+    "info": "t:sections.footer.settings.header__1.info"
+  },
+  {
+    "type": "checkbox",
+    "id": "newsletter_enable",
+    "default": true,
+    "label": "t:sections.footer.settings.newsletter_enable.label"
+  },
+  {
+    "type": "text",
+    "id": "newsletter_heading",
+    "default": "Subscribe to our emails",
+    "label": "t:sections.footer.settings.newsletter_heading.label"
+  },
+  {
+    "type": "text",
+    "id": "newsletter_sub_heading",
+    "label": "Sub Heading"
+  },
+  {
+    "type": "header",
+    "content": "t:sections.footer.settings.header__2.content",
+    "info": "t:sections.footer.settings.header__2.info"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_social",
+    "default": false,
+    "label": "t:sections.footer.settings.show_social.label"
+  },  
+  {
+    "type": "text",
+    "id": "social_label",
+    "label": "Social Label"
+  },
+  {
+    "type": "header",
+    "content": "t:sections.footer.settings.header__7.content"
+  },
+  {
+    "type": "checkbox",
+    "id": "payment_enable",
+    "default": true,
+    "label": "t:sections.footer.settings.payment_enable.label"
+  },
+  {
+    "type": "text",
+    "id": "payment_label",
+    "label": "Payment Label"
+  },
+  {
+    "type": "image_picker",
+    "id": "payment_logo",
+    "label": "Payment logo"
+  }
+  ],
+  "default": {
+  "blocks": [
+  {
+    "type": "link_list"
+  },
+  {
+    "type": "text"
+  }
+  ]
+}
+}
+{% endschema %}

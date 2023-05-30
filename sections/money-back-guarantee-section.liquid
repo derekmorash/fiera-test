@@ -1,0 +1,127 @@
+<div class="mny-bck-sec">
+  <div class="container">
+    <div class="mny-bck-bx">
+      {% if section.settings.image != blank %}
+      	<img class="mny-bck" src="{{ section.settings.image | img_url: '500x' }}" alt="" loading="lazy">
+      {% endif %}
+      {%- if section.settings.title != blank -%}
+      	<h3>{{ section.settings.title | escape }}</h3>
+      {%- endif -%}
+      {%- if section.settings.info != blank -%}
+      	<p>{{ section.settings.info | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.title01 != blank -%}
+    	<p class="meal-don">{{ section.settings.title01 | escape }}</p>
+    {%- endif -%}
+
+    <div class="clearall"></div>
+
+    {% if section.settings.mob_image != blank %}
+    	<img class="s2-brnd-img hide-mob" src="{{ section.settings.mob_image | img_url: '500x' }}" alt="" loading="lazy">
+    {% endif %}
+    {% if section.settings.image01 != blank %}
+    	<img class="s2-brnd-img hide-desk" src="{{ section.settings.image01 | img_url: '500x' }}" alt="" loading="lazy">
+    {% endif %}
+
+    <ul class="mny-bck-lst">
+      {% for block in section.blocks %}
+        {% if block.settings.points != blank %}
+          <li>{{ block.settings.points | escape }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    {% if section.settings.link != blank %}
+    	<a class="comn-btn" href="{{ section.settings.link }}">{{ section.settings.link_btn | escape }}</a>
+    {% endif %}
+    
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "MoneyBack Guarantee Sec",
+    "class": "money-back-guarantee-section",
+	"max_blocks": 10,
+    "settings": [
+	  {
+        "type": "header",
+        "content": "MoneyBack Guarantee Section"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+	  },
+	  {
+        "type": "text",
+        "id": "info",
+        "label": "Info"
+	  },
+
+	  {
+        "type": "header",
+        "content": "Donated Section"
+      },
+      {
+        "type": "text",
+        "id": "title01",
+        "label": "Heading"
+	  },
+      {
+        "type": "image_picker",
+        "id": "image01",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mob_image",
+        "label": "Image Mobile"
+      },
+      {
+        "type": "text",
+        "id": "link_btn",
+        "label": "Shop"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link",
+        "info": "Optional"
+      }
+
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "points",
+            "label": "Points"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MoneyBack Guarantee Sec",
+        "category": "Product",
+        "blocks": [
+          {
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

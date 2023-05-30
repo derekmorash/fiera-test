@@ -1,0 +1,125 @@
+<div class="container">
+{% for block in section.blocks %}
+  
+{% if block.type == 'heading-text-image' %}
+	<div class="story-row">
+  		<div class="story-dtls {{ block.settings.section_align }}">
+          {%- if block.settings.title != blank -%}
+              <h1>{{ block.settings.title }}</h1>
+          {%- endif -%}
+
+          {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | img_url : '600x' }}" loading="lazy" class="story-img-mob forMob" alt="img_mob">
+          {%- endif -%}
+
+          {%- if block.settings.sub_title != blank -%}
+              <p class="story-txt1">{{ block.settings.sub_title }}</p>
+          {%- endif-%}
+
+          {%- if block.settings.content != blank -%}
+              {{ block.settings.content }}
+          {%- endif-%}
+
+        </div>
+      {%- if block.settings.image != blank -%}	
+        <div class="story-imgdv {% if block.settings.section_align == 'fr' %}fl{% else %}fr{% endif %}">
+          <img src="{{ block.settings.image | img_url : '800x' }}" loading="lazy" class="story-img" alt="img_desc">
+        </div>
+      {%- endif -%}
+	</div>
+
+{% elsif block.type == 'text-image' %}
+	<div class="story-bndleBx">
+          {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | img_url : '800x' }}" loading="lazy" class="story-bndle-img" alt="img_mob">
+          {%- endif -%}
+
+          {%- if block.settings.section_content != blank -%}
+              <div class="story-bndleBx-rght">
+                  {{ block.settings.section_content }}
+              </div>
+          {%- endif-%}
+	</div>
+{% endif %}
+  
+
+{% endfor %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Story Page Main Content",
+    "tag": "div",
+	"class": "story-section",
+    "settings": [],
+	"blocks": [
+		{
+          "type": "heading-text-image",
+          "name": "Heading Text and Image",
+          "settings": [
+                {
+                  "type": "select",
+                  "options": [
+                    {
+                      "group": "Right",
+                      "value": "fl",
+                      "label": "Image On Right"
+                    },
+                    {
+                      "group": "Left",
+                      "value": "fr",
+                      "label": "Image On Left"
+                    }
+                  ],
+                  "id": "section_align",
+                  "label": "Select Image align Left/Right",
+                  "default": "fl"
+                },
+                {
+                  "type": "image_picker",
+                  "id": "image",
+                  "label": "Image"
+                },
+                {
+                  "type": "text",
+                  "id": "title",
+                  "label": "Title"
+                },
+                {
+                  "type": "text",
+                  "id": "sub_title",
+                  "label": "Sub Title"
+                },
+                {
+                  "type": "html",
+                  "id": "content",
+                  "label": "Content Text"
+                }
+        	]
+		},
+		{
+		  "type": "text-image",
+          "name": "Story Text Image Only",
+		  "settings": [
+              {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+              },
+              {
+                  "type": "html",
+                  "id": "section_content",
+                  "label": "Text Content"
+              }
+			]
+		}
+
+	],
+	"presets": [
+      {
+        "name": "Story Page Main Content"
+      }
+	]
+  }
+{% endschema %}

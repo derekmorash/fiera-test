@@ -1,0 +1,119 @@
+<div class="prd-det-s6">
+  <div class="container">
+    <div class="prd-det-s6-inr">
+      {% if section.settings.image != blank %}
+      <img src="{{ section.settings.image | img_url: '800X' }}" loading="lazy" alt="" class="prd-det-s6-img hide-mob" loading="lazy">
+      {% endif %}
+      <div class="prd-det-s6-inr-rgt">
+        
+        {% if section.settings.title != blank %}
+        <p class="comn-hdg">{{ section.settings.title }}</p>
+        {% endif %}
+        
+        {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | img_url: '800X' }}" loading="lazy" alt="" class="prd-det-s6-img forMob" loading="lazy">
+        {% endif %}
+        
+        {% if section.settings.sub_title != blank %}
+        <p class="comn-txt">{{ section.settings.sub_title }}</p>
+        {% endif %}
+        
+        {% if section.blocks.size > 0 %}
+        <ul class="s6-list">
+          {% for block in section.blocks %}
+            {% if block.settings.content != blank %}
+            <li>
+              <div class="num">{{ forloop.index }}</div>
+              <h3>
+                {% if block.settings.title != blank %}
+                  {{ block.settings.title }}
+                {% else %}
+                  Step {{ forloop.index }}
+                {% endif %}
+              </h3>
+              <p>{{ block.settings.content }}</p>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% if section.settings.button_title != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="comn-btn comn-btn-fill hide-mob">{{ section.settings.button_title }}</a>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "How To Use",
+  "class": "how-to-use-section--full-width",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+	{
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Title"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Step",
+      "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+		  "info": "Default: Step"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How To Use",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

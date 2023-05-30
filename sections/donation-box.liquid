@@ -1,0 +1,113 @@
+<div class="sec2">
+  <div class="container">
+    
+    {% if section.settings.title != blank %}
+    <p class="comn-hdg">{{ section.settings.title }}</p>
+    {% endif %}
+    
+    {% if section.settings.sub_title != blank %}
+    <p class="comn-txt">{{ section.settings.sub_title }}</p>
+    {% endif %}
+    
+    {%- if section.settings.desktop_image != blank -%}
+    <img data-src="{{ section.settings.desktop_image | img_url: '550X' }}" loading="lazy" alt="" class="lazy s2-brnd-img hide-mob">
+    {%- endif -%}
+    
+    {%- if section.settings.mobile_image != blank -%}
+    <img data-src="{{ section.settings.mobile_image | img_url: '450X' }}" loading="lazy" alt="" class="lazy s2-brnd-img hide-desk">
+    {%- endif -%}
+    
+    {%- if section.blocks.size > 0 -%}
+    <div class="timer-div">
+      {% if section.settings.donation_title != blank %}
+      <p class="timer-hd">{{ section.settings.donation_title }}</p>
+      {% endif %}
+      <div class="timer-sec">
+        <div class="timer-sec_main-generic">
+          <div class="timer-count">2</div>
+          <div class="timer-count">8</div>
+          <div class="timer-count">8</div>
+          <div class="timer-count">8</div>
+          <div class="timer-count">0</div>
+          <div class="timer-count">9</div>
+          <div class="timer-count">9</div>
+        </div>
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Donation Box",
+  "class": "donation-box-section--full-width",
+  "tag": "section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop Image"
+    },
+	{
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image"
+    },
+	{
+      "type": "text",
+      "id": "donation_title",
+      "label": "Donation Title"
+    },
+    {
+    "type":"textarea",
+    "id": "custom_html",
+    "label": "HTML"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "range",
+      "name": "Donation Number",
+      "settings": [
+		{
+          "type": "range",
+          "id": "title",
+          "min": 0,
+          "max": 9,
+          "step": 1,
+          "label": "Number",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Donation Box",
+      "blocks": [
+        {
+          "type": "range"
+        },
+        {
+          "type": "range"
+        },
+        {
+          "type": "range"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

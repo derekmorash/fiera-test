@@ -1,0 +1,119 @@
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-article-card.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-featured-blog.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-article-card.css' | asset_url | stylesheet_tag }}</noscript>
+
+{{ 'section-featured-blog.css' | asset_url | stylesheet_tag }}
+
+<div class="sec6">
+  <div class="container">
+    {% if section.settings.heading != blank %}
+    <p class="comn-hdg">{{ section.settings.heading | escape }}</p>
+    {% endif %}
+    
+    {% if section.settings.sub_heading != blank %}
+    <p class="comn-txt" style="color:#5a5a5a;">{{ section.settings.sub_heading }}</p>
+    {% endif %}
+    
+    {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
+    <div class="s6-inr">
+      {%- for article in section.settings.blog.articles limit: section.settings.post_limit -%}
+      <div class="s6-inr-bx">
+        
+        {%- if section.settings.show_image and article.image -%}
+          <img data-src="{{ article.image.src | img_url: '465x300', crop: 'center' }}" alt="" loading="lazy" class="lazy s6-img">
+        {%- endif -%}
+        
+        <div class="s6-inr-btm">
+          <p class="sml-txt">{{- article.published_at | time_tag: format: 'date' -}}</p>
+          <p class="s6-inr-tx"><a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title | escape }}</a></p>
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+    
+    {%- if section.settings.blog != blank and section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
+    <a href="{{ section.settings.blog.url }}" class="comn-btn">Read More</a>
+    {%- endif -%}
+  </div>
+</div>
+<div class="clearall"></div>
+
+{% schema %}
+{
+  "name": "t:sections.featured-blog.name",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Blog posts",
+      "label": "t:sections.featured-blog.settings.heading.label"
+    },
+	{
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Sub Heading"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "t:sections.featured-blog.settings.blog.label"
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.featured-blog.settings.post_limit.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.featured-blog.settings.show_image.label",
+      "info": "t:sections.featured-blog.settings.show_image.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.featured-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.featured-blog.settings.show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "soft_background",
+      "default": false,
+      "label": "t:sections.featured-blog.settings.soft_background.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "t:sections.featured-blog.settings.show_view_all.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "blog": "News"
+      }
+    }
+  ]
+}
+{% endschema %}

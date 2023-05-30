@@ -1,0 +1,57 @@
+<!--ajax cart modal-->
+<div class="ajax-cart__modal js-ajax-cart-modal">
+
+    <div class="ajax-cart-modal">
+
+        <!--ajax cart modal close-->
+        <div class="ajax-cart-modal__close js-ajax-cart-modal-close">
+            {% include 'icon-close' %}
+        </div>
+        <!--end ajax cart modal close-->
+
+        <!--ajax cart modal content-->
+        <div class="ajax-cart-modal__content js-ajax-cart-modal-content"></div>
+        <!--end ajax cart modal content-->
+
+    </div>
+
+</div>
+<!--end ajax cart modal-->
+
+<!--ajax cart drawer-->
+<div class="ajax-cart__drawer js-ajax-cart-drawer">
+    <div class="ajax-cart-drawer">
+        <!--ajax cart drawer close-->
+        <div class="ajax-cart-drawer__close js-ajax-cart-drawer-close">
+            {% include 'icon-close' %}
+        </div>
+        <!--end ajax cart drawer close-->
+		<div class="ajax-cart_title">
+           Your Cart
+        </div>
+        <!--ajax cart drawer content-->
+        <div class="ajax-cart-drawer__content js-ajax-cart-drawer-content"></div>
+        <!--end ajax cart drawer content-->
+
+        <!--ajax cart drawer buttons-->
+      <div class="data-subtotal" data-subtotal>{{ cart.total_price | money }}</div>
+        <div class="ajax-cart-drawer__buttons">
+
+          <a href="/checkout/" class="button button--black button--full-width js-button js-ajax-checkout-button">
+            <span>Proceed To Checkout</span>
+          </a>
+          <a href="/collections/our-best-sellers" class="button button--black button--full-width js-button">
+            <span>Continue Shopping</span>
+          </a>
+
+        </div>
+        <!--end ajax cart drawer buttons-->
+
+    </div>
+
+</div>
+<!--end ajax cart drawer-->
+
+<!--ajax cart overlay-->
+<div class="ajax-cart__overlay js-ajax-cart-overlay"></div>
+<!--end ajax cart overlay-->

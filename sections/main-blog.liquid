@@ -1,0 +1,86 @@
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{{ 'blog-style.css' | asset_url | stylesheet_tag }}
+
+<div class="shop-sec1">
+  <div class="container">
+    <div class="contact-hdng">
+      
+      {% if section.settings.page_title != blank %}
+      	<h1>{{ section.settings.page_title }}</h1>
+      {% else %}
+      	<h1>{{ blog.title | escape }}</h1>
+      {% endif %}
+      
+      {% if section.settings.sub_title != blank %}
+      	<p>{{ section.settings.sub_title }}</p>
+      {% endif %}
+    </div>
+	
+    {%- paginate blog.articles by 9 -%}
+    
+    <div class="blog-page-wrapper">  
+      {%- for article in blog.articles -%}
+        <div class="post-item">
+          {%- render 'article-card', article: article, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    
+    {%- if paginate.pages > 1 -%}
+    	{%- render 'button-pagination', paginate: paginate -%}
+    {%- endif -%}
+    
+    {%- endpaginate -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+  {
+    "type": "header",
+    "content": "t:sections.main-blog.settings.header.content"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_image",
+    "default": true,
+    "label": "t:sections.main-blog.settings.show_image.label",
+    "info": "t:sections.main-blog.settings.show_image.info"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_date",
+    "default": true,
+    "label": "t:sections.main-blog.settings.show_date.label"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_author",
+    "default": false,
+    "label": "t:sections.main-blog.settings.show_author.label"
+  },
+  {
+	"type": "text",
+    "id": "page_title",
+    "label": "Page Title",
+	"info": "Edit page title insted of actual page name"
+  },
+  {
+	"type": "text",
+    "id": "sub_title",
+    "label": "Page Sub Heading Title"
+  },
+  {
+    "type": "paragraph",
+    "content": "t:sections.main-blog.settings.paragraph.content"
+  }
+  ]
+}
+{% endschema %}

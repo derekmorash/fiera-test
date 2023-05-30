@@ -1,0 +1,124 @@
+/* checkout.css*/ 
+
+.checkout_main {
+  display: flex;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  position: relative;
+  width:100%;
+  max-width:1030px;
+  margin:40px auto 0;
+}
+.checkout_main .checkout_left {
+  width: 62%;
+  padding-bottom: 30px;
+}
+.checkout_main .checkout_left h3 {
+  width: 100%;
+  padding: 10px 20px;
+  text-align: left;
+  background: #dae1ed;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #363636;
+  font-weight: 600;
+  position: relative;
+  margin: 0;
+}
+
+.checkout_main .checkout_right {
+  width: 38%;
+  background: #fbf9f4;
+  border-left: 1px solid #ebebeb;
+  padding-bottom: 25px;
+}
+
+.checkout_main .checkout_right .find-salon-page { margin: 0; padding: 20px 20px 0 20px; overflow: hidden; clear: both; width: 100%;}
+
+.checkout_main .find-salon-banner-section {padding: 0;}
+.checkout_main .checkout_left .find-salon-banner-section h2 {
+  margin: 0;
+  line-height: 1.2;
+  text-align: left;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 3px 3px 0 0;
+  background: #313b54;
+}
+.find-salon-banner-section .checkout_main h2 {
+  margin: 0;
+  line-height: 1.2;
+  text-align: left;
+  font-size: 24px;
+  font-weight: 600;
+  color: #363636;
+  padding: 10px 20px;
+}
+.checkout_main .checkout_right .order-sec h2 { border-bottom: 1px solid #ebebeb;}
+
+.checkout_welcom {padding:20px;}
+
+.find-salon-banner-section .checkout_main p {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000000;
+  font-weight: 500;
+}
+.find-salon-banner-section .checkout_main p.offrbx-txt1 {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  color: red;
+}
+.find-salon-banner-section .checkout_main p.offrbx-txt2 {
+  font-size: 18px;
+  line-height: 24px;
+  color: #363636;
+  margin-top: 10px;
+}
+.find-salon-banner-section .checkout_main p.smry-prc-p1 {padding: 5px 5px 10px 10px;}
+
+
+.checkout_main .ofrbx-top .fieldToggle p {font-size: 20px; line-height: 1.4;color: #fefefe; font-weight: 600; letter-spacing: .5px;}
+
+.checkout_main .fieldToggle input[type=checkbox]+span, .checkout_main .protectionHeading label input[type=checkbox]+span {
+  margin-top: 6px;
+  width: 18px;
+  height: 18px;
+}
+
+.checkout_main .order-item-sec { padding: 15px; overflow: hidden;}
+.checkout_main .order-item-sec .smry-prd-name {padding:5px 0 15px 0;}
+
+.checkout_main .order-amt-sec { padding: 0 20px;}
+
+.checkout_main .btn {
+  font-size: 20px;
+  line-height: 1.5;
+  width: 100%;
+  height: 56px;
+  border: 2px solid #313b54;
+  background:#313b54;
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
+  font-weight: 600;
+  color:#fff;
+  transition:all 0.5s ease;
+}
+.checkout_main .btn:hover {background:#fff;color:#313b54;}
+
+
+/* @media */
+
+@media screen and (max-width: 767px) {
+	
+  .checkout_main {flex-wrap:wrap;}
+  .checkout_main .find-salon-banner-mobile-section { margin: 0;}
+  .checkout_main .checkout_left { width: 100%;}
+  .checkout_main .checkout_right {width: 100%;}
+  
+}

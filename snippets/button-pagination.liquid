@@ -1,0 +1,28 @@
+{% if paginate.parts.size > 0 %}
+  <div class="custom-pagination-wrapper">
+    
+      
+      {% if paginate.previous %}
+        <span class="custom-nav prev-page">
+          <a href="{{ paginate.previous.url }}{{ anchor }}" aria-label="{{ 'general.pagination.previous' | t }}"><img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/lft-arw.jpg?v=1632897967"> Previous</a>
+        </span>
+      {% endif %}
+      	
+	    <span class="page-label"> Page
+        {% for part in paginate.parts %}  
+          {% if part.title == paginate.current_page %}
+          {{ part.title }}
+          {% endif %}
+        {% endfor %}
+          / {{ paginate.pages}}
+    	</span>
+
+      {% if paginate.next %}
+        <span class="custom-nav next-page">
+          <a href="{{ paginate.next.url }}{{ anchor }}" aria-label="{{ 'general.pagination.next' | t }}">Next <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/rgt-arw.jpg?v=1632897672"></a>
+        </span>
+      {% endif %}
+      
+    
+  </div>
+{% endif %}

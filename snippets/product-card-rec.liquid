@@ -1,0 +1,61 @@
+{% comment %}
+Renders a product card
+
+Accepts:
+- product_card_product: {Object} Product Liquid object (optional)
+- media_size: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+- show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
+- add_image_padding: {Boolean} Enables padding on the image to space out the grid
+- show_vendor: {Boolean} Show the product vendor. Default: false
+- show_image_outline: {Boolean} Show card outline. Default: true (optional)
+- show_rating: {Boolean} Show the product rating. Default: false
+
+Usage:
+{% render 'product-card', show_vendor: section.settings.show_vendor %}
+
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{% endcomment %}
+
+<div class="prd-det-s7-inr-bx">
+  
+  {%- if product_card_product.featured_media -%}
+    {%- if product_card_product.media[1] != nil and show_secondary_image -%}
+    <div class="hover-bg" style="background:url({{ product_card_product.media[1] | img_url: '700x' }}) center top no-repeat; background-size:cover;"></div>
+    {%- endif -%}
+  	{% if collection_page_image != blank %}
+  	<img src="{{ collection_page_image | img_url: '235x' }}" loading="lazy" alt="" class="prd-dtls7-slide-img">
+  	{% else %}
+    <img src="{{ product_card_product.featured_media | img_url: '235x' }}" loading="lazy" alt="" class="prd-dtls7-slide-img">
+  	{% endif %}
+  {%- endif -%}
+  
+  <p class="prd-det-s7-txt1">
+    {% if collection_page_title != blank %}
+    {{ collection_page_title }}
+    	{% else %}
+    {{ product_card_product.title }}
+    {% endif %}
+  </p>
+  {% render 'price', product: product_card_product, price_class: '' %}
+  <div class="prd-rat">
+    <div class="yotpo bottomLine" data-product-id="{{ product_card_product.id }}"></div>
+    {% comment %}
+    <div class="yotpo bottomLine stars"
+    data-appkey="A1g0ak8AfUt4amT9bGjLpRLNOtyJXLCMEwdhx337"
+    data-product-id="{{ product_card_product.id }}"
+    data-name="{{ product_card_product.title | escape }}"
+    data-url="{{ shop.url }}{{ product_card_product.url }}"
+    data-image-url="{{ product_card_product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+    data-price="{{ product_card_product.price | money_without_currency }}"
+    data-currency="{{ shop.currency }}">
+    </div>   
+    {% endcomment %}
+  </div>
+  
+    
+    {% if collection_page_description != blank %}
+    <p class="s3-btm-tx4">{{ collection_page_description }}</p>
+    {% endif %}
+  <a href="{{ product_card_product.url | default: '#' }}" class="comn-btn">Buy Now</a>
+  
+</div>

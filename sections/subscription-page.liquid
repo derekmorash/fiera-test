@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="{{ 'subscription-style.css' | asset_url }}" media="print" onload="this.media='all'">
+
+
+{%- if section.settings.show-main-page -%}
+<div class="page-width page-width--narrow">
+  <h1 class="main-page-title page-title h0">
+    {{ page.title | escape }}
+  </h1>
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+{%- endif -%}
+<style>
+body.subscription div.txtCtn_box ul {
+    padding-bottom: 20px;
+}
+
+body.subscription div.txtCtn_box li {
+    list-style-type: disc;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+		{
+			"type": "checkbox",
+			"id": "show-main-page",
+			"label": "Show Title and Content from page",
+			"default": true
+		}
+	]
+}
+{% endschema %}

@@ -1,0 +1,5 @@
+<img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/menu-cart-icn.png?v=1632478926" alt="">
+<span class="hide-mob">{{ 'templates.cart.cart' | t }}</span>
+{%- if cart != empty -%}
+<span class='badge badge-warning lblCartCount' id='lblCartCount'>{{ cart.item_count }}</span>
+{%- endif -%}

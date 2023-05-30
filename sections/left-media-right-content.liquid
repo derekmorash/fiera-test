@@ -1,0 +1,134 @@
+<div class="boxSecMain_two_col">
+  <div class="sec_with_products text__center">
+    <div class="section_page_container">
+      {% if section.settings.info_sec_heading != blank %}
+      <div  class="section_sec_title">
+        <h3>{{ section.settings.info_sec_heading }}</h3>
+      </div>
+      {% endif %}
+      {% if section.settings.section_richtext != blank %}
+      <div class="sec__rich__text">
+        {{ section.settings.section_richtext }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="container_box_list">
+
+
+    {% for block in section.blocks %}
+
+    <div class="boxSec_main">
+      <div class="show_title_mobile">	
+          <div class="txtCtn_box">
+            {% if block.settings.sec_box_heading != blank %}
+                <h3>{{ block.settings.sec_box_heading }}</h3>
+            {% endif %}
+      
+            {% if block.settings.link != blank %}
+            <div class="show_btn_mobile">
+              <a class="link_underline" href="{{ block.settings.link }}">{{ block.settings.link_btn | escape }}</a>
+            </div>
+            {% endif %}
+      		</div>
+      	</div>
+      
+      {% if block.settings.sec_img_box != blank %} 
+      <div class="bgCtn_box border-scale"> 
+        <img src="{{ block.settings.sec_img_box | img_url: '5000x' }}" alt="" loading="lazy"> 
+      </div>
+      {% endif %}
+      
+		
+
+      <div class="txtCtn_box">
+        {% if block.settings.sec_box_heading != blank %}
+        <h3 class="hide_title_mobile">{{ block.settings.sec_box_heading }}</h3>
+        {% endif %}
+
+        {% if block.settings.box_richtext != blank %}
+        <div class="box__rich__text">
+          {{ block.settings.box_richtext }}
+        </div>
+        {% endif %}
+        {% comment %}
+          {% if block.settings.link != blank %}
+        	<a class="btnLarge" href="{{ block.settings.link }}">{{ block.settings.link_btn | escape }}</a>
+          {% endif %}
+        {% endcomment %}
+      </div>
+    </div>
+    {% endfor %}
+
+
+
+  </div>
+
+</div>
+
+{% schema %}
+  {
+  "name": "Image and Content",
+  "class": "box_image_inside_section",
+  "max_blocks": 20,
+  "settings": [
+      {
+      "type": "text",
+      "id": "info_sec_heading",
+      "label": "Section Heading",
+      "default": "Section Heading"
+      },
+      {
+      "type": "richtext",
+      "id": "section_richtext",
+      "label": "Text"
+      }
+      ],
+      "blocks": [
+      {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+      {
+      "type": "image_picker",
+      "id": "sec_img_box",
+      "label": "Section Image"
+      },
+      {
+      "type": "text",
+      "id": "sec_box_heading",
+      "label": "Content Heading"
+      },
+      {
+      "id": "box_richtext",
+      "type": "richtext",
+      "default": "<p>Offer text goes here</p>",
+      "label": "Text goes here"
+      },
+      {
+      "type": "text",
+      "id": "link_btn",
+      "label": "Button Text"
+      },
+      {
+      "type": "url",
+      "id": "link",
+      "label": "Button Link"
+      }
+  ]
+  }
+  ],
+  "presets": [
+    {
+    "name": "Image and Content",
+    "category": "Page",
+    "blocks": [
+    {
+    "type": "image"
+     }
+    	]
+  	}
+  ]
+  }
+{% endschema %}

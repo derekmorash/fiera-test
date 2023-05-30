@@ -1,0 +1,118 @@
+<div class="sec5">
+  <div class="container">
+    <div class="s5-inr">
+      <div class="s5-inr-lft">
+        
+        {% if section.settings.title != blank %}
+        <p class="comn-hdg">{{ section.settings.title }}</p>
+        {% endif %}
+        
+        {% if section.settings.image != blank %}
+        <img data-src="{{ section.settings.image | img_url: '600X' }}" alt="" loading="lazy" class="lazy vid-img vid-img-tab">
+        {% endif %}
+        
+        {% if section.settings.content != blank %}
+        <p class="comn-txt">{{ section.settings.content }}</p>
+        {% endif %}
+        
+        {% if section.blocks.size > 0 %}
+        <ul class="s5-list">
+          {% for block in section.blocks %}
+          <li>
+            {% if block.settings.image != blank %}
+            <img data-src="{{ block.settings.image | img_url: '50X' }}" alt="" loading="lazy" class="lazy s5-lst-icn">
+            {% endif %}
+            
+            {% if block.settings.title != blank %}
+            <p>{{ block.settings.title }}</p>
+            {% endif %}
+          </li>
+          {% endfor %}          
+        </ul>
+        {% endif %}
+        
+        {% if section.settings.button_title != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="comn-btn">{{ section.settings.button_title }}</a>
+        {% endif %}
+        
+      </div>
+      
+      {% if section.settings.image != blank %}
+      <div class="s5-inr-rgt hide-tab">
+        <img data-src="{{ section.settings.image | img_url: '800X' }}" alt="" loading="lazy" class="lazy vid-img">
+      </div>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Promise",
+  "class": "our-promise-section--full-width",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+	{
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Title"
+    }	,
+	{
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+		{
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Promise",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

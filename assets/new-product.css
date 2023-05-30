@@ -1,0 +1,381 @@
+
+
+/**/
+
+.mny-bck-sec { float: left; width: 100%; margin-top: -130px; }
+.container { max-width: 1540px; width: 100%; margin: 0 auto; padding: 0 20px; position: relative; }
+.mny-bck-bx { float: left; width: 100%; background: url(mny-bck-bx.jpg) center top no-repeat #272d3f; background-size: cover; padding: 70px 120px 80px 420px; border-radius: 5px; color: #fff; text-align: left; letter-spacing: 0.5px; }
+.meal-don { font-size: 40px; line-height: 50px; font-weight: 600; margin-top: 50px; float: left; width: 100%; }
+.mny-bck { position: absolute; left: 140px; top: 50px; }
+.mny-bck-bx h3 { color:#fff; font-size: 40px; line-height: 50px; font-weight: 600; margin-bottom: 20px; }
+.mny-bck-bx p { font-size: 16px; line-height: 24px; }
+.meal-don { font-size: 40px; line-height: 50px; font-weight: 600; margin-top: 50px; float: left; width: 100%; }
+.clearall { clear: both; font-size: 1px; line-height: 1px; height: 1px; }
+.s2-brnd-img { display: block; margin: 30px auto; max-width: 100%; }
+.hide-desk{display:none !important;} 
+ul.mny-bck-lst { float: left; width: 100%; } 
+ul.mny-bck-lst li { font-size: 16px; line-height: 24px; width: 33.3%; padding: 0 55px; margin: 30px 0 50px; float: left; border-right: 1px solid #ececec; } 	 
+ul.mny-bck-lst li:last-child { border-right: none; } 
+a:hover { outline: none; text-decoration: none; }
+.comn-btn {
+  font-size: 24px;
+  line-height: 52px;
+  font-weight: 600;
+
+  max-width: 530px;
+  /* width: 100%;*/
+  display: flex;
+  vertical-align: top;
+  height: 60px;
+  background: none;
+
+  color: #333;
+  font-family: Organica;
+  text-align: center;
+  text-transform: none;
+  margin-top: 0;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #313b54;
+  border-radius:0;
+}
+.comn-btn:hover {background:#313b54;color:#fff;}
+
+.sec7 { float: left; width: 100%; padding: 70px 0 20px; }
+.comn-hdg { font-size: 36px; line-height: 40px; font-weight: 600; margin-bottom: 15px; } 
+
+.faq-sec { float: left; width: 100%; background: #e8ecf4; padding: 60px 0 180px;}
+.comn-hd { font-size: 45px; line-height: 56px; font-weight: 600; float: left; width: 100%; margin-bottom: 20px;}
+.custom_sec_main .faq-container { display: inline-block; max-width: 970px; width: 100%; text-align: left; margin: 15px 0 0;}
+
+.up-slide-dwn {margin-top: 0; overflow: hidden; border-bottom: 1px solid #d4d4d4; padding: 5px 0;}
+.faq-container .up-slide-dwn:last-child { border-bottom: none;}
+.custom_sec_main .accordion { float: left; width: 100%; text-align: left;
+  background: url(https://cdn.shopify.com/s/files/1/0549/5082/2118/files/cart-plus.png?v=1632477662) no-repeat 100% 50%;
+  padding: 15px 40px 15px 0; font-size: 18px; line-height: 22px; color: #000; font-weight: 600; cursor: pointer; position: relative;
+border:none;margin:0;
+}
+.custom_sec_main .acdn-heading.accordion-open { background: url(https://cdn.shopify.com/s/files/1/0549/5082/2118/files/cart-minus.png?v=1632477705) no-repeat 100% 50%; border: none !important;}
+.custom_sec_main .acdn-content { float: left; width: 100%; padding: 0px 0 20px 0;}
+.custom_sec_main .acdn-para { float: left; width: 100%; font-size: 16px; color: #000; line-height: 26px; padding: 0px 30px 0 0; letter-spacing: 0.5px;margin:0;}
+
+
+/* SECTION-5*/
+.sec5{
+  float:left;
+  width:100%;
+  padding:60px 0;
+}
+
+.s5-mdl{
+  float:left;
+  width:100%;
+  margin:40px 0 20px;
+  display:flex;
+  -webkit-display:flex;
+}
+.s5-col{
+  float:left;
+  width:31.33%;
+  padding:20px;
+  text-align:left;
+  margin:0 1% 0;
+  outline:none;
+  border-radius:5px;
+  border:1px solid #ececec;
+}
+.s5-col.active{
+  background:#e8ecf4;
+  border-radius:5px;
+  position:relative;
+  border:1px solid #dedad2;
+}
+.s5-col.active:after{
+  content:'';
+  position:absolute;
+  left:50%;
+  width:22px;
+  margin-left:-11px;
+  height:13px;
+  bottom:-13px;
+  background:url(dwn-arw.png) center bottom no-repeat;
+}
+.s5-col h4{
+  float:left;
+  width:100%;
+  font-size:20px;
+  line-height:26px;
+  color:#343e5a;
+  font-weight:bold;
+  padding-bottom:12px;
+  border-bottom:1px solid #ddd;
+}
+.s5-col h4 img{
+  display:inline-block;
+  vertical-align:middle;
+  margin:-7px 10px 0 0;
+}
+.s5-col p{
+  float:left;
+  width:100%;
+  font-size:18px;
+  line-height:26px;
+  color:#2d2d2d;
+  margin-top:10px;
+  letter-spacing:0.3px;
+}
+
+.progress-outer{
+  float:left;
+  width:100%;
+  height: 5px;
+  background: #fafcff;
+  border-radius: 7px;
+  margin-top:30px;
+  position:relative;
+}
+.progress-bar{
+  float:left;
+  width:0%;
+  height:100%;
+  background:#313b54;
+  border-radius: 7px;
+}
+#progress-val{
+  position:absolute;
+  left:0;
+  width:100%;
+  text-align:center;
+  color:#fff;
+  font-size:19px;
+  line-height:25px;
+}
+
+ul.progress-dot{
+  float:left;
+  width:100%;
+  margin-top:-17px;
+  z-index:5;
+  position: relative;
+}
+ul.progress-dot li{
+  float:left;
+  width:33.33%;
+  text-align:center;
+}
+ul.progress-dot li span{
+  display:inline-block;
+  vertical-align:middle;
+  border: 4px solid #fafcff;
+  background: #313b54;
+  height: 14px;
+  border-radius: 14px;
+  width: 14px;
+}
+
+ul.s5-btm-lst{
+  float:left;
+  width:100%;
+}
+ul.s5-btm-lst li{
+  background:url(https://cdn.shopify.com/s/files/1/0549/5082/2118/files/s5-btm-lst-tik.png?v=1645249682) left top no-repeat;
+  font-size:16px;
+  line-height:24px;
+  float:left;
+  width:31%;
+  border-right:1px solid #eae8e3;
+  text-align:left;
+  padding:0 30px 0 40px;
+  margin-top:40px;
+  margin-right:3.5%;
+}
+ul.s5-btm-lst li:last-child{margin-right:0px; border-right:none;}
+ul.s5-btm-lst li span{
+  font-size:20px;
+  line-height:24px;
+  font-weight:600;
+  color:#313b54;
+  display:block;
+  margin-bottom:6px;
+}
+
+
+/*qq*/
+@media only screen and (max-width: 1180px){ 
+  ul.mny-bck-lst li { padding: 0 20px; } 
+} 
+@media only screen and (max-width: 1010px){ 
+
+  .mny-bck { left: 20px;    top: 20px;    width: 120px;}
+  .mny-bck-bx { padding: 20px 20px 30px 160px;}
+  .mny-bck-bx h3 { font-size: 32px; line-height: 38px; margin-bottom: 10px; } 
+  ul.mny-bck-lst li { padding: 0 10px; margin: 10px 0 30px; } 
+
+} 
+@media only screen and (max-width:767px) { 
+  .container{width:100%; padding:0 10px; max-width:600px; box-sizing:border-box;}
+  .mny-bck { display: block; margin: 0 auto 15px; position: static; }
+  .mny-bck-bx { padding: 25px 15px; text-align: center;}
+  .s2-brnd-img { margin: 20px auto; }
+  .hide-desk, .forMob { display: block; } 
+  ul.mny-bck-lst li { width: 100%; border-right: none; margin: 10px 0; } 
+  .mny-bck-bx h3 {
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 10px;
+  }
+
+  .sec5{padding:25px 0;}
+  .s5-mdl{ margin:0; position:relative; padding-left:20px; flex-wrap:wrap;}
+  .s5-mdl:before{
+    position:absolute;
+    left:5px;
+    top:10px;
+    bottom:10px;
+    width:4px;
+    background:#313b54;
+    border-radius:15px;
+    content:"";
+  }	
+  .s5-col{
+    background:#fff;
+    border-radius:5px;
+    position:relative;
+    width:100%;
+    padding:20px;
+    margin:15px 0;
+    border:1px solid #88b9ca;
+  }
+  .s5-col:after{
+    content:'';
+    position:absolute;
+    left:50%;
+    width:22px;
+    margin-left:-11px;
+    height:13px;
+    bottom:-12px;
+    /* background:url(../images/dwn-arw.png) center bottom no-repeat; */
+  }
+  .s5-col.active:after	{background:url(dwn-arw.png) center bottom no-repeat; }
+  .s5-col:before{
+    position:absolute;
+    left:-22px;
+    top:50%;
+    margin-top:-6px;
+    border: 2px solid #FFF;
+    background: #313b54;
+    height:12px;
+    border-radius: 12px;
+    width: 12px;
+    content:"";
+  }
+  .s5-col p{font-size:15px;}
+  .s5-col span{ min-height:auto;}
+  .progress-outer,ul.progress-dot{ display:none;}
+  ul.s5-btm-lst li{margin:20px 0 0; padding:0 0 0 40px; width:100%; border-right:none;}
+
+
+  .product-concealer-benefits .concealer-benefits-info {flex-wrap: wrap;}
+  .product-concealer-benefits .concealer-benefits-info .fl.concealer-box { width: 100%;order: 2;text-align: center;}
+  .product-concealer-benefits .concealer-benefits-info .concealer-image {width: 100%;order: 1;text-align: center;}
+  .product-concealer-benefits .concealer-benefits-info .fr.concealer-box { width: 100%;text-align: center;order: 3;}
+  
+  .comn-hd {font-size: 30px;margin-bottom: 20px;}
+  
+  .custom_sec_main .accordion {font-size:16px;}
+  
+  
+  .top-fix-bar .top-sec .hide-desk { display: block!important;}
+  
+}
+.mny-bck-sec .comn-btn {
+    max-width: 530px;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    height: 60px;
+    background: #44a344;
+    border-radius: 4px;
+    font-size: 20px;
+    line-height: 60px;
+    font-weight: 600;
+    color: #fff;
+    font-family: 'Organica';
+    text-align: center;border: none;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width:640px) { 
+  
+  .mny-bck-bx h3 { font-size: 26px;line-height: 1.5;}
+  .mny-bck-bx p {font-size:14px;line-height: 1.5;}
+  .meal-don {font-size: 26px;line-height: 1.5;margin-top: 20px;}
+  
+  ul.mny-bck-lst li {font-size:14px;}
+  
+  
+}
+
+.comn-btn-fill {
+    background: #313b54;
+    color: #fff;
+}
+
+.comn-btn.ing-btn{
+  font-size: 20px !important;
+  line-height: 52px;
+  width: 275px;
+  height: 56px;
+  color:#6d6d6d;
+  border: 2px solid #313b54;
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
+  font-weight: 600;
+  background-color:transparent;
+
+}
+.btn-arw {
+    margin-left: 5px;
+}
+
+.comn-btn.ing-btn:hover {
+    background: #313b54;
+    color: #fff;
+    transition: all ease 0.6s;
+}
+.s5-col.active {
+    background: #e8ecf4;
+    border-radius: 5px;
+    position: relative;
+    border: 1px solid #bac4e1;
+}
+
+.s5-col.active:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 22px;
+    margin-left: -11px;
+    height: 13px;
+    bottom: -13px;
+    background: url(https://cdn.shopify.com/s/files/1/0549/5082/2118/files/dwn-arw-pro.png?v=1645250366) center bottom no-repeat;
+}
+
+
+@media only screen and (max-width:767px) { 
+  
+  .comn-hd { font-size: 26px; line-height: 32px;     margin-bottom: 20px;}
+  .s5-col p { font-size: 17px;     line-height: 22px;}
+  ul.s5-btm-lst li span { font-size: 17px;  line-height: 21px;}
+
+  .custom_sec_main .accordion { font-size: 18px; line-height: 22px;}
+
+  
+}
+
+
+@media only screen and (max-width: 1010px){
+.s5-col h4 { font-size: 18px; line-height: 24px;}
+}

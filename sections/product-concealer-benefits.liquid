@@ -1,0 +1,161 @@
+<link rel="preload" as="style" href="{{ 'product-concealer-benefits.css' | asset_url }}">
+{{ 'product-concealer-benefits.css' | asset_url | stylesheet_tag }}
+
+<div class="concealer-benefits-inn">
+  <div class="container">
+    {% if section.settings.title != blank %}
+    	<h2>{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    
+    <div class="concealer-benefits-info">
+      
+      <ul class="fl concealer-box">
+        <li>
+          {% if section.settings.title_1 != blank %}
+          	<h3 class="prd-ben-hd">{{ section.settings.title_1 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_1 != blank %}
+          	<p class="prd-ben-tx">{{ section.settings.content_1 }}</p>
+          {% endif %}
+        </li>
+        <li>
+          {% if section.settings.title_2 != blank %}
+          	<h3 class="prd-ben-hd">{{ section.settings.title_2 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_2 != blank %}
+          	<p class="prd-ben-tx">{{ section.settings.content_2 }}</p>
+          {% endif %}
+        </li>
+      </ul>
+      <div class="concealer-image">
+        {% assign image_width = section.settings.image_width | append: 'X' %}
+
+        {% if section.settings.image_mobile != blank %}
+        <img src="{{ section.settings.image_mobile | img_url: image_width }}" alt="" class="mobile_img" loading="lazy">
+        {% endif %}
+
+        {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | img_url: image_width }}" alt="" class="desktop_img" loading="lazy">
+        {% endif %}
+      </div>
+      <ul class="fr concealer-box">
+        <li>
+          {% if section.settings.title_3 != blank %}
+          	<h3 class="prd-ben-hd">{{ section.settings.title_3 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_3 != blank %}
+          	<p class="prd-ben-tx">{{ section.settings.content_3 }}</p>
+          {% endif %}
+        </li>
+        <li>
+          {% if section.settings.title_4 != blank %}
+          	<h3 class="prd-ben-hd">{{ section.settings.title_4 }}</h3>
+          {% endif %}
+          
+          {% if section.settings.content_4 != blank %}
+          	<p class="prd-ben-tx">{{ section.settings.content_4 }}</p>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pro Concealer Benefits",
+  "class": "product-concealer-benefits",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },	
+	{
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+	{
+      "type": "range",
+	  "min": 100,
+	  "max": 500,
+	  "step": 50,
+      "id": "image_width",
+      "label": "Image Width",
+	  "default": 400
+    },
+	{
+      "type": "header",
+      "content": "Section 1"
+    },
+	{
+      "type": "textarea",
+      "id": "title_1",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_1",
+      "label": "Content"
+    },
+	{
+      "type": "header",
+      "content": "Section 2"
+    },
+	{
+      "type": "textarea",
+      "id": "title_2",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_2",
+      "label": "Content"
+    },
+	{
+      "type": "header",
+      "content": "Section 3"
+    },
+	{
+      "type": "textarea",
+      "id": "title_3",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_3",
+      "label": "Content"
+    },
+	{
+      "type": "header",
+      "content": "Section 4"
+    },
+	{
+      "type": "textarea",
+      "id": "title_4",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "content_4",
+      "label": "Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pro Concealer Benefits"
+    }
+  ]
+}
+{% endschema %}

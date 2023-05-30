@@ -1,0 +1,42 @@
+<link rel="preload" as="style" href="{{ 'product-review-section.css' | asset_url }}">
+{{ 'product-review-section.css' | asset_url | stylesheet_tag }}
+
+<div id="sec1frm-show">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+    	<p class="comn-hdg">{{ section.settings.title | escape }}</p>
+    {%- endif -%}
+    <div class="comn-txt">          
+      <div class="yotpo yotpo-main-widget"
+           data-product-id="{{ product.id }}"
+           data-name="{{ product.title | escape }}"
+           data-url="{{ shop.url }}{{ product.url }}"
+           data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+           data-price="{{ variant.price | money_without_currency }}"
+           data-currency="{{ shop.currency }}"
+           data-description="{{ product.description | escape }}"
+           loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product Review Section",
+    "class": "product-review-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Review Section",
+        "category": "Product"
+      }
+    ]
+  }
+{% endschema %}
