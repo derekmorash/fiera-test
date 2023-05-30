@@ -237,79 +237,8 @@
     <div class="prd-det-s1-inr">
       <!-- Left Content -->
       <div class="bnr-left prd-det-s1-lft">
-
-        <!-- Media Gallery -->
-        <div class="slide-div">
-
-          {%- for media in product.media -%}
-            <div>
-              <img src="{{ media | img_url: '800x' }}" loading="lazy" class="lazy prd-slide" id="thumb_img" alt="img">
-            </div>
-            {% if forloop.index != 2 %}{% endif %}
-          {%- endfor -%}
-
-          {% if product.metafields.my_fields.wistia_video_id_1 != blank %}
-            <div>
-              <div style="padding:11px 76px;">
-                <script src="https://fast.wistia.com/embed/medias/{{ product.metafields.my_fields.wistia_video_id_1 }}.jsonp" async></script>
-                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-                <div class="wistia_responsive_padding">
-                  <div class="wistia_responsive_wrapper">
-                    <div class="wistia_embed wistia_async_{{ product.metafields.my_fields.wistia_video_id_1 }} videoFoam=true"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {% endif %}
-
-          {% if product.metafields.my_fields.wistia_video_id_2 != blank %}
-            <div>
-              <div id="shade_video1">
-                <script src="https://fast.wistia.com/embed/medias/{{ product.metafields.my_fields.wistia_video_id_2 }}.jsonp" async></script>
-                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-                <div class="wistia_responsive_padding">
-                  <div class="wistia_responsive_wrapper">
-                    <div class="wistia_embed wistia_async_{{ product.metafields.my_fields.wistia_video_id_2 }} videoFoam=true"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {% endif %}
-
-        </div>
-        <!-- Media Gallery -->
-
-        <!-- Media Gallery Nav -->
-        {% if wistia_video_status == 1 or product.media.size > 1 %}
-          <div class="slider-nav">
-
-            {%- for media in product.media -%}
-              {% if forloop.index != 0 %}
-                {% if media.alt != 'hidden' %}
-                  <div class="pro-thumb {% if forloop.index == 1 %}active{% endif %}">
-                    <img src="{{ media | img_url: '100x' }}" loading="lazy" class="prd-nav" id="thumb_img" alt="img">
-                  </div>
-                {% endif %}
-              {% endif %}
-            {%- endfor -%}
-
-            {% if product.metafields.my_fields.wistia_video_id_1 != blank %}
-              <div class="video-cell pro-thumb {% if forloop.index == 1 %}active{% endif %}">
-                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/luxury-concealer-slide4.png?v=1632736348"
-                     loading="lazy" class="prd-nav" alt="img">
-              </div>
-            {% endif %}
-
-            {% if product.metafields.my_fields.wistia_video_id_2 != blank %}
-              <div class="video-cell pro-thumb {% if forloop.index == 1 %}active{% endif %}">
-                <img src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/luxury-concealer-slide4.png?v=1632736348"
-                     loading="lazy" class="prd-nav" alt="img">
-              </div>
-            {% endif %}
-
-          </div>
-        {% endif %}
-        <!-- Media Gallery Nav -->
+        {% comment %} New Slider {% endcomment %}
+        {%- render 'product-media-slider', prod: product -%}
 
         <!-- Shade Guide Nav -->
         <div class="clearall"></div>
@@ -321,11 +250,12 @@
       <!-- Left Content -->
       <!-- Add to Cart Content -->
       <div class="bnrCont">
-        <div class="banner-cont-mob">
+        <div class="">
 
           <div class="bnr-header">
             <h1 class="fc-seo">{{ product.title }}</h1>
-            <p><h2 class="fc-seo">A Concealer With Skin Care Formulated <br class="show-mob">For Women Over 40</h2></p>
+            <h2 class="fc-seo">A Concealer With Skin Care Formulated <br class="show-mob">For Women Over 40</h2>
+            <p>15ML / 0.5 FL OZ.</p>
           </div>
 
           <div class="prd-rat">
@@ -352,6 +282,16 @@
 
           <!-- Product Desscription -->
           <div class="clearall"></div>
+
+          <ul class="prd-det-rgt-list">
+            <li>All-day coverage</li>
+            <li>Firmer, brighter complexion</li>
+            <li>Never gets cakey</li>
+            <li>Never settles into fine lines</li>
+            <li><strong>Plus free brush!</strong></li>
+          </ul>
+
+          {% comment %}           
           <p class="bnr-para">
             Fièra Luxury Concealer is the only concealer of its kind for women over 40, providing
             all-day coverage that never gets cakey or settles into fine lines.
@@ -360,6 +300,7 @@
             Plus working "behind the scenes" are premium skin care ingredients helping to reduce visible signs of
             aging and giving you firmer, healthier, and brighter looking skin.
           </p>
+          {% endcomment %}
 
 
 

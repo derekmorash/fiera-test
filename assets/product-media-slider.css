@@ -1,0 +1,42 @@
+.media-slider {
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.media-thumbs {
+  margin: 20px 0;
+  padding: 1px 20px;
+}
+
+.media-slider__slide,
+.media-thumbs__slide {
+  background: #999;
+}
+
+.media-thumbs__slide {
+  width: 50px;
+  outline: solid 1px transparent;
+  opacity: 0.6;
+  transition: outline-color 0.1s, opacity 0.1s;
+}
+
+.media-thumbs__slide.swiper-slide-thumb-active {
+  outline-color: #000;
+  opacity: 1;
+}
+
+.media-slider__slide > img,
+.media-slider__slide > .product-media-modal__model,
+.media-slider__slide > .deferred-media,
+.media-slider__slide > .deferred-media__poster,
+.media-slider__slide > .wistia-slide-item,
+.media-thumbs__media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.media-thumbs__media {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}

@@ -1597,7 +1597,7 @@ ul.drop-menu li img{
 
 .bannar-sec{padding:0 0 40px;}
 .bnr-left{width:calc(100% + 30px); margin-left:-15px;}
-.bnrCont{width:100%; margin-top:-15px; position:relative;}
+.bnrCont{width:100%; margin-top: 0; position:relative;}
 .banner-cont-mob{ float:left; width:100%; background:#fff; border-radius:15px; border: 1px solid #c2c2c2;  padding:20px 15px 25px;}
 .bnr-header{padding-bottom:15px;}
 .bnr-header h2{font-size:26px; line-height:32px;}

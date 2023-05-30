@@ -1842,7 +1842,7 @@ ul.mode-row-2 li span {text-transform: capitalize;}
 
   .bannar-sec{padding:0 0 40px;}
   .bnr-left{width:100%; margin:0; float: none;}
-  .bnrCont{width:100%; margin-top:-45px; position:relative;padding:0 20px; float: none;}
+  .bnrCont{width:100%; margin-top:-45px; position:relative; float: none;}
   .banner-cont-mob{ float:left; width:100%; background:#fff; border-radius:15px; border: 1px solid #c2c2c2;  padding:20px 15px 25px; margin-top:20px;}
   .bnr-header{padding-bottom:15px;}
   .bnr-header h2{font-size:26px; line-height:32px;}
@@ -2088,6 +2088,9 @@ ul.s3list li{
 	}
 ul.s3list li img{margin:0 auto;display:block;max-width:100%;}
 
-
+.bnrCont .prd-det-rgt-list {
+  margin-top: 20px;
+  text-align: left;
+}
 
 
