@@ -238,6 +238,9 @@
       <!-- Left Content -->
       <div class="bnr-left prd-det-s1-lft">
 
+        {% comment %} OLD SLIDER {% endcomment %}
+
+        {% comment %}         
         <!-- Media Gallery -->
         <div class="slide-div">
 
@@ -280,6 +283,7 @@
         <!-- Media Gallery -->
 
         <!-- Media Gallery Nav -->
+        
         {% if wistia_video_status == 1 or product.media.size > 1 %}
           <div class="slider-nav">
 
@@ -310,6 +314,10 @@
           </div>
         {% endif %}
         <!-- Media Gallery Nav -->
+        {% endcomment %}
+
+        {% comment %} New Slider {% endcomment %}
+        {%- render 'product-media-slider', prod: product -%}
 
         <!-- Shade Guide Nav -->
         <div class="clearall"></div>

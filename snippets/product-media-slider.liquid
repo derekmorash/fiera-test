@@ -1,0 +1,115 @@
+{% comment %}
+  product-media-slider.liquid
+  A custom product media slider component by Derek Morash
+
+  Params:
+  - prod: product object
+{% endcomment %}
+
+{%- liquid
+  assign has_media = false
+
+  assign wistia_video_status = false
+  if product.metafields.my_fields.wistia_video_id_1 != blank or product.metafields.my_fields.wistia_video_id_2 != blank
+    assign wistia_video_status = true
+  endif
+
+  if prod
+    if wistia_video_status == true or prod.media.size > 1
+      assign has_media = true
+    endif
+  endif
+-%}
+
+{%- if has_media -%}
+  {% comment %} Dependency assets {% endcomment %}
+  {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+  {% comment %} Component assets {% endcomment %}
+  {{ 'product-media-slider.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-media-slider.js' | asset_url }}" defer></script>
+
+  <media-slider>
+    <div class="media-slider swiper">
+      <div class="media-slider__wrapper swiper-wrapper">
+        {%- for media in prod.media -%}
+          <div class="media-slider__slide swiper-slide">
+            {%- render 'product-media', media: media -%}
+          </div>
+        {%- endfor -%}
+
+        {% comment %} External wistia videos {% endcomment %}
+        {% if product.metafields.my_fields.wistia_video_id_1 != blank %}
+          <div class="media-slider__slide swiper-slide">
+            <div class="wistia-slide-item" style="padding:11px 76px;">
+              <script src="https://fast.wistia.com/embed/medias/{{ product.metafields.my_fields.wistia_video_id_1 }}.jsonp" async></script>
+              <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+              <div class="wistia_responsive_padding">
+                <div class="wistia_responsive_wrapper">
+                  <div class="wistia_embed wistia_async_{{ product.metafields.my_fields.wistia_video_id_1 }} videoFoam=true"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if product.metafields.my_fields.wistia_video_id_2 != blank %}
+          <div class="media-slider__slide swiper-slide">
+            <div class="wistia-slide-item" id="shade_video1">
+              <script src="https://fast.wistia.com/embed/medias/{{ product.metafields.my_fields.wistia_video_id_2 }}.jsonp" async></script>
+              <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+              <div class="wistia_responsive_padding">
+                <div class="wistia_responsive_wrapper">
+                  <div class="wistia_embed wistia_async_{{ product.metafields.my_fields.wistia_video_id_2 }} videoFoam=true"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="media-thumbs swiper">
+      <div class="media-thumbs__wrapper swiper-wrapper">
+        {%- for media in prod.media -%}
+          <div class="media-thumbs__slide swiper-slide">
+            <img
+              src="{{ media | image_url: width: 100 }}"
+              width="100"
+              height="100"
+              loading="lazy"
+              class="media-thumbs__media"
+              alt="{{ media.preview_image.alt | escape }}"
+            >
+          </div>
+        {%- endfor -%}
+
+        {% if product.metafields.my_fields.wistia_video_id_1 != blank %}
+          <div class="media-thumbs__slide swiper-slide">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/luxury-concealer-slide4.png?v=1632736348"
+              width="100"
+              height="100"
+              loading="lazy"
+              class="media-thumbs__media"
+              alt="Luxury concealer"
+            >
+          </div>
+        {% endif %}
+
+        {% if product.metafields.my_fields.wistia_video_id_2 != blank %}
+          <div class="media-thumbs__slide swiper-slide">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0549/5082/2118/files/luxury-concealer-slide4.png?v=1632736348"
+              width="100"
+              height="100"
+              loading="lazy"
+              class="media-thumbs__media"
+              alt="Luxury concealer"
+            >
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </media-slider>
+{%- endif -%}
